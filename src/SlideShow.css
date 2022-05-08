@@ -1,0 +1,122 @@
+.SlideShow
+{
+  width: 100%;
+  overflow: hidden;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+  position: relative;
+}
+.SlideShow,
+.SlideShow .SlideList,
+.SlideShow .SlideItem
+{
+  height: 100%;
+}
+.SlideShow .SlideList
+{
+  position: relative;
+  white-space: nowrap;
+  cursor: grab;
+}
+.SlideShow .SlideList:active
+{
+  cursor: grabbing;
+}
+.SlideShow .SlideItem
+{
+  display: inline-block;
+  background: center center / cover no-repeat;
+  width: 100%;
+  transition: left .5s;
+  position: absolute;
+}
+.SlideShow .SlideControl
+{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 20px 10px;
+  font-size: 1.6rem;
+  display: flex;
+  align-items: center;
+}
+.SlideShow .SlideCounter
+{
+  opacity: .7;
+  width: 100px;
+  text-align: center;
+  user-select: none;
+}
+.SlideShow button
+{
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  opacity: .7;
+  color: inherit;
+  font-size: 3rem;
+  text-shadow: inherit;
+  /*outline: none;*/
+}
+.SlideShow button:hover,
+.SlideShow button:focus
+{
+  opacity: 1;
+}
+.SlideShow .BackLink
+{
+  position: absolute;
+  display: block;
+  font-size: 1.4rem;
+  z-index: 2;
+  color: #fff;
+  padding: 4px 20px;
+  opacity: .8;
+}
+.SlideShow .BackLink:hover,
+.SlideShow .BackLink:focus
+{
+  opacity: 1;
+  color: #fff;
+}
+.SlideShow h2
+{
+  position: absolute;
+  font-size: .8rem;
+  z-index: 1;
+  margin: 0;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.3) 100%);
+}
+.SlideShow h2 a[href],
+.SlideShow h2 a[href]:hover,
+.SlideShow h2 a[href]:focus
+{
+  color: #fff;
+}
+@media (min-width: 500px)
+{
+  .SlideShow .BackLink
+  {
+    font-size: 1.6rem;
+  }
+  .SlideShow h2
+  {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 900px)
+{
+  .SlideShow h2
+  {
+    padding: 15px 20px;
+  }
+  .SlideShow .SlideItem
+  {
+    background-size: contain;
+  }
+}
