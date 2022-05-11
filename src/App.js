@@ -1,7 +1,4 @@
-import React from 'react'
-import { Switch, Route, BrowserRouter } from 'react-router-dom'
-import cn from 'classnames'
-import api from './api'
+import { HtmlDiv, HtmlMain } from 'htmlmodule'
 import { Header } from './Header'
 import { SlideShow } from './SlideShow'
 import { AlbumGroup } from './AlbumGroup'
@@ -11,11 +8,11 @@ import { Blog } from './Blog'
 import { ErrorPage } from './ErrorPage'
 import './App.css'
 
-class App extends React.Component
+export class App extends HtmlDiv
 {
-  constructor(props) {
-    super(props)
-    this.state = { open : false, data : null }
+  state = {
+    open : false,
+    data : null,
   }
 
   toggleNav = () => {
@@ -27,47 +24,56 @@ class App extends React.Component
   }
 
   render() {
-    const { open, data } = this.state
-    const className = cn('App', { open, homepage : window.location.pathname === '/' })
-    return (
-      <BrowserRouter>
-        <div className={ className } aria-busy={ String(!data) }>
-          <div className="Inner">
-            <Header open={ open }
-                    data={ data }
-                    toggleNav={ this.toggleNav }
-                    closeNav={ this.closeNav }/>
-            <Switch>
-              <Route path="/:sectionPath/:albumPath" render={ ({ match }) => {
-                return <SlideShow path={ match.url }/>
-              } }/>
-              { api.config.sections.map(section => (
-                <Route key={ section.owner_id } path={ section.path }>
-                  <AlbumGroup path={ section.path }/>
-                </Route>
-              )) }
-              <Route path="/Проектирование">
-                <main className="Main"><FileList/></main>
-              </Route>
-              <Route path="/Блог">
-                <Blog/>
-              </Route>
-              <Route path="/Контакты">
-                <main className="Main"><Contacts/></main>
-              </Route>
-              <Route path="/" exact>
-                <SlideShow path="/" auto/>
-              </Route>
-              <Route path="*">
-                <ErrorPage/>
-              </Route>
-            </Switch>
-            <div className="Backdrop" onClick={ this.closeNav }/>
-          </div>
-        </div>
-      </BrowserRouter>
-    )
+    const path = decodeURIComponent(location.pathname)
+    this.class = {
+      open : this.state.open,
+      homepage : /^\/(?:index\.html)?$/.test(path),
+    }
+    return new HtmlDiv({
+      className : 'Inner',
+      children : [
+        new Header({
+          data : this.state.data,
+          open : this.state.open,
+          toggleNav : this.toggleNav,
+          closeNave : this.closeNav,
+        }),
+        /^\/[а-яё\w]+\/[а-яё\w]+$/i.test(path)?
+          new SlideShow({ path }) :
+          api.config.sections.find(section => section.path === path)?
+            new AlbumGroup({ path, key : path }) :
+            /^\/Проектирование\/?$/.test(path)?
+              new Main(new FileList) :
+              /^\/Блог\/?$/.test(path)?
+                new Blog({ key : 'blog' }) :
+                /^\/Контакты\/?$/.test(path)?
+                  new Main(new Contacts) :
+                  /^\/(?:index\.html)?$/.test(path)?
+                    new SlideShow({ path : '/', auto : true }) :
+                    new ErrorPage,
+        new HtmlDiv({
+          className : 'Backdrop',
+          onclick : this.closeNav,
+        }),
+      ],
+    })
+  }
+
+  componentDidMount() {
+    window.onpopstate = () => this.setState()
+    document.onclick = e => {
+      if(e.target.href && e.target.classList.contains('Link')) {
+        this.setState()
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    window.onpopstate = null
+    document.onclick = null
   }
 }
 
-export default App
+export class Main extends HtmlMain
+{
+}

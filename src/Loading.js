@@ -1,5 +1,8 @@
-import React from 'react'
+import { HtmlDiv } from 'htmlmodule'
 
-export function Loading() {
-  return <div className="Loading">Загрузка...</div>
+export class Loading extends HtmlDiv
+{
+  render() {
+    return 'Загрузка...'
+  }
 }

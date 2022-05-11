@@ -1,27 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { HtmlDiv, HtmlA, HtmlH2 } from 'htmlmodule'
 import { ErrorPage } from './ErrorPage'
 import { Loading } from './Loading'
+import { Icon } from './Icon'
 import api from './api'
 import './SlideShow.css'
 
 const { Hammer } = window
 
-export class SlideShow extends React.Component
+export class SlideShow extends HtmlDiv
 {
-  constructor(props) {
-    super(props)
-    this.state = { album : null, current : 0, busy : true, err : null }
-    this._ref = React.createRef()
+  state = {
+    album : null,
+    current : 0,
+    busy : true,
+    err : null,
   }
 
   render() {
     const { album, err } = this.state
     if(err) {
-      return <ErrorPage/>
+      return new ErrorPage
     }
     if(!album) {
-      return <Loading/>
+      return new Loading
     }
     const section = album.section
     const current = this.state.current
@@ -31,38 +32,42 @@ export class SlideShow extends React.Component
     if(album.title) {
       document.title = album.title + ' | Лариса Дедловская'
     }
-    return (
-      <div className="SlideShow">
-        { section && (<h2>
-          <Link to={ section.path } onKeyDown={ this.onBackKeyDown }>{ section.title }</Link>
-          { ' → ' + album.title }
-        </h2>) }
-        <div className="SlideList appear"
-             aria-busy={ this.state.busy }
-             ref={ this._ref }
-             onClick={ this.onClick }
-             onTransitionEnd={ this.onTransitionEnd }>{
-          items.map((item, i) => (
-            <SlideItem key={ item.id } item={ item } index={ i }/>
-          ))
-        }</div>
-        <div className="SlideControl">
-          <button className="SlidePrev"
-                  onClick={ this.onPrevButtonClick }
-                  onKeyDown={ this.onButtonKeyDown }
-                  title="Предыдущий слайд">
-            <span className="icon icon-angle-left"/>
-          </button>
-          <div className="SlideCounter">{ current + 1 } / { album.items.length }</div>
-          <button className="SlideNext"
-                  onClick={ this.onNextButtonClick }
-                  onKeyDown={ this.onButtonKeyDown }
-                  title="Следующий слайд">
-            <span className="icon icon-angle-right"/>
-          </button>
-        </div>
-      </div>
-    )
+    return [
+      section && new HtmlH2([
+        new HtmlA({
+          href : section.path,
+          onkeydown : this.onBackKeyDown,
+          text : section.title,
+        }),
+        ' → ' + album.title,
+      ]),
+      this._ref = new SlideList({
+        class : ['appear'],
+        attrs : { 'aria-busy' : this.state.busy },
+        onclick : this.onClick,
+        ontransitionend : this.onTransitionEnd,
+        children : items.map((item, i) => new SlideItem({
+          item,
+          index : i,
+          key : item.id,
+        })),
+      }),
+      new SlideControl([
+        new SlidePrev({
+          onclick : this.onPrevButtonClick,
+          onkeydown : this.onButtonKeyDown,
+          title : 'Предыдущий слайд',
+          children : new Icon('angle-left'),
+        }),
+        new SlideCounter([current + 1, ' / ', album.items.length]),
+        new SlideNext({
+          onclick : this.onNextButtonClick,
+          onkeydown : this.onButtonKeyDown,
+          title : 'Следующий слайд',
+          children : new Icon('angle-right'),
+        }),
+      ]),
+    ]
   }
 
   async componentDidMount() {
@@ -71,7 +76,7 @@ export class SlideShow extends React.Component
       return
     }
     this.props.auto && this.tick()
-    this._hammertime = new Hammer(this._ref.current)
+    this._hammertime = new Hammer(this._ref.node)
     this._hammertime.on('swipe', e => {
       if(e.direction === Hammer.DIRECTION_LEFT) {
         this.switchSlide(1, true)
@@ -166,14 +171,38 @@ export class SlideShow extends React.Component
   }
 }
 
-function SlideItem(props) {
-  const url = props.item.sizes.find(size => size.type === 'z').url
-  const style = {
-    backgroundImage : `url(${ url })`,
-    left : (props.index - 1) * 100 + '%',
+class SlideItem extends HtmlDiv
+{
+  render() {
+    const url = this.props.item.sizes.find(size => size.type === 'z').url
+    const style = {
+      backgroundImage : `url(${ url })`,
+      left : (this.props.index - 1) * 100 + '%',
+    }
+    if(location.hostname !== 'new.lddesign.ru') {
+      style.backgroundSize = 'cover'
+    }
+    this.setAttr('role', 'img')
+    this.style = style
   }
-  if(window.location.hostname === 'new.lddesign.ru') {
-    style.backgroundSize = 'cover'
-  }
-  return <div role="img" className="SlideItem" style={ style }/>
+}
+
+class SlideList extends HtmlDiv
+{
+}
+
+class SlideControl extends HtmlDiv
+{
+}
+
+class SlidePrev extends HtmlDiv
+{
+}
+
+class SlideCounter extends HtmlDiv
+{
+}
+
+class SlideNext extends HtmlDiv
+{
 }

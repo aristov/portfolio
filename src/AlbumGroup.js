@@ -1,33 +1,36 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { HtmlDiv, HtmlH2 } from 'htmlmodule'
 import { ErrorPage } from './ErrorPage'
 import { Loading } from './Loading'
+import { Link } from './Link'
 import api from './api'
 import './AlbumGroup.css'
 
-export class AlbumGroup extends React.Component
+export class AlbumGroup extends HtmlDiv
 {
-  constructor(props) {
-    super(props)
-    this.state = { group : null, busy : true, err : null }
-    this._ref = React.createRef()
+  state = {
+    group : null,
+    busy : true,
+    err : null,
   }
 
   render() {
     const { group, err } = this.state
     if(err) {
-      return <ErrorPage/>
+      return new ErrorPage
     }
     if(!group) {
-      return <Loading/>
+      return new Loading
     }
     document.title = group.title + ' | Лариса Дедловская'
-    return (
-      <div className="AlbumGroup appear" aria-busy={ this.state.busy } ref={ this._ref }>
-        <div className="AlbumItem"><h2>{ group.title }</h2></div>
-        { group.items.map(album => <AlbumItem key={ album.id } album={ album }/>) }
-      </div>
-    )
+    this.class = ['appear']
+    this.setAttr('aria-busy', this.state.busy)
+    return [
+      new HtmlDiv({
+        className : 'AlbumItem',
+        children : new HtmlH2(group.title),
+      }),
+      group.items.map(album => new AlbumItem({ key : album.id, album })),
+    ]
   }
 
   componentDidMount() {
@@ -52,19 +55,15 @@ export class AlbumGroup extends React.Component
   }
 }
 
-class AlbumItem extends React.Component
+class AlbumItem extends Link
 {
   render() {
     const album = this.props.album
     const url = album.sizes.find(size => size.type === 'r').src
-    return (
-      <Link to={ album.path }
-            className="AlbumItem"
-            style={ { backgroundImage : `url(${ url })` } }
-            onKeyDown={ this.onKeyDown }>
-        <div className="AlbumInfo">{ album.title }</div>
-      </Link>
-    )
+    this.href = album.path
+    this.style = { backgroundImage : `url(${ url })` }
+    this.onkeydown = this.onKeyDown
+    return new HtmlDiv({ className : 'AlbumInfo', text : album.title })
   }
 
   onKeyDown = e => {

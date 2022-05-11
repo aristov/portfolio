@@ -1,24 +1,29 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { HtmlDiv, HtmlH2, HtmlHr, HtmlA } from 'htmlmodule'
+import { Icon } from './Icon'
 import api from './api'
 import './FileList.css'
 
-export function FileList() {
-  document.title = 'Проектирование | Лариса Дедловская'
-  return (
-    <div className="FileList">
-      <h2>Проектирование</h2>
-      <hr/>
-      { api.config.docs.map(item => <FileLink key={ item.path } item={ item }/>) }
-    </div>
-  )
+export class FileList extends HtmlDiv
+{
+  render() {
+    document.title = 'Проектирование | Лариса Дедловская'
+    return [
+      new HtmlH2('Проектирование'),
+      new HtmlHr,
+      api.config.docs.map(item => new FileLink({ key : item.path, item })),
+    ]
+  }
 }
 
-function FileLink(props) {
-  return (
-    <Link className="FileLink" to={ props.item.path } target="_blank" rel="noreferrer">
-      <span className="icon icon-file-pdf"/>
-      { props.item.title }
-    </Link>
-  )
+export class FileLink extends HtmlA
+{
+  render() {
+    this.href = this.props.item.path
+    this.target = '_blank'
+    this.rel = 'noreferrer'
+    return [
+      new Icon('file-pdf'),
+      this.props.item.title,
+    ]
+  }
 }

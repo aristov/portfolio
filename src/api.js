@@ -1,7 +1,7 @@
 import config from './config'
 
 const { protocol, hostname, port } = window.location
-const pathname = port? '/lddesign.ru/public/' : '/'
+const pathname = port? '/portfolio/public/' : '/'
 const BASE_URL = protocol + '//' + hostname + pathname
 
 function normalize(name) {

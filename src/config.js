@@ -32,7 +32,7 @@ const config = {
       title : 'Примеры работ в 3D',
       path : '/data/docs/examples_3d.pdf',
     },
-  ]
+  ],
 }
 
 export default config
