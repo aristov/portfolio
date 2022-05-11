@@ -1,10 +1,11 @@
-import { TodoApp } from './TodoApp'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
 
-const render = app => {
-  app?.destroy()
-  return TodoApp.render({}, document.getElementById('app'))
-}
-
-let app = render()
-
-module.hot?.accept(['./TodoApp'], () => app = render(app))
+ReactDOM.render(
+  <React.StrictMode>
+    <App/>
+  </React.StrictMode>,
+  document.getElementById('root'),
+)

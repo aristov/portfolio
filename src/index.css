@@ -1,0 +1,41 @@
+@import 'fontello/css/lddesign.css';
+
+html
+{
+  height: 100%;
+}
+body
+{
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #000;
+}
+body,
+body #root
+{
+  height: 100%;
+}
+a[href]
+{
+  /*outline: none;*/
+  color: #00a;
+  text-decoration: none;
+}
+a[href]:hover,
+a[href]:focus
+{
+  color: #00f;
+}
+.icon::before
+{
+  margin: 0;
+}
+.appear
+{
+  transition: opacity .3s, transform .3s;
+}
+.appear[aria-busy=true]
+{
+  transform: translateY(20px);
+  opacity: 0;
+}

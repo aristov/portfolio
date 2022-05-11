@@ -1,0 +1,57 @@
+.Blog
+{
+  background-color: #eee;
+  overflow: auto;
+}
+.Blog article
+{
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.Blog h3,
+.Blog p
+{
+  max-width: 900px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Blog h3
+{
+  margin-top: 10px;
+}
+.Blog time
+{
+  font-size: .8rem;
+}
+.Blog p
+{
+  font-size: .9rem;
+}
+.Blog img
+{
+  max-width: 100%;
+  max-height: 382px;
+  vertical-align: top;
+  margin-bottom: 5px;
+}
+.Blog img:not(:last-child)
+{
+  margin-right: 5px;
+}
+.Blog .Loading
+{
+  text-align: center;
+  padding: 50px;
+}
+@media (min-width: 900px)
+{
+  .Blog
+  {
+    padding: 20px;
+  }
+  /*.Blog article
+  {
+    max-width: 900px;
+  }*/
+}
