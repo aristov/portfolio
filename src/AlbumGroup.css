@@ -1,7 +1,6 @@
 .AlbumGroup
 {
   overflow: auto;
-  background-color: #fff;
 }
 .AlbumGroup .AlbumItem
 {
@@ -42,7 +41,7 @@
 }
 @media (min-width: 500px)
 {
-  .AlbumGroup
+  .AlbumGroup > .Inner
   {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -72,14 +71,14 @@
 }
 @media (min-width: 1100px)
 {
-  .AlbumGroup
+  .AlbumGroup > .Inner
   {
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
 @media (min-width: 1500px)
 {
-  .AlbumGroup
+  .AlbumGroup > .Inner
   {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }

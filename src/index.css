@@ -1,4 +1,4 @@
-@import 'fontello/css/lddesign.css';
+@import 'icons/css/lddesign.css';
 
 html
 {
@@ -17,7 +17,6 @@ body #root
 }
 a[href]
 {
-  /*outline: none;*/
   color: #00a;
   text-decoration: none;
 }
@@ -34,7 +33,7 @@ a[href]:focus
 {
   transition: opacity .3s, transform .3s;
 }
-.appear[aria-busy=true]
+[aria-busy=true] .appear
 {
   transform: translateY(20px);
   opacity: 0;

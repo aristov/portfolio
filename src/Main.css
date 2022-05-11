@@ -1,8 +1,26 @@
 .Main
 {
+  display: grid;
+  height: 100vh;
   overflow: auto;
+  box-sizing: border-box;
+}
+.Main > .Content
+{
+  box-sizing: border-box;
   padding: 0 20px;
   background-color: #fff;
+  width: 100%;
+}
+.Main .Loading
+{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  opacity: .5;
+  color: #fff;
 }
 .Main h2
 {
@@ -17,7 +35,7 @@
 }
 @media (min-width: 900px)
 {
-  .Main
+  .Main > .Content
   {
     padding: 0 30px;
   }

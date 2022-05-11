@@ -1,25 +1,27 @@
-import { HtmlDiv, HtmlA, HtmlH2 } from 'htmlmodule'
-import { ErrorPage } from './ErrorPage'
-import { Loading } from './Loading'
+import { HtmlA, HtmlDiv, HtmlH2 } from 'htmlmodule'
+import { ErrorContent } from './ErrorContent'
 import { Icon } from './Icon'
+import { Loading } from './Loading'
+import { Main } from './Main'
+import { SlideItem } from './SlideItem'
+import { Inner } from './Inner'
 import api from './api'
 import './SlideShow.css'
 
 const { Hammer } = window
 
-export class SlideShow extends HtmlDiv
+export class SlideShow extends Main
 {
   state = {
     album : null,
     current : 0,
-    busy : true,
     err : null,
   }
 
   render() {
     const { album, err } = this.state
     if(err) {
-      return new ErrorPage
+      return new ErrorContent
     }
     if(!album) {
       return new Loading
@@ -32,7 +34,7 @@ export class SlideShow extends HtmlDiv
     if(album.title) {
       document.title = album.title + ' | Лариса Дедловская'
     }
-    return [
+    return new Inner([
       section && new HtmlH2([
         new HtmlA({
           href : section.path,
@@ -43,7 +45,6 @@ export class SlideShow extends HtmlDiv
       ]),
       this._ref = new SlideList({
         class : ['appear'],
-        attrs : { 'aria-busy' : this.state.busy },
         onclick : this.onClick,
         ontransitionend : this.onTransitionEnd,
         children : items.map((item, i) => new SlideItem({
@@ -67,7 +68,7 @@ export class SlideShow extends HtmlDiv
           children : new Icon('angle-right'),
         }),
       ]),
-    ]
+    ])
   }
 
   async componentDidMount() {
@@ -96,9 +97,10 @@ export class SlideShow extends HtmlDiv
   }
 
   async load() {
+    this.setAttr('aria-busy', 'true')
     try {
       this.setState({ album : await api.getAlbum(this.props.path) })
-      setTimeout(() => this.setState({ busy : false }))
+      setTimeout(() => this.setAttr('aria-busy', 'false'))
     }
     catch(err) {
       this.setState({ err })
@@ -168,22 +170,6 @@ export class SlideShow extends HtmlDiv
       e.stopPropagation()
       e.target.click()
     }
-  }
-}
-
-class SlideItem extends HtmlDiv
-{
-  render() {
-    const url = this.props.item.sizes.find(size => size.type === 'z').url
-    const style = {
-      backgroundImage : `url(${ url })`,
-      left : (this.props.index - 1) * 100 + '%',
-    }
-    if(location.hostname !== 'new.lddesign.ru') {
-      style.backgroundSize = 'cover'
-    }
-    this.setAttr('role', 'img')
-    this.style = style
   }
 }
 
