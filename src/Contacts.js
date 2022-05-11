@@ -1,12 +1,14 @@
-import { HtmlDiv, HtmlA, HtmlHr, HtmlH2 } from 'htmlmodule'
-import { Icon } from './Icon'
+import { HtmlA, HtmlDiv, HtmlH2, HtmlHr } from 'htmlmodule'
+import { ContactsLink } from './ContactsLink'
+import { Content } from './Content'
+import { Main } from './Main'
 import './Contacts.css'
 
-export class Contacts extends HtmlDiv
+export class Contacts extends Main
 {
   render() {
     document.title = 'Контакты | Лариса Дедловская'
-    return [
+    return new Content([
       new HtmlH2('Контакты'),
       new HtmlHr,
       new ContactsLink({
@@ -49,29 +51,18 @@ export class Contacts extends HtmlDiv
         children : 'mona',
       }),
       new HtmlHr,
-      new Author([
-        'Разработчик сайта: ',
-        new HtmlA({
-          href : 'mailto:vv.aristov@gmail.com',
-          target : '_blank',
-          rel : 'noreferrer',
-          text : 'Вячеслав Аристов',
-        }),
-      ]),
-    ]
+      new HtmlDiv({
+        className : 'Author',
+        children : [
+          'Разработчик сайта: ',
+          new HtmlA({
+            href : 'mailto:vv.aristov@gmail.com',
+            target : '_blank',
+            rel : 'noreferrer',
+            text : 'Вячеслав Аристов',
+          }),
+        ]
+      }),
+    ])
   }
-}
-
-class ContactsLink extends HtmlA
-{
-  render() {
-    return [
-      new Icon(this.props.icon),
-      this.props.children,
-    ]
-  }
-}
-
-class Author extends HtmlDiv
-{
 }

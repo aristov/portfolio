@@ -1,8 +1,9 @@
 import {
-  HtmlA, HtmlButton, HtmlDiv, HtmlH1, HtmlHeader, HtmlLi, HtmlNav, HtmlSmall, HtmlSpan, HtmlUl,
+  HtmlA, HtmlButton, HtmlH1, HtmlHeader, HtmlLi, HtmlNav, HtmlSmall, HtmlSpan, HtmlUl,
 } from 'htmlmodule'
-import { Icon } from './Icon'
+import { Inner } from './Inner'
 import { Link } from './Link'
+import { Social } from './Social'
 import api from './api'
 import './Header.css'
 
@@ -12,19 +13,16 @@ export class Header extends HtmlHeader
 {
   render() {
     return [
-      new HtmlDiv({
-        className : 'Inner',
-        children : [
-          new HtmlH1(new HtmlA({ href : '/', text : 'Лариса Дедловская' })),
-          new HtmlButton({
-            className : 'MenuButton',
-            onclick : this.props.toggleNav,
-            children : new HtmlSpan({
-              className : this.props.open? 'icon icon-cancel' : 'icon icon-menu',
-            }),
+      new Inner([
+        new HtmlH1(new HtmlA({ href : '/', text : 'Лариса Дедловская' })),
+        new HtmlButton({
+          className : 'MenuButton',
+          onclick : this.props.toggleNav,
+          children : new HtmlSpan({
+            className : this.props.open? 'icon icon-cancel' : 'icon icon-menu',
           }),
-        ],
-      }),
+        }),
+      ]),
       this._nav = new HtmlNav([
         new HtmlUl({
           attrs : { role : 'menu' },
@@ -94,36 +92,3 @@ export class Header extends HtmlHeader
     }
   }
 }
-
-class Social extends HtmlDiv
-{
-  render() {
-    return new HtmlDiv([
-      new HtmlA({
-        target : '_blank',
-        rel : 'noreferrer',
-        href : 'https://instagram.com/design.ld',
-        children : new Icon('instagram'),
-      }),
-      new HtmlA({
-        target : '_blank',
-        rel : 'noreferrer',
-        href : 'https://facebook.com/larisa.dedlovskaya',
-        children : new Icon('facebook'),
-      }),
-      new HtmlA({
-        target : '_blank',
-        rel : 'noreferrer',
-        href : 'https://mona.livejournal.com',
-        children : new Icon('livejournal'),
-      }),
-      new HtmlA({
-        target : '_blank',
-        rel : 'noreferrer',
-        href : 'https://vk.com/larisadedlovskaya',
-        children : new Icon('vkontakte'),
-      }),
-    ])
-  }
-}
-

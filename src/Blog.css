@@ -1,7 +1,7 @@
 .Blog
 {
   background-color: #eee;
-  overflow: auto;
+  display: block;
 }
 .Blog article
 {
@@ -41,8 +41,7 @@
 }
 .Blog .Loading
 {
-  text-align: center;
-  padding: 50px;
+  color: #000;
 }
 @media (min-width: 900px)
 {
