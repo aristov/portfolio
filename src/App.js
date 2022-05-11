@@ -30,7 +30,7 @@ export class App extends HtmlDiv
         toggleNav : this.toggleNav,
         closeNave : this.closeNav,
       }),
-      /^\/[а-яё\w]+\/[а-яё\w]+$/i.test(path) ?
+      /^\/[а-яёй\w\-]+\/[а-яёй\w\-]+$/i.test(path) ?
         new SlideShow({ path }) :
         api.config.sections.find(section => section.path === path) ?
           new AlbumGroup({ path, key : path }) :
