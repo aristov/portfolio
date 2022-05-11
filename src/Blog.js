@@ -1,16 +1,15 @@
-import React from 'react'
+import { HtmlDiv, HtmlArticle, HtmlTime, HtmlP, HtmlH3, HtmlImg } from 'htmlmodule'
 import { Loading } from './Loading'
 import api from './api'
 import './Blog.css'
 
 const { moment } = window
 
-export class Blog extends React.Component
+export class Blog extends HtmlDiv
 {
-  constructor(props) {
-    super(props)
-    this.state = { data : [], busy : false }
-    this._ref = React.createRef()
+  state = {
+    data : [],
+    busy : false,
   }
 
   componentDidMount() {
@@ -32,56 +31,52 @@ export class Blog extends React.Component
     if(this.state.data.length >= this._count) {
       return
     }
-    const node = this._ref.current
+    const node = this.node
     if(node.scrollTop > node.scrollHeight - node.clientHeight * 2) {
       void this.load()
     }
   }
 
   render() {
-    return (
-      <div role="feed"
-           className="Blog"
-           onScroll={ this.onScroll }
-           ref={ this._ref }
-           aria-busy={ this.state.busy }>
-        { this.state.data.map(item => {
-          if(!item.text && !item.attachments) {
-            return null
-          }
-          if(item.copy_history) {
-            return null
-          }
-          return <Post key={ item.id } item={ item }/>
-        }) }
-        { this.state.busy && <Loading/> }
-      </div>
-    )
+    this.setAttr('role', 'feed')
+    this.setAttr('aria-busy', this.state.busy)
+    this.onscroll = this.onScroll
+    return [
+      this.state.data.map(item => {
+        if(!item.text && !item.attachments) {
+          return null
+        }
+        if(item.copy_history) {
+          return null
+        }
+        return new Post({ key : item.id, item })
+      }),
+      this.state.busy && new Loading,
+    ]
   }
 }
 
-function Post(props) {
-  const item = props.item
-  const [title, ...text] = item.text.split('\n\n')
-  return (
-    <article>
-      <time>{ moment.unix(item.date).format('D MMM YYYY') }</time>
-      <h3 dangerouslySetInnerHTML={ { __html : linkInsert(title) } }/>
-      { !!text.length && text.map(p => {
-        return <p key={ p } dangerouslySetInnerHTML={ { __html : linkInsert(p) } }/>
-      }) }
-      { item.attachments?.map(attachment => {
+class Post extends HtmlArticle
+{
+  render() {
+    const item = this.props.item
+    const [title, ...text] = item.text.split('\n\n')
+    return [
+      new HtmlTime(moment.unix(item.date).format('D MMM YYYY')),
+      new HtmlH3({ html : linkInsert(title) }),
+      !!text.length && text.map(p => new HtmlP({ html : linkInsert(p) })),
+      item.attachments?.map(attachment => {
         if(attachment.type === 'photo') {
-          return (
-            <img key={ attachment.photo.id }
-                 src={ attachment.photo.sizes.find(size => size.type === 'r')?.url }
-                 alt=""/>
-          )
+          return new HtmlImg({
+            key : attachment.photo.id,
+            src : attachment.photo.sizes.find(size => size.type === 'r')?.url,
+            alt : '',
+          })
         }
         return null
-      }) }
-    </article>
-  )
+      }),
+    ]
+  }
 }
 
 const URL_RE = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z0-9.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z0-9.-]+)((?:\/[+~%/.\w\-_]*)?\??(?:[-+=&;%@.\w_]*)#?(?:[.!/\\\w]*))?)/g
