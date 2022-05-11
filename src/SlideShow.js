@@ -122,7 +122,9 @@ export class SlideShow extends Main
     if(this._transition) {
       return
     }
-    this._transition = true
+    if(shift > 0) { // fixme https://github.com/patrick-steele-idem/morphdom/issues/200
+      this._transition = true
+    }
     this.setState(state => ({ current : this.getIndex(state.current + shift) }))
   }
 
