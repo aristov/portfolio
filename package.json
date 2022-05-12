@@ -10,13 +10,14 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack",
     "start": "webpack serve"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
     "css-loader": "^6.7.1",
     "htmlmodule": "file:../htmlmodule",
+    "mini-css-extract-plugin": "^2.6.0",
     "postcss-loader": "^6.2.1",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.0",

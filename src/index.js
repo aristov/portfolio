@@ -8,4 +8,7 @@ const render = app => {
 
 let app = render()
 
-module.hot?.accept(['./App'], () => app = render(app))
+if(module.hot) {
+  document.getElementById('css')?.remove()
+  module.hot.accept(['./App'], () => app = render(app))
+}
