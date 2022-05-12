@@ -4,6 +4,7 @@ import {
 import { Inner } from './Inner'
 import { Link } from './Link'
 import { Social } from './Social'
+import { Icon } from './Icon'
 import api from './api'
 import './Header.css'
 
@@ -18,9 +19,7 @@ export class Header extends HtmlHeader
         new HtmlButton({
           className : 'MenuButton',
           onclick : this.props.toggleNav,
-          children : new HtmlSpan({
-            className : this.props.open? 'icon icon-cancel' : 'icon icon-menu',
-          }),
+          children : new Icon(this.props.open ? 'cancel' : 'menu'),
         }),
       ]),
       this._nav = new HtmlNav([
