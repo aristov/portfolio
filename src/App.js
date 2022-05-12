@@ -8,6 +8,7 @@ import { FileList } from './FileList'
 import { Contacts } from './Contacts'
 import { Blog } from './Blog'
 import { ErrorContent } from './ErrorContent'
+import { router } from './router'
 import './App.css'
 
 export class App extends HtmlDiv
@@ -18,10 +19,10 @@ export class App extends HtmlDiv
   }
 
   render() {
-    const path = decodeURIComponent(location.pathname)
+    const path = decodeURIComponent(location.pathname).replace(/\/$/, '') || '/'
     this.class = {
       open : this.state.open,
-      homepage : /^\/(?:index\.html)?$/.test(path),
+      homepage : path === '/',
     }
     return new Inner([
       new Header({
@@ -30,23 +31,37 @@ export class App extends HtmlDiv
         toggleNav : this.toggleNav,
         closeNave : this.closeNav,
       }),
-      /^\/[а-яёй\w\-]+\/[а-яёй\w\-]+$/i.test(path) ?
-        new SlideShow({ path }) :
-        api.config.sections.find(section => section.path === path) ?
-          new AlbumGroup({ path, key : path }) :
-          /^\/Проектирование\/?$/.test(path) ?
-            new FileList :
-            /^\/Блог\/?$/.test(path) ?
-              new Blog({ key : 'blog' }) :
-              /^\/Контакты\/?$/.test(path) ?
-                new Contacts :
-                /^\/(?:index\.html)?$/.test(path) ?
-                  new SlideShow({ path : '/', auto : true }) :
-                  new Main(new ErrorContent),
-      new HtmlDiv({
-        className : 'Backdrop',
-        onclick : this.closeNav,
-      }),
+      router([
+        {
+          path : /^\/[а-яёй\w\-]+\/[а-яёй\w\-]+$/i,
+          render : () => new SlideShow({ path }),
+        },
+        ...api.config.sections.map(section => ({
+          path : section.path,
+          render : () => new AlbumGroup({ path, key : path }),
+        })),
+        {
+          path : '/Проектирование',
+          render : () => new FileList,
+        },
+        {
+          path : '/Блог',
+          render : () => new Blog,
+        },
+        {
+          path : '/Контакты',
+          render : () => new Contacts,
+        },
+        {
+          path : '/',
+          render : () => new SlideShow({ path : '/', auto : true }),
+        },
+        {
+          path : /.*/,
+          render : () => new Main(new ErrorContent),
+        },
+      ]),
+      new Backdrop({ onclick : this.closeNav }),
     ])
   }
 
@@ -71,4 +86,8 @@ export class App extends HtmlDiv
   closeNav = () => {
     this.setState({ open : false })
   }
+}
+
+class Backdrop extends HtmlDiv
+{
 }
