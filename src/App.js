@@ -29,7 +29,7 @@ export class App extends HtmlDiv
         data : this.state.data,
         open : this.state.open,
         toggleNav : this.toggleNav,
-        closeNave : this.closeNav,
+        closeNav : this.closeNav,
       }),
       router([
         {
