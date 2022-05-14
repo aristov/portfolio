@@ -6,14 +6,14 @@ export class SlideControl extends HtmlDiv
   render() {
     return [
       new SlidePrev({
-        onclick : this.props.onPrevButtonClick,
+        onclick : () => this.props.switchSlide(-1, true),
         onkeydown : this.onButtonKeyDown,
         title : 'Предыдущий слайд',
         children : new Icon('angle-left'),
       }),
       new SlideCounter([this.props.current + 1, ' / ', this.props.album.items.length]),
       new SlideNext({
-        onclick : this.props.onNextButtonClick,
+        onclick : () => this.props.switchSlide(1, true),
         onkeydown : this.onButtonKeyDown,
         title : 'Следующий слайд',
         children : new Icon('angle-right'),

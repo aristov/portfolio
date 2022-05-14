@@ -45,8 +45,7 @@ export class SlideShow extends Main
       }),
       new SlideControl({
         current, album,
-        onPrevButtonClick : this.onPrevButtonClick,
-        onNextButtonClick : this.onNextButtonClick,
+        switchSlide : this.switchSlide,
       }),
     ])
   }
@@ -96,7 +95,7 @@ export class SlideShow extends Main
     })
   }
 
-  switchSlide(shift, stop = false) {
+  switchSlide = (shift, stop = false) => {
     if(stop) {
       this.state.timer && clearTimeout(this.state.timer)
       this.setState({ timer : null })
@@ -135,13 +134,5 @@ export class SlideShow extends Main
 
   onTransitionEnd = () => {
     this._transition = false
-  }
-
-  onPrevButtonClick = () => {
-    this.switchSlide(-1, true)
-  }
-
-  onNextButtonClick = () => {
-    this.switchSlide(1, true)
   }
 }
