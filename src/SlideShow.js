@@ -1,10 +1,10 @@
-import { HtmlA, HtmlDiv, HtmlH2 } from 'htmlmodule'
 import { ErrorContent } from './ErrorContent'
-import { Icon } from './Icon'
 import { Loading } from './Loading'
 import { Main } from './Main'
-import { SlideItem } from './SlideItem'
 import { Inner } from './Inner'
+import { SlideHeading } from './SlideHeading'
+import { SlideList } from './SlideList'
+import { SlideControl } from './SlideControl'
 import api from './api'
 import './SlideShow.css'
 
@@ -36,39 +36,18 @@ export class SlideShow extends Main
       document.title = album.title + ' | Лариса Дедловская'
     }
     return new Inner([
-      section && new HtmlH2([
-        new HtmlA({
-          href : section.path,
-          onkeydown : this.onBackKeyDown,
-          text : section.title,
-        }),
-        ' → ' + album.title,
-      ]),
+      section && new SlideHeading({ section, album }),
       this._ref = new SlideList({
+        items,
         class : ['appear'],
         onclick : this.onClick,
         ontransitionend : this.onTransitionEnd,
-        children : items.map((item, i) => new SlideItem({
-          item,
-          index : i,
-          key : item.id,
-        })),
       }),
-      new SlideControl([
-        new SlidePrev({
-          onclick : this.onPrevButtonClick,
-          onkeydown : this.onButtonKeyDown,
-          title : 'Предыдущий слайд',
-          children : new Icon('angle-left'),
-        }),
-        new SlideCounter([current + 1, ' / ', album.items.length]),
-        new SlideNext({
-          onclick : this.onNextButtonClick,
-          onkeydown : this.onButtonKeyDown,
-          title : 'Следующий слайд',
-          children : new Icon('angle-right'),
-        }),
-      ]),
+      new SlideControl({
+        current, album,
+        onPrevButtonClick : this.onPrevButtonClick,
+        onNextButtonClick : this.onNextButtonClick,
+      }),
     ])
   }
 
@@ -165,35 +144,4 @@ export class SlideShow extends Main
   onNextButtonClick = () => {
     this.switchSlide(1, true)
   }
-
-  onButtonKeyDown = e => {
-    e.code === 'Space' && e.stopPropagation()
-  }
-
-  onBackKeyDown = e => {
-    if(e.code === 'Space') {
-      e.stopPropagation()
-      e.target.click()
-    }
-  }
-}
-
-class SlideList extends HtmlDiv
-{
-}
-
-class SlideControl extends HtmlDiv
-{
-}
-
-class SlidePrev extends HtmlDiv
-{
-}
-
-class SlideCounter extends HtmlDiv
-{
-}
-
-class SlideNext extends HtmlDiv
-{
 }
