@@ -1,5 +1,5 @@
 import {
-  HtmlA, HtmlButton, HtmlH1, HtmlHeader, HtmlLi, HtmlNav, HtmlSmall, HtmlSpan, HtmlUl,
+  HtmlA, HtmlButton, HtmlH1, HtmlHeader, HtmlLi, HtmlNav, HtmlSmall, HtmlUl,
 } from 'htmlmodule'
 import { Inner } from './Inner'
 import { Link } from './Link'
