@@ -15,12 +15,13 @@ export class SlideShow extends Main
   state = {
     album : null,
     current : 0,
+    timer : null,
     err : null,
   }
 
   render() {
-    const { album, err } = this.state
-    if(err) {
+    const album = this.state.album
+    if(this.state.err) {
       return new ErrorContent
     }
     if(!album) {
@@ -90,8 +91,8 @@ export class SlideShow extends Main
   }
 
   componentWillUnmount() {
-    this._timer && clearTimeout(this._timer)
-    this._timer = null
+    this.state.timer && clearTimeout(this.state.timer)
+    this.setState({ timer : null })
     this._hammertime?.off('swipe')
     document.removeEventListener('keydown', this.onKeyDown)
   }
@@ -108,16 +109,18 @@ export class SlideShow extends Main
   }
 
   tick() {
-    this._timer = setTimeout(() => {
-      this.switchSlide(1)
-      this.tick()
-    }, 5000)
+    this.setState({
+      timer : setTimeout(() => {
+        this.switchSlide(1)
+        this.tick()
+      }, 5000),
+    })
   }
 
   switchSlide(shift, stop = false) {
     if(stop) {
-      this._timer && clearTimeout(this._timer)
-      this._timer = null
+      this.state.timer && clearTimeout(this.state.timer)
+      this.setState({ timer : null })
     }
     if(this._transition) {
       return
@@ -130,7 +133,7 @@ export class SlideShow extends Main
 
   getIndex(i) {
     const items = this.state.album.items
-    return i < 0? items.length + i : i % items.length
+    return i < 0 ? items.length + i : i % items.length
   }
 
   onClick = () => {
