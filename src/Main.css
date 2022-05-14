@@ -1,7 +1,7 @@
 .Main
 {
   display: grid;
-  height: 100vh;
+  height: 100%;
   overflow: auto;
   box-sizing: border-box;
 }
@@ -35,6 +35,10 @@
 }
 @media (min-width: 900px)
 {
+  .Main
+  {
+    height: 100vh;
+  }
   .Main > .Content
   {
     padding: 0 30px;
