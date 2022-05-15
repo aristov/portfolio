@@ -1,4 +1,4 @@
-import { HtmlDiv } from '../../htmlmodule'
+import { HtmlDiv } from 'htmlmodule'
 import { SlideItem } from './SlideItem'
 
 export class SlideList extends HtmlDiv
