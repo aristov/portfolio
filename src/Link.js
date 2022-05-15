@@ -2,9 +2,9 @@ import { HtmlA } from 'htmlmodule'
 
 export class Link extends HtmlA
 {
-  render() {
+  init(deep) {
+    super.init(deep)
     this.onclick = this.onClick
-    return super.render()
   }
 
   onClick = e => {
