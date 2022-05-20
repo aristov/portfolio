@@ -4,7 +4,7 @@ import { Inner } from './Inner'
 import { Main } from './Main'
 import { SlideShow } from './SlideShow'
 import { AlbumGroup } from './AlbumGroup'
-import { FileList } from './FileList'
+import { DocumentList } from './DocumentList'
 import { Contacts } from './Contacts'
 import { Blog } from './Blog'
 import { ErrorContent } from './ErrorContent'
@@ -42,7 +42,7 @@ export class App extends HtmlDiv
         })),
         {
           path : '/Проектирование',
-          render : () => new FileList,
+          render : () => new DocumentList,
         },
         {
           path : '/Блог',
