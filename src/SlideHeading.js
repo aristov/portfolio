@@ -6,7 +6,7 @@ export class SlideHeading extends HtmlH2
   render() {
     return [
       new Link({
-        href : this.props.section.path,
+        to : this.props.section.path,
         text : this.props.section.title,
         onkeydown : this.onKeyDown,
       }),
