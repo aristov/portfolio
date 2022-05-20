@@ -30,7 +30,7 @@
   white-space: nowrap;
   margin: 0;
 }
-.Header h1 a[href]
+.Header h1 a
 {
   display: block;
   padding: 14px 10px;
@@ -73,19 +73,19 @@
 {
   color: inherit;
 }
-.Header li a[href]
+.Header li a
 {
   display: block;
   padding: 15px 20px;
   opacity: .8;
 }
-.Header li a[href]:hover,
-.Header li a[href]:focus,
-.Header li a[href].current
+.Header li a:hover,
+.Header li a:focus,
+.Header li a:not([href])
 {
   opacity: 1;
 }
-.Header li a[href].current
+.Header li a:not([href])
 {
   cursor: default;
 }
@@ -95,14 +95,14 @@
   font-size: 1.6rem;
   margin-top: 20px;
 }
-.Header .Social a[href]
+.Header .Social a
 {
   display: inline-block;
   padding: 10px;
   opacity: .8;
 }
-.Header .Social a[href]:hover,
-.Header .Social a[href]:focus
+.Header .Social a:hover,
+.Header .Social a:focus
 {
   opacity: 1;
 }
@@ -148,7 +148,7 @@
     width: fit-content;
     padding: 0 10px;
   }
-  .Header li a[href]
+  .Header li a
   {
     padding: 10px;
   }

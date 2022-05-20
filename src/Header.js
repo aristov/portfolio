@@ -30,15 +30,15 @@ export class Header extends HtmlHeader
             api.config.sections.map(section => new HtmlLi({
               attrs : { role : 'menuitem' },
               children : new Link({
+                to : section.path,
                 text : section.title,
-                href : section.path,
                 onkeydown : this.onKeyDown,
               }),
             })),
             new HtmlLi({
               attrs : { role : 'menuitem' },
               children : new Link({
-                href : '/Проектирование',
+                to : '/Проектирование',
                 text : 'Проектирование',
                 onkeydown : this.onKeyDown,
               }),
@@ -46,7 +46,7 @@ export class Header extends HtmlHeader
             new HtmlLi({
               attrs : { role : 'menuitem' },
               children : new Link({
-                href : '/Блог',
+                to : '/Блог',
                 text : 'Блог',
                 onkeydown : this.onKeyDown,
               }),
@@ -54,7 +54,7 @@ export class Header extends HtmlHeader
             new HtmlLi({
               attrs : { role : 'menuitem' },
               children : new Link({
-                href : '/Контакты',
+                to : '/Контакты',
                 text : 'Контакты',
                 onkeydown : this.onKeyDown,
               }),
