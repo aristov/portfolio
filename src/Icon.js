@@ -2,7 +2,9 @@ import { HtmlSpan } from 'htmlmodule'
 
 export class Icon extends HtmlSpan
 {
-  render() {
-    this.className = 'icon icon-' + this.props.children
+  className = 'icon icon-' + this.props.glyph
+
+  normalizeProps(props) {
+    return typeof props === 'string' ? { glyph : props } : super.normalizeProps(props)
   }
 }
