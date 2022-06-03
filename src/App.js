@@ -68,9 +68,7 @@ export class App extends HtmlDiv
   componentDidMount() {
     window.onpopstate = () => this.setState()
     document.onclick = e => {
-      if(e.target.closest('.Link')) {
-        e.target.closest('.Link') && this.setState()
-      }
+      e.target.closest('.Link') && this.setState()
     }
   }
 
