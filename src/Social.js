@@ -3,6 +3,8 @@ import { Icon } from './Icon'
 
 export class Social extends HtmlDiv
 {
+  static class = 'Social'
+
   render() {
     return new HtmlDiv([
       new HtmlA({

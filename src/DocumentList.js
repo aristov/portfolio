@@ -7,6 +7,8 @@ import './DocumentList.css'
 
 export class DocumentList extends Main
 {
+  static class = 'DocumentList'
+
   render() {
     document.title = 'Проектирование | Лариса Дедловская'
     return new Content([
@@ -17,7 +19,10 @@ export class DocumentList extends Main
         href : item.path,
         target : '_blank',
         rel : 'noreferrer',
-        children : [new Icon('file-pdf'), item.title],
+        children : [
+          new Icon('file-pdf'),
+          item.title,
+        ],
       })),
     ])
   }

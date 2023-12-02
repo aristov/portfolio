@@ -6,6 +6,8 @@ import './Contacts.css'
 
 export class Contacts extends Main
 {
+  static class = 'Contacts'
+
   render() {
     document.title = 'Контакты | Лариса Дедловская'
     return new Content([
@@ -59,7 +61,7 @@ export class Contacts extends Main
             href : 'mailto:vv.aristov@gmail.com',
             target : '_blank',
             rel : 'noreferrer',
-            text : 'Вячеслав Аристов',
+            children : 'Вячеслав Аристов',
           }),
         ]
       }),

@@ -12,16 +12,24 @@ const { Hammer } = window
 
 export class SlideShow extends Main
 {
+  static class = 'SlideShow'
+
   state = {
     album : null,
     current : 0,
     timer : null,
-    err : null,
+    error : null,
+    busy : false,
+  }
+
+  assign() {
+    super.assign()
+    this.busy = this.state.busy
   }
 
   render() {
     const album = this.state.album
-    if(this.state.err) {
+    if(this.state.error) {
       return new ErrorContent
     }
     if(!album) {
@@ -31,28 +39,36 @@ export class SlideShow extends Main
     const current = this.state.current
     const prev = this.getIndex(current - 1)
     const next = this.getIndex(current + 1)
-    const items = [album.items[prev], album.items[current], album.items[next]]
+    const items = [
+      album.items[prev],
+      album.items[current],
+      album.items[next],
+    ]
     if(album.title) {
       document.title = album.title + ' | Лариса Дедловская'
     }
     return new Inner([
-      section && new SlideHeading({ section, album }),
+      section && new SlideHeading({
+        section,
+        album,
+      }),
       this._ref = new SlideList({
         items,
-        class : ['appear'],
+        classList : ['appear'],
         onclick : this.onClick,
         ontransitionend : this.onTransitionEnd,
       }),
       new SlideControl({
-        current, album,
+        current,
+        album,
         switchSlide : this.switchSlide,
       }),
     ])
   }
 
-  async componentDidMount() {
-    await this.load()
-    if(this.state.err) {
+  async mount() {
+    await this.#load()
+    if(this.state.error) {
       return
     }
     this.props.auto && this.tick()
@@ -68,50 +84,59 @@ export class SlideShow extends Main
     document.addEventListener('keydown', this.onKeyDown)
   }
 
-  componentWillUnmount() {
-    this.state.timer && clearTimeout(this.state.timer)
+  destroy() {
+    if(this.state.timer) {
+      clearTimeout(this.state.timer)
+    }
     this.setState({ timer : null })
     this._hammertime?.off('swipe')
     document.removeEventListener('keydown', this.onKeyDown)
   }
 
-  async load() {
-    this.setAttr('aria-busy', 'true')
+  async #load() {
+    this.setState({ busy : true })
     try {
-      this.setState({ album : await api.getAlbum(this.props.path) })
-      setTimeout(() => this.setAttr('aria-busy', 'false'))
+      this.setState({
+        album : await api.getAlbum(this.props.path),
+        busy : false,
+      })
     }
-    catch(err) {
-      this.setState({ err })
+    catch(error) {
+      this.setState({ error })
     }
   }
 
   tick() {
+    const handler = () => {
+      this.switchSlide(1)
+      this.tick()
+    }
     this.setState({
-      timer : setTimeout(() => {
-        this.switchSlide(1)
-        this.tick()
-      }, 5000),
+      timer : setTimeout(handler, 5000),
     })
   }
 
   switchSlide = (shift, stop = false) => {
     if(stop) {
-      this.state.timer && clearTimeout(this.state.timer)
+      if(this.state.timer) {
+        clearTimeout(this.state.timer)
+      }
       this.setState({ timer : null })
     }
     if(this._transition) {
       return
     }
-    if(shift > 0) { // fixme https://github.com/patrick-steele-idem/morphdom/issues/200
-      this._transition = true
-    }
-    this.setState(state => ({ current : this.getIndex(state.current + shift) }))
+    this._transition = true
+    this.setState(state => ({
+      current : this.getIndex(state.current + shift),
+    }))
   }
 
   getIndex(i) {
     const items = this.state.album.items
-    return i < 0 ? items.length + i : i % items.length
+    return i < 0 ?
+      items.length + i :
+      i % items.length
   }
 
   onClick = () => {

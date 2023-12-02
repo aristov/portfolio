@@ -12,10 +12,16 @@ const { Hammer } = window
 
 export class Header extends HtmlHeader
 {
+  static class = 'Header'
+
   render() {
+    const year = (new Date).getFullYear()
     return [
       new Inner([
-        new HtmlH1(new HtmlA({ href : '/', text : 'Лариса Дедловская' })),
+        new HtmlH1(new HtmlA({
+          href : '/',
+          children : 'Лариса Дедловская',
+        })),
         new HtmlButton({
           className : 'MenuButton',
           onclick : this.props.toggleNav,
@@ -24,70 +30,73 @@ export class Header extends HtmlHeader
       ]),
       this._nav = new HtmlNav([
         new HtmlUl({
-          attrs : { role : 'menu' },
+          role : 'menu',
           onclick : this.props.closeNav,
           children : [
             api.config.sections.map(section => new HtmlLi({
-              attrs : { role : 'menuitem' },
+              role : 'menuitem',
               children : new Link({
                 to : section.path,
-                text : section.title,
+                children : section.title,
                 onkeydown : this.onKeyDown,
               }),
             })),
             new HtmlLi({
-              attrs : { role : 'menuitem' },
+              role : 'menuitem',
               children : new Link({
                 to : '/Проектирование',
-                text : 'Проектирование',
+                children : 'Проектирование',
                 onkeydown : this.onKeyDown,
               }),
             }),
             new HtmlLi({
-              attrs : { role : 'menuitem' },
+              role : 'menuitem',
               children : new Link({
                 to : '/Блог',
-                text : 'Блог',
+                children : 'Блог',
                 onkeydown : this.onKeyDown,
               }),
             }),
             new HtmlLi({
-              attrs : { role : 'menuitem' },
+              role : 'menuitem',
               children : new Link({
                 to : '/Контакты',
-                text : 'Контакты',
+                children : 'Контакты',
                 onkeydown : this.onKeyDown,
               }),
             }),
           ],
         }),
         new Social,
-        new HtmlSmall(`© ${ (new Date()).getFullYear() } Лариса Дедловская`),
+        new HtmlSmall(`© ${ year } Лариса Дедловская`),
       ]),
     ]
   }
 
-  componentDidMount() {
+  mount() {
     this._hammertime = new Hammer(this._nav.node)
     this._hammertime.on('swipe', e => {
-      e.direction === Hammer.DIRECTION_RIGHT && this.props.closeNav()
+      if(e.direction === Hammer.DIRECTION_RIGHT) {
+        this.props.closeNav()
+      }
     })
   }
 
-  componentWillUnmount() {
+  destroy() {
     this._hammertime.off('swipe')
   }
 
   onKeyDown = e => {
+    const target = e.nativeEvent.target
     if(e.code === 'Space') {
       e.stopPropagation()
-      e.target.click()
+      target.click()
     }
     if(e.code === 'ArrowUp') {
-      e.target.parentElement.previousElementSibling?.querySelector('a').focus()
+      target.parentElement.previousElementSibling?.querySelector('a').focus()
     }
     if(e.code === 'ArrowDown') {
-      e.target.parentElement.nextElementSibling?.querySelector('a').focus()
+      target.parentElement.nextElementSibling?.querySelector('a').focus()
     }
   }
 }

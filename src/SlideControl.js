@@ -3,37 +3,47 @@ import { Icon } from './Icon'
 
 export class SlideControl extends HtmlDiv
 {
+  static class = 'SlideControl'
+
   render() {
     return [
       new SlidePrev({
-        onclick : () => this.props.switchSlide(-1, true),
-        onkeydown : this.onKeyDown,
         title : 'Предыдущий слайд',
+        onkeydown : this.onKeyDown,
+        onclick : () => this.props.switchSlide(-1, true),
         children : new Icon('angle-left'),
       }),
-      new SlideCounter([this.props.current + 1, ' / ', this.props.album.items.length]),
+      new SlideCounter([
+        this.props.current + 1, ' / ',
+        this.props.album.items.length,
+      ]),
       new SlideNext({
-        onclick : () => this.props.switchSlide(1, true),
-        onkeydown : this.onKeyDown,
         title : 'Следующий слайд',
+        onkeydown : this.onKeyDown,
+        onclick : () => this.props.switchSlide(1, true),
         children : new Icon('angle-right'),
       }),
     ]
   }
 
   onKeyDown = e => {
-    e.code === 'Space' && e.stopPropagation()
+    if(e.code === 'Space') {
+      e.stopPropagation()
+    }
   }
 }
 
 class SlidePrev extends HtmlButton
 {
+  static class = 'SlidePrev'
 }
 
 class SlideCounter extends HtmlDiv
 {
+  static class = 'SlideCounter'
 }
 
 class SlideNext extends HtmlButton
 {
+  static class = 'SlideNext'
 }

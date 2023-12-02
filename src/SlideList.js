@@ -3,11 +3,15 @@ import { SlideItem } from './SlideItem'
 
 export class SlideList extends HtmlDiv
 {
+  static class = 'SlideList'
+
   render() {
-    return this.props.items.map((item, i) => new SlideItem({
-      item,
-      index : i,
-      key : item.id,
-    }))
+    return this.props.items.map(
+      (item, i) => new SlideItem({
+        key : item.id,
+        index : i,
+        item,
+      }),
+    )
   }
 }

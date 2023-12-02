@@ -2,7 +2,7 @@ import './index.css'
 import { App } from './App'
 
 const render = app => {
-  app?.destroy()
+  App.destroy(app)
   return App.render({}, document.getElementById('root'))
 }
 

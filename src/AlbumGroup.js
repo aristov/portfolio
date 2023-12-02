@@ -9,14 +9,22 @@ import './AlbumGroup.css'
 
 export class AlbumGroup extends Main
 {
+  static class = 'AlbumGroup'
+
   state = {
     group : null,
-    err : null,
+    error : null,
+    busy : false,
+  }
+
+  assign() {
+    super.assign()
+    this.busy = this.state.busy
   }
 
   render() {
     const group = this.state.group
-    if(this.state.err) {
+    if(this.state.error) {
       return new ErrorContent
     }
     if(!group) {
@@ -24,35 +32,42 @@ export class AlbumGroup extends Main
     }
     document.title = group.title + ' | Лариса Дедловская'
     return new Inner({
-      class : ['appear'],
+      classList : ['appear'],
       children : [
         new HtmlDiv({
           className : 'AlbumItem',
           children : new HtmlH2(group.title),
         }),
-        group.items.map(album => new AlbumItem({ key : album.id, album })),
-      ]
+        group.items.map(
+          album => new AlbumItem({
+            key : album.id,
+            album,
+          }),
+        ),
+      ],
     })
   }
 
-  componentDidMount() {
-    void this.load()
+  mount() {
+    void this.#load()
   }
 
-  componentDidUpdate(prevProps) {
+  update(prevProps, prevState) {
     if(this.props.path !== prevProps.path) {
-      void this.load()
+      void this.#load()
     }
   }
 
-  async load() {
-    this.setAttr('aria-busy', 'true')
+  async #load() {
+    this.setState({ busy : true })
     try {
-      this.setState({ group : await api.getSection(this.props.path) })
-      setTimeout(() => this.setAttr('aria-busy', 'false'))
+      this.setState({
+        group : await api.getSection(this.props.path),
+        busy : false,
+      })
     }
-    catch(err) {
-      this.setState({ err })
+    catch(error) {
+      this.setState({ error })
     }
   }
 }

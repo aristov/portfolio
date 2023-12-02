@@ -3,29 +3,48 @@ import { Link } from './Link'
 
 export class AlbumItem extends Link
 {
-  render() {
-    const album = this.props.album
-    const url = album.sizes.find(size => size.type === 'r').src
-    this.href = album.path
-    this.style = { backgroundImage : `url(${ url })` }
-    this.onkeydown = this.onKeyDown
-    return new HtmlDiv({ className : 'AlbumInfo', text : album.title })
+  static class = 'AlbumItem'
+
+  init() {
+    super.init()
+    this.on('keydown', this.onKeyDown)
   }
 
-  onKeyDown = e => {
+  assign() {
+    super.assign()
+    const album = this.props.album
+    const size = album.sizes.find(
+      size => size.type === 'r',
+    )
+    const url = size.src
+    this.href = album.path
+    this.style = {
+      backgroundImage : `url(${ url })`,
+    }
+  }
+
+  render() {
+    return new HtmlDiv({
+      className : 'AlbumInfo',
+      children : this.props.album.title,
+    })
+  }
+
+  onKeyDown(e) {
+    const target = e.nativeEvent.target
     switch(e.code) {
       case 'Space':
-        e.target.click()
+        target.click()
         break
       case 'ArrowLeft':
       case 'ArrowUp':
         e.preventDefault()
-        e.target.previousElementSibling?.focus()
+        target.previousElementSibling?.focus()
         break
       case 'ArrowRight':
       case 'ArrowDown':
         e.preventDefault()
-        e.target.nextElementSibling?.focus()
+        target.nextElementSibling?.focus()
         break
       default:
         void null

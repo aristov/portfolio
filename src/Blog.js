@@ -6,8 +6,16 @@ import './Blog.css'
 
 export class Blog extends Main
 {
+  static class = 'Blog'
+
   state = {
     data : null,
+    busy : false,
+  }
+
+  init() {
+    super.init()
+    this.on('scroll', this.onScroll)
   }
 
   render() {
@@ -15,25 +23,29 @@ export class Blog extends Main
     if(!data) {
       return new Loading
     }
-    this.onscroll = this.onScroll
-    return new Feed({ data, class : ['appear'] })
+    return new Feed({
+      data,
+      classList : ['appear'],
+    })
   }
 
-  componentDidMount() {
-    void this.load()
+  mount() {
+    void this.#load()
   }
 
-  async load() {
-    this.setAttr('aria-busy', 'true')
+  async #load() {
+    this.setState({ busy : true })
     const data = this.state.data || []
     const { count, items } = await api.getBlog(data.length)
     this._count = count
-    this.setState({ data : [...data, ...items] })
-    setTimeout(() => this.setAttr('aria-busy', 'false'))
+    this.setState({
+      data : [...data, ...items],
+      busy : false,
+    })
   }
 
-  onScroll = () => {
-    if(this.getAttr('aria-busy') === 'true') {
+  onScroll() {
+    if(this.state.busy) {
       return
     }
     if(this.state.data.length >= this._count) {
@@ -41,7 +53,7 @@ export class Blog extends Main
     }
     const node = this.node
     if(node.scrollTop > node.scrollHeight - node.clientHeight * 2) {
-      void this.load()
+      void this.#load()
     }
   }
 }

@@ -189,11 +189,10 @@ a[href]:focus
   white-space: nowrap;
   margin: 0;
 }
-.Header h1 a[href]
+.Header h1 a
 {
   display: block;
   padding: 14px 10px;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
@@ -234,19 +233,19 @@ a[href]:focus
 {
   color: inherit;
 }
-.Header li a[href]
+.Header li a
 {
   display: block;
   padding: 15px 20px;
   opacity: .8;
 }
-.Header li a[href]:hover,
-.Header li a[href]:focus,
-.Header li a[href].current
+.Header li a:hover,
+.Header li a:focus,
+.Header li a:not([href])
 {
   opacity: 1;
 }
-.Header li a[href].current
+.Header li a:not([href])
 {
   cursor: default;
 }
@@ -256,14 +255,14 @@ a[href]:focus
   font-size: 1.6rem;
   margin-top: 20px;
 }
-.Header .Social a[href]
+.Header .Social a
 {
   display: inline-block;
   padding: 10px;
   opacity: .8;
 }
-.Header .Social a[href]:hover,
-.Header .Social a[href]:focus
+.Header .Social a:hover,
+.Header .Social a:focus
 {
   opacity: 1;
 }
@@ -285,7 +284,6 @@ a[href]:focus
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto 1fr;
-    width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     height: 100%;
@@ -308,12 +306,11 @@ a[href]:focus
   }
   .Header ul
   {
-    width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
     padding: 0 10px;
   }
-  .Header li a[href]
+  .Header li a
   {
     padding: 10px;
   }
@@ -327,7 +324,7 @@ a[href]:focus
 .Main
 {
   display: grid;
-  height: 100vh;
+  height: 100%;
   overflow: auto;
   box-sizing: border-box;
 }
@@ -361,6 +358,10 @@ a[href]:focus
 }
 @media (min-width: 900px)
 {
+  .Main
+  {
+    height: 100vh;
+  }
   .Main > .Content
   {
     padding: 0 30px;
@@ -403,12 +404,10 @@ a[href]:focus
 {
   position: relative;
   white-space: nowrap;
-  cursor: -webkit-grab;
   cursor: grab;
 }
 .SlideShow .SlideList:active
 {
-  cursor: -webkit-grabbing;
   cursor: grabbing;
 }
 .SlideShow .SlideItem
@@ -436,7 +435,6 @@ a[href]:focus
   text-align: center;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 .SlideShow button
@@ -599,17 +597,16 @@ a[href]:focus
   }
 }
 
-.FileList .FileLink
+.DocumentList a[href]
 {
   display: flex;
   align-items: center;
   padding: 15px 0;
   font-size: 1rem;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }
-.FileList .FileLink .icon-file-pdf
+.DocumentList a[href] .icon-file-pdf
 {
   font-size: 1.5rem;
   margin-right: 10px;
@@ -625,7 +622,6 @@ a[href]:focus
   padding: 10px 0;
   display: flex;
   align-items: center;
-  width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
 }

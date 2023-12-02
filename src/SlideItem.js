@@ -1,9 +1,15 @@
-import { HtmlDiv } from 'htmlmodule'
+import { RoleImg } from 'htmlmodule'
 
-export class SlideItem extends HtmlDiv
+export class SlideItem extends RoleImg
 {
-  render() {
-    const url = this.props.item.sizes.find(size => size.type === 'z').url
+  static class = 'SlideItem'
+
+  assign() {
+    super.assign()
+    const size = this.props.item.sizes.find(
+      size => size.type === 'z',
+    )
+    const url = size.url
     const style = {
       backgroundImage : `url(${ url })`,
       left : (this.props.index - 1) * 100 + '%',
@@ -11,7 +17,6 @@ export class SlideItem extends HtmlDiv
     if(location.hostname !== 'new.lddesign.ru') {
       style.backgroundSize = 'cover'
     }
-    this.setAttr('role', 'img')
     this.style = style
   }
 }

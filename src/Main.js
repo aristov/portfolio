@@ -3,4 +3,5 @@ import './Main.css'
 
 export class Main extends HtmlMain
 {
+  static class = 'Main'
 }

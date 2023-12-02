@@ -1,6 +1,6 @@
 /**
  * @param {{path:string,render:function}[]} routes
- * @return {*|string|DomElem|*[]|string[]|DomElem[]}
+ * @return {*|string|ElemType|*[]|string[]|ElemType[]}
  */
 export function router(routes) {
   const pathname = decodeURIComponent(location.pathname).replace(/\/$/, '')
