@@ -1,0 +1,12 @@
+{
+  "verbose": true,
+  "watch": [
+    ".env",
+    "app",
+    "bin/www",
+    "postcss.config.js",
+    "public/static",
+    "webpack.config.js"
+  ],
+  "ext": "js json html"
+}

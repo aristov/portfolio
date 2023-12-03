@@ -5191,9 +5191,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(49);
 
 
-const { protocol, hostname, port } = window.location
-const pathname = port? '/portfolio/public/' : '/'
-const BASE_URL = protocol + '//' + hostname + pathname
+const BASE_URL = 'http://new.lddesign.ru'
 
 function normalize(name) {
   return name.replace(/[\s():,./]+/g, '_')
@@ -5217,7 +5215,7 @@ const api = {
     }
     const url = new URL('albums.php', BASE_URL)
     url.searchParams.set('owner_id', section.owner_id)
-    const res = await fetch(url)
+    const res = await fetch(url.href)
     const { items } = await res.json()
     section.items = items
     for(const album of items) {
@@ -5241,7 +5239,7 @@ const api = {
     const url = new URL('album.php', BASE_URL)
     url.searchParams.set('owner_id', album.owner_id)
     url.searchParams.set('album_id', album.id)
-    const res = await fetch(url)
+    const res = await fetch(url.href)
     const { items } = await res.json()
     album.items = items
     return album
@@ -5250,7 +5248,7 @@ const api = {
     const url = new URL('blog.php', BASE_URL)
     url.searchParams.set('owner_id', _config_js__WEBPACK_IMPORTED_MODULE_0__["default"].owner_id)
     url.searchParams.set('offset', offset)
-    const res = await fetch(url)
+    const res = await fetch(url.href)
     return res.json()
   },
 }
@@ -5258,8 +5256,6 @@ const api = {
 for(const section of _config_js__WEBPACK_IMPORTED_MODULE_0__["default"].sections) {
   api.cache[section.path = '/' + normalize(section.title)] = section
 }
-
-window.api = api
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (api);
 
