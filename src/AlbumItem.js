@@ -1,5 +1,5 @@
 import { HtmlDiv } from 'htmlmodule'
-import { Link } from './Link'
+import { Link } from './Link.js'
 
 export class AlbumItem extends Link
 {

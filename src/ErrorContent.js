@@ -1,4 +1,4 @@
-import { Content } from './Content'
+import { Content } from './Content.js'
 import './ErrorContent.css'
 
 export class ErrorContent extends Content

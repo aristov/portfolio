@@ -1,5 +1,5 @@
 import { HtmlDiv } from 'htmlmodule'
-import { SlideItem } from './SlideItem'
+import { SlideItem } from './SlideItem.js'
 
 export class SlideList extends HtmlDiv
 {

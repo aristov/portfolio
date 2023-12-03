@@ -1,5 +1,5 @@
 import { RoleFeed } from 'htmlmodule'
-import { Post } from './Post'
+import { Post } from './Post.js'
 
 export class Feed extends RoleFeed
 {

@@ -1,6 +1,8 @@
 import './index.css'
-import { App } from './App'
+import { App } from './App.js'
 
+// noinspection JSUnresolvedVariable
+const hot = import.meta.webpackHot
 const render = app => {
   App.destroy(app)
   return App.render({}, document.getElementById('root'))
@@ -8,7 +10,8 @@ const render = app => {
 
 let app = render()
 
-if(module.hot) {
+if(hot) {
   document.getElementById('css')?.remove()
-  module.hot.accept(['./App'], () => app = render(app))
+  // noinspection JSUnresolvedVariable
+  hot.accept(['./App'], () => app = render(app))
 }

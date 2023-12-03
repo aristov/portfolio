@@ -1,7 +1,7 @@
-import { Feed } from './Feed'
-import { Loading } from './Loading'
-import { Main } from './Main'
-import api from './api'
+import { Feed } from './Feed.js'
+import { Loading } from './Loading.js'
+import { Main } from './Main.js'
+import api from './api.js'
 import './Blog.css'
 
 export class Blog extends Main

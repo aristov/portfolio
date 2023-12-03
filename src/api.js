@@ -1,4 +1,4 @@
-import config from './config'
+import config from './config.js'
 
 const { protocol, hostname, port } = window.location
 const pathname = port? '/portfolio/public/' : '/'

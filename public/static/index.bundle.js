@@ -691,7 +691,7 @@ module.exports = __webpack_require__.p + "7ed47dd3aefe559d96ad.svg?87942404";
 
 /***/ }),
 /* 18 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -699,17 +699,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   App: () => (/* binding */ App)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
-/* harmony import */ var _Inner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(44);
-/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(52);
-/* harmony import */ var _SlideShow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(55);
-/* harmony import */ var _AlbumGroup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(67);
-/* harmony import */ var _DocumentList__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(71);
-/* harmony import */ var _Contacts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(74);
-/* harmony import */ var _Blog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(78);
-/* harmony import */ var _ErrorContent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(56);
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(83);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(48);
+/* harmony import */ var _Header_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(43);
+/* harmony import */ var _Inner_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(44);
+/* harmony import */ var _Main_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(52);
+/* harmony import */ var _SlideShow_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(55);
+/* harmony import */ var _AlbumGroup_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(67);
+/* harmony import */ var _DocumentList_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(71);
+/* harmony import */ var _Contacts_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(74);
+/* harmony import */ var _Blog_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(78);
+/* harmony import */ var _ErrorContent_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(56);
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(83);
+/* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(48);
 /* harmony import */ var _App_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(84);
 
 
@@ -742,49 +742,49 @@ class App extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
       this.state.open && 'open',
       path === '/' && 'homepage',
     ]
-    return new _Inner__WEBPACK_IMPORTED_MODULE_2__.Inner([
-      new _Header__WEBPACK_IMPORTED_MODULE_1__.Header({
+    return new _Inner_js__WEBPACK_IMPORTED_MODULE_2__.Inner([
+      new _Header_js__WEBPACK_IMPORTED_MODULE_1__.Header({
         data : this.state.data,
         open : this.state.open,
         toggleNav : this.toggleNav,
         closeNav : this.closeNav,
       }),
-      (0,_router__WEBPACK_IMPORTED_MODULE_10__.router)([
+      (0,_router_js__WEBPACK_IMPORTED_MODULE_10__.router)([
         {
           path : /^\/[а-яёй\w\-]+\/[а-яёй\w\-]+$/i,
-          render : () => new _SlideShow__WEBPACK_IMPORTED_MODULE_4__.SlideShow({
+          render : () => new _SlideShow_js__WEBPACK_IMPORTED_MODULE_4__.SlideShow({
             key : 'slideshow',
             path,
           }),
         },
-        ..._api__WEBPACK_IMPORTED_MODULE_11__["default"].config.sections.map(section => ({
+        ..._api_js__WEBPACK_IMPORTED_MODULE_11__["default"].config.sections.map(section => ({
           path : section.path,
-          render : () => new _AlbumGroup__WEBPACK_IMPORTED_MODULE_5__.AlbumGroup({
+          render : () => new _AlbumGroup_js__WEBPACK_IMPORTED_MODULE_5__.AlbumGroup({
             path,
             key : path,
           }),
         })),
         {
           path : '/Проектирование',
-          render : () => new _DocumentList__WEBPACK_IMPORTED_MODULE_6__.DocumentList({
+          render : () => new _DocumentList_js__WEBPACK_IMPORTED_MODULE_6__.DocumentList({
             key : 'documentlist',
           }),
         },
         {
           path : '/Блог',
-          render : () => new _Blog__WEBPACK_IMPORTED_MODULE_8__.Blog({
+          render : () => new _Blog_js__WEBPACK_IMPORTED_MODULE_8__.Blog({
             key : 'blog',
           }),
         },
         {
           path : '/Контакты',
-          render : () => new _Contacts__WEBPACK_IMPORTED_MODULE_7__.Contacts({
+          render : () => new _Contacts_js__WEBPACK_IMPORTED_MODULE_7__.Contacts({
             key : 'contacts',
           }),
         },
         {
           path : '/',
-          render : () => new _SlideShow__WEBPACK_IMPORTED_MODULE_4__.SlideShow({
+          render : () => new _SlideShow_js__WEBPACK_IMPORTED_MODULE_4__.SlideShow({
             key : 'slideshow',
             path : '/',
             auto : true,
@@ -792,9 +792,9 @@ class App extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
         },
         {
           path : /.*/,
-          render : () => new _Main__WEBPACK_IMPORTED_MODULE_3__.Main({
+          render : () => new _Main_js__WEBPACK_IMPORTED_MODULE_3__.Main({
             key : 'error',
-            children : new _ErrorContent__WEBPACK_IMPORTED_MODULE_9__.ErrorContent,
+            children : new _ErrorContent_js__WEBPACK_IMPORTED_MODULE_9__.ErrorContent,
           }),
         },
       ]),
@@ -4926,7 +4926,7 @@ class HtmlType extends _ElemType_js__WEBPACK_IMPORTED_MODULE_1__.ElemType
 
 /***/ }),
 /* 43 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -4934,11 +4934,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Header: () => (/* binding */ Header)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Inner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(44);
-/* harmony import */ var _Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(45);
-/* harmony import */ var _Social__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(46);
-/* harmony import */ var _Icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(47);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(48);
+/* harmony import */ var _Inner_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(44);
+/* harmony import */ var _Link_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(45);
+/* harmony import */ var _Social_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(46);
+/* harmony import */ var _Icon_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(47);
+/* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(48);
 /* harmony import */ var _Header_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(50);
 
 
@@ -4957,7 +4957,7 @@ class Header extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHeader
   render() {
     const year = (new Date).getFullYear()
     return [
-      new _Inner__WEBPACK_IMPORTED_MODULE_1__.Inner([
+      new _Inner_js__WEBPACK_IMPORTED_MODULE_1__.Inner([
         new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlH1(new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlA({
           href : '/',
           children : 'Лариса Дедловская',
@@ -4965,7 +4965,7 @@ class Header extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHeader
         new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlButton({
           className : 'MenuButton',
           onclick : this.props.toggleNav,
-          children : new _Icon__WEBPACK_IMPORTED_MODULE_4__.Icon(this.props.open ? 'cancel' : 'menu'),
+          children : new _Icon_js__WEBPACK_IMPORTED_MODULE_4__.Icon(this.props.open ? 'cancel' : 'menu'),
         }),
       ]),
       this._nav = new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlNav([
@@ -4973,9 +4973,9 @@ class Header extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHeader
           role : 'menu',
           onclick : this.props.closeNav,
           children : [
-            _api__WEBPACK_IMPORTED_MODULE_5__["default"].config.sections.map(section => new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlLi({
+            _api_js__WEBPACK_IMPORTED_MODULE_5__["default"].config.sections.map(section => new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlLi({
               role : 'menuitem',
-              children : new _Link__WEBPACK_IMPORTED_MODULE_2__.Link({
+              children : new _Link_js__WEBPACK_IMPORTED_MODULE_2__.Link({
                 to : section.path,
                 children : section.title,
                 onkeydown : this.onKeyDown,
@@ -4983,7 +4983,7 @@ class Header extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHeader
             })),
             new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlLi({
               role : 'menuitem',
-              children : new _Link__WEBPACK_IMPORTED_MODULE_2__.Link({
+              children : new _Link_js__WEBPACK_IMPORTED_MODULE_2__.Link({
                 to : '/Проектирование',
                 children : 'Проектирование',
                 onkeydown : this.onKeyDown,
@@ -4991,7 +4991,7 @@ class Header extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHeader
             }),
             new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlLi({
               role : 'menuitem',
-              children : new _Link__WEBPACK_IMPORTED_MODULE_2__.Link({
+              children : new _Link_js__WEBPACK_IMPORTED_MODULE_2__.Link({
                 to : '/Блог',
                 children : 'Блог',
                 onkeydown : this.onKeyDown,
@@ -4999,7 +4999,7 @@ class Header extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHeader
             }),
             new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlLi({
               role : 'menuitem',
-              children : new _Link__WEBPACK_IMPORTED_MODULE_2__.Link({
+              children : new _Link_js__WEBPACK_IMPORTED_MODULE_2__.Link({
                 to : '/Контакты',
                 children : 'Контакты',
                 onkeydown : this.onKeyDown,
@@ -5007,7 +5007,7 @@ class Header extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHeader
             }),
           ],
         }),
-        new _Social__WEBPACK_IMPORTED_MODULE_3__.Social,
+        new _Social_js__WEBPACK_IMPORTED_MODULE_3__.Social,
         new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlSmall(`© ${ year } Лариса Дедловская`),
       ]),
     ]
@@ -5044,7 +5044,7 @@ class Header extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHeader
 
 /***/ }),
 /* 44 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -5062,7 +5062,7 @@ class Inner extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
 
 /***/ }),
 /* 45 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -5101,7 +5101,7 @@ class Link extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlA
 
 /***/ }),
 /* 46 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -5109,7 +5109,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Social: () => (/* binding */ Social)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(47);
+/* harmony import */ var _Icon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(47);
 
 
 
@@ -5123,25 +5123,25 @@ class Social extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
         target : '_blank',
         rel : 'noreferrer',
         href : 'https://instagram.com/design.ld',
-        children : new _Icon__WEBPACK_IMPORTED_MODULE_1__.Icon('instagram'),
+        children : new _Icon_js__WEBPACK_IMPORTED_MODULE_1__.Icon('instagram'),
       }),
       new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlA({
         target : '_blank',
         rel : 'noreferrer',
         href : 'https://facebook.com/larisa.dedlovskaya',
-        children : new _Icon__WEBPACK_IMPORTED_MODULE_1__.Icon('facebook'),
+        children : new _Icon_js__WEBPACK_IMPORTED_MODULE_1__.Icon('facebook'),
       }),
       new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlA({
         target : '_blank',
         rel : 'noreferrer',
         href : 'https://mona.livejournal.com',
-        children : new _Icon__WEBPACK_IMPORTED_MODULE_1__.Icon('livejournal'),
+        children : new _Icon_js__WEBPACK_IMPORTED_MODULE_1__.Icon('livejournal'),
       }),
       new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlA({
         target : '_blank',
         rel : 'noreferrer',
         href : 'https://vk.com/larisadedlovskaya',
-        children : new _Icon__WEBPACK_IMPORTED_MODULE_1__.Icon('vkontakte'),
+        children : new _Icon_js__WEBPACK_IMPORTED_MODULE_1__.Icon('vkontakte'),
       }),
     ])
   }
@@ -5150,7 +5150,7 @@ class Social extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
 
 /***/ }),
 /* 47 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -5181,14 +5181,14 @@ class Icon extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlSpan
 
 /***/ }),
 /* 48 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(49);
+/* harmony import */ var _config_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(49);
 
 
 const { protocol, hostname, port } = window.location
@@ -5200,11 +5200,11 @@ function normalize(name) {
 }
 
 const api = {
-  config: _config__WEBPACK_IMPORTED_MODULE_0__["default"],
+  config: _config_js__WEBPACK_IMPORTED_MODULE_0__["default"],
   cache : {
     '/' : {
-      owner_id : _config__WEBPACK_IMPORTED_MODULE_0__["default"].owner_id,
-      id : _config__WEBPACK_IMPORTED_MODULE_0__["default"].album_id,
+      owner_id : _config_js__WEBPACK_IMPORTED_MODULE_0__["default"].owner_id,
+      id : _config_js__WEBPACK_IMPORTED_MODULE_0__["default"].album_id,
     },
   },
   async getSection(path) {
@@ -5248,14 +5248,14 @@ const api = {
   },
   async getBlog(offset) {
     const url = new URL('blog.php', BASE_URL)
-    url.searchParams.set('owner_id', _config__WEBPACK_IMPORTED_MODULE_0__["default"].owner_id)
+    url.searchParams.set('owner_id', _config_js__WEBPACK_IMPORTED_MODULE_0__["default"].owner_id)
     url.searchParams.set('offset', offset)
     const res = await fetch(url)
     return res.json()
   },
 }
 
-for(const section of _config__WEBPACK_IMPORTED_MODULE_0__["default"].sections) {
+for(const section of _config_js__WEBPACK_IMPORTED_MODULE_0__["default"].sections) {
   api.cache[section.path = '/' + normalize(section.title)] = section
 }
 
@@ -5266,7 +5266,7 @@ window.api = api
 
 /***/ }),
 /* 49 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -5418,7 +5418,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Header
 {
   display: block;
   padding: 14px 10px;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .Header button
@@ -5509,7 +5508,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Header
     display: grid;
     grid-template-columns: auto;
     grid-template-rows: auto 1fr;
-    width: -moz-fit-content;
     width: fit-content;
     height: 100%;
   }
@@ -5531,7 +5529,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Header
   }
   .Header ul
   {
-    width: -moz-fit-content;
     width: fit-content;
     padding: 0 10px;
   }
@@ -5552,7 +5549,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Header
 
 /***/ }),
 /* 52 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -5698,21 +5695,21 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Main
 
 /***/ }),
 /* 55 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SlideShow: () => (/* binding */ SlideShow)
 /* harmony export */ });
-/* harmony import */ var _ErrorContent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56);
-/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(60);
-/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
-/* harmony import */ var _Inner__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
-/* harmony import */ var _SlideHeading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(61);
-/* harmony import */ var _SlideList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(62);
-/* harmony import */ var _SlideControl__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(64);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(48);
+/* harmony import */ var _ErrorContent_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(56);
+/* harmony import */ var _Loading_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(60);
+/* harmony import */ var _Main_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
+/* harmony import */ var _Inner_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
+/* harmony import */ var _SlideHeading_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(61);
+/* harmony import */ var _SlideList_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(62);
+/* harmony import */ var _SlideControl_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(64);
+/* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(48);
 /* harmony import */ var _SlideShow_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(65);
 
 
@@ -5726,7 +5723,7 @@ __webpack_require__.r(__webpack_exports__);
 
 const { Hammer } = window
 
-class SlideShow extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
+class SlideShow extends _Main_js__WEBPACK_IMPORTED_MODULE_2__.Main
 {
   static class = 'SlideShow'
 
@@ -5746,10 +5743,10 @@ class SlideShow extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
   render() {
     const album = this.state.album
     if(this.state.error) {
-      return new _ErrorContent__WEBPACK_IMPORTED_MODULE_0__.ErrorContent
+      return new _ErrorContent_js__WEBPACK_IMPORTED_MODULE_0__.ErrorContent
     }
     if(!album) {
-      return new _Loading__WEBPACK_IMPORTED_MODULE_1__.Loading
+      return new _Loading_js__WEBPACK_IMPORTED_MODULE_1__.Loading
     }
     const section = album.section
     const current = this.state.current
@@ -5763,18 +5760,18 @@ class SlideShow extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
     if(album.title) {
       document.title = album.title + ' | Лариса Дедловская'
     }
-    return new _Inner__WEBPACK_IMPORTED_MODULE_3__.Inner([
-      section && new _SlideHeading__WEBPACK_IMPORTED_MODULE_4__.SlideHeading({
+    return new _Inner_js__WEBPACK_IMPORTED_MODULE_3__.Inner([
+      section && new _SlideHeading_js__WEBPACK_IMPORTED_MODULE_4__.SlideHeading({
         section,
         album,
       }),
-      this._ref = new _SlideList__WEBPACK_IMPORTED_MODULE_5__.SlideList({
+      this._ref = new _SlideList_js__WEBPACK_IMPORTED_MODULE_5__.SlideList({
         items,
         classList : ['appear'],
         onclick : this.onClick,
         ontransitionend : this.onTransitionEnd,
       }),
-      new _SlideControl__WEBPACK_IMPORTED_MODULE_6__.SlideControl({
+      new _SlideControl_js__WEBPACK_IMPORTED_MODULE_6__.SlideControl({
         current,
         album,
         switchSlide : this.switchSlide,
@@ -5813,7 +5810,7 @@ class SlideShow extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
     this.setState({ busy : true })
     try {
       this.setState({
-        album : await _api__WEBPACK_IMPORTED_MODULE_7__["default"].getAlbum(this.props.path),
+        album : await _api_js__WEBPACK_IMPORTED_MODULE_7__["default"].getAlbum(this.props.path),
         busy : false,
       })
     }
@@ -5881,19 +5878,19 @@ class SlideShow extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
 
 /***/ }),
 /* 56 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ErrorContent: () => (/* binding */ ErrorContent)
 /* harmony export */ });
-/* harmony import */ var _Content__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
+/* harmony import */ var _Content_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(57);
 /* harmony import */ var _ErrorContent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(58);
 
 
 
-class ErrorContent extends _Content__WEBPACK_IMPORTED_MODULE_0__.Content
+class ErrorContent extends _Content_js__WEBPACK_IMPORTED_MODULE_0__.Content
 {
   static class = 'ErrorContent'
 
@@ -5906,7 +5903,7 @@ class ErrorContent extends _Content__WEBPACK_IMPORTED_MODULE_0__.Content
 
 /***/ }),
 /* 57 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6006,7 +6003,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.ErrorContent
 
 /***/ }),
 /* 60 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6028,7 +6025,7 @@ class Loading extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
 
 /***/ }),
 /* 61 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6036,7 +6033,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SlideHeading: () => (/* binding */ SlideHeading)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45);
+/* harmony import */ var _Link_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45);
 
 
 
@@ -6046,7 +6043,7 @@ class SlideHeading extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlH2
 
   render() {
     return [
-      new _Link__WEBPACK_IMPORTED_MODULE_1__.Link({
+      new _Link_js__WEBPACK_IMPORTED_MODULE_1__.Link({
         to : this.props.section.path,
         children : this.props.section.title,
         onkeydown : this.onKeyDown,
@@ -6067,7 +6064,7 @@ class SlideHeading extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlH2
 
 /***/ }),
 /* 62 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6075,7 +6072,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SlideList: () => (/* binding */ SlideList)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _SlideItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63);
+/* harmony import */ var _SlideItem_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(63);
 
 
 
@@ -6085,7 +6082,7 @@ class SlideList extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
 
   render() {
     return this.props.items.map(
-      (item, i) => new _SlideItem__WEBPACK_IMPORTED_MODULE_1__.SlideItem({
+      (item, i) => new _SlideItem_js__WEBPACK_IMPORTED_MODULE_1__.SlideItem({
         key : item.id,
         index : i,
         item,
@@ -6097,7 +6094,7 @@ class SlideList extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
 
 /***/ }),
 /* 63 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6121,7 +6118,7 @@ class SlideItem extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.RoleImg
       backgroundImage : `url(${ url })`,
       left : (this.props.index - 1) * 100 + '%',
     }
-    if(location.hostname !== 'new.lddesign.ru') {
+    if(location.hostname === 'new.lddesign.ru') {
       style.backgroundSize = 'cover'
     }
     this.style = style
@@ -6131,7 +6128,7 @@ class SlideItem extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.RoleImg
 
 /***/ }),
 /* 64 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6139,7 +6136,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   SlideControl: () => (/* binding */ SlideControl)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(47);
+/* harmony import */ var _Icon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(47);
 
 
 
@@ -6153,7 +6150,7 @@ class SlideControl extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
         title : 'Предыдущий слайд',
         onkeydown : this.onKeyDown,
         onclick : () => this.props.switchSlide(-1, true),
-        children : new _Icon__WEBPACK_IMPORTED_MODULE_1__.Icon('angle-left'),
+        children : new _Icon_js__WEBPACK_IMPORTED_MODULE_1__.Icon('angle-left'),
       }),
       new SlideCounter([
         this.props.current + 1, ' / ',
@@ -6163,7 +6160,7 @@ class SlideControl extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv
         title : 'Следующий слайд',
         onkeydown : this.onKeyDown,
         onclick : () => this.props.switchSlide(1, true),
-        children : new _Icon__WEBPACK_IMPORTED_MODULE_1__.Icon('angle-right'),
+        children : new _Icon_js__WEBPACK_IMPORTED_MODULE_1__.Icon('angle-right'),
       }),
     ]
   }
@@ -6310,9 +6307,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.SlideShow
   opacity: .7;
   width: 100px;
   text-align: center;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
 }
 .SlideShow button
 {
@@ -6394,7 +6389,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.SlideShow
 
 /***/ }),
 /* 67 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6402,12 +6397,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   AlbumGroup: () => (/* binding */ AlbumGroup)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _AlbumItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68);
-/* harmony import */ var _ErrorContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(56);
-/* harmony import */ var _Inner__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
-/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(60);
-/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(52);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(48);
+/* harmony import */ var _AlbumItem_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(68);
+/* harmony import */ var _ErrorContent_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(56);
+/* harmony import */ var _Inner_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(44);
+/* harmony import */ var _Loading_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(60);
+/* harmony import */ var _Main_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(52);
+/* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(48);
 /* harmony import */ var _AlbumGroup_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(69);
 
 
@@ -6418,7 +6413,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class AlbumGroup extends _Main__WEBPACK_IMPORTED_MODULE_5__.Main
+class AlbumGroup extends _Main_js__WEBPACK_IMPORTED_MODULE_5__.Main
 {
   static class = 'AlbumGroup'
 
@@ -6436,13 +6431,13 @@ class AlbumGroup extends _Main__WEBPACK_IMPORTED_MODULE_5__.Main
   render() {
     const group = this.state.group
     if(this.state.error) {
-      return new _ErrorContent__WEBPACK_IMPORTED_MODULE_2__.ErrorContent
+      return new _ErrorContent_js__WEBPACK_IMPORTED_MODULE_2__.ErrorContent
     }
     if(!group) {
-      return new _Loading__WEBPACK_IMPORTED_MODULE_4__.Loading
+      return new _Loading_js__WEBPACK_IMPORTED_MODULE_4__.Loading
     }
     document.title = group.title + ' | Лариса Дедловская'
-    return new _Inner__WEBPACK_IMPORTED_MODULE_3__.Inner({
+    return new _Inner_js__WEBPACK_IMPORTED_MODULE_3__.Inner({
       classList : ['appear'],
       children : [
         new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlDiv({
@@ -6450,7 +6445,7 @@ class AlbumGroup extends _Main__WEBPACK_IMPORTED_MODULE_5__.Main
           children : new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlH2(group.title),
         }),
         group.items.map(
-          album => new _AlbumItem__WEBPACK_IMPORTED_MODULE_1__.AlbumItem({
+          album => new _AlbumItem_js__WEBPACK_IMPORTED_MODULE_1__.AlbumItem({
             key : album.id,
             album,
           }),
@@ -6473,7 +6468,7 @@ class AlbumGroup extends _Main__WEBPACK_IMPORTED_MODULE_5__.Main
     this.setState({ busy : true })
     try {
       this.setState({
-        group : await _api__WEBPACK_IMPORTED_MODULE_6__["default"].getSection(this.props.path),
+        group : await _api_js__WEBPACK_IMPORTED_MODULE_6__["default"].getSection(this.props.path),
         busy : false,
       })
     }
@@ -6486,7 +6481,7 @@ class AlbumGroup extends _Main__WEBPACK_IMPORTED_MODULE_5__.Main
 
 /***/ }),
 /* 68 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6494,11 +6489,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   AlbumItem: () => (/* binding */ AlbumItem)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45);
+/* harmony import */ var _Link_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(45);
 
 
 
-class AlbumItem extends _Link__WEBPACK_IMPORTED_MODULE_1__.Link
+class AlbumItem extends _Link_js__WEBPACK_IMPORTED_MODULE_1__.Link
 {
   static class = 'AlbumItem'
 
@@ -6711,7 +6706,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.AlbumGroup
 
 /***/ }),
 /* 71 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6719,10 +6714,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   DocumentList: () => (/* binding */ DocumentList)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Content__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(57);
-/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
-/* harmony import */ var _Icon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(47);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(48);
+/* harmony import */ var _Content_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(57);
+/* harmony import */ var _Main_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
+/* harmony import */ var _Icon_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(47);
+/* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(48);
 /* harmony import */ var _DocumentList_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(72);
 
 
@@ -6731,22 +6726,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class DocumentList extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
+class DocumentList extends _Main_js__WEBPACK_IMPORTED_MODULE_2__.Main
 {
   static class = 'DocumentList'
 
   render() {
     document.title = 'Проектирование | Лариса Дедловская'
-    return new _Content__WEBPACK_IMPORTED_MODULE_1__.Content([
+    return new _Content_js__WEBPACK_IMPORTED_MODULE_1__.Content([
       new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlH2('Проектирование'),
       new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHr,
-      _api__WEBPACK_IMPORTED_MODULE_4__["default"].config.docs.map(item => new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlA({
+      _api_js__WEBPACK_IMPORTED_MODULE_4__["default"].config.docs.map(item => new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlA({
         key : item.path,
         href : item.path,
         target : '_blank',
         rel : 'noreferrer',
         children : [
-          new _Icon__WEBPACK_IMPORTED_MODULE_3__.Icon('file-pdf'),
+          new _Icon_js__WEBPACK_IMPORTED_MODULE_3__.Icon('file-pdf'),
           item.title,
         ],
       })),
@@ -6830,7 +6825,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.DocumentList a[href]
   align-items: center;
   padding: 15px 0;
   font-size: 1rem;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .DocumentList a[href] .icon-file-pdf
@@ -6845,7 +6839,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.DocumentList a[href]
 
 /***/ }),
 /* 74 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6853,9 +6847,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Contacts: () => (/* binding */ Contacts)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _ContactsLink__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(75);
-/* harmony import */ var _Content__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(57);
-/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(52);
+/* harmony import */ var _ContactsLink_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(75);
+/* harmony import */ var _Content_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(57);
+/* harmony import */ var _Main_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(52);
 /* harmony import */ var _Contacts_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(76);
 
 
@@ -6863,48 +6857,48 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class Contacts extends _Main__WEBPACK_IMPORTED_MODULE_3__.Main
+class Contacts extends _Main_js__WEBPACK_IMPORTED_MODULE_3__.Main
 {
   static class = 'Contacts'
 
   render() {
     document.title = 'Контакты | Лариса Дедловская'
-    return new _Content__WEBPACK_IMPORTED_MODULE_2__.Content([
+    return new _Content_js__WEBPACK_IMPORTED_MODULE_2__.Content([
       new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlH2('Контакты'),
       new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHr,
-      new _ContactsLink__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
+      new _ContactsLink_js__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
         href : 'mailto:lddesign@mail.ru',
         icon : 'mail',
         children : 'lddesign@mail.ru',
       }),
-      new _ContactsLink__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
+      new _ContactsLink_js__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
         href : 'tel:+79257711473',
         icon : 'phone',
         children : '+7 925 771 1473',
       }),
       new htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlHr,
-      new _ContactsLink__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
+      new _ContactsLink_js__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
         href : 'https://instagram.com/design.ld',
         target : '_blank',
         rel : 'noreferrer',
         icon : 'instagram',
         children : 'design.ld',
       }),
-      new _ContactsLink__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
+      new _ContactsLink_js__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
         href : 'https://facebook.com/larisa.dedlovskaya',
         target : '_blank',
         rel : 'noreferrer',
         icon : 'facebook',
         children : 'larisa.dedlovskaya',
       }),
-      new _ContactsLink__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
+      new _ContactsLink_js__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
         href : 'https://vk.com/larisadedlovskaya',
         target : '_blank',
         rel : 'noreferrer',
         icon : 'vkontakte',
         children : 'larisadedlovskaya',
       }),
-      new _ContactsLink__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
+      new _ContactsLink_js__WEBPACK_IMPORTED_MODULE_1__.ContactsLink({
         href : 'https://mona.livejournal.com',
         target : '_blank',
         rel : 'noreferrer',
@@ -6931,7 +6925,7 @@ class Contacts extends _Main__WEBPACK_IMPORTED_MODULE_3__.Main
 
 /***/ }),
 /* 75 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -6939,7 +6933,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ContactsLink: () => (/* binding */ ContactsLink)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Icon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(47);
+/* harmony import */ var _Icon_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(47);
 
 
 
@@ -6949,7 +6943,7 @@ class ContactsLink extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.HtmlA
 
   render() {
     return [
-      new _Icon__WEBPACK_IMPORTED_MODULE_1__.Icon(this.props.icon),
+      new _Icon_js__WEBPACK_IMPORTED_MODULE_1__.Icon(this.props.icon),
       this.props.children,
     ]
   }
@@ -7035,7 +7029,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Contacts dd
   padding: 10px 0;
   display: flex;
   align-items: center;
-  width: -moz-fit-content;
   width: fit-content;
 }
 .Contacts .ContactsLink .icon
@@ -7055,17 +7048,17 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Contacts dd
 
 /***/ }),
 /* 78 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   Blog: () => (/* binding */ Blog)
 /* harmony export */ });
-/* harmony import */ var _Feed__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79);
-/* harmony import */ var _Loading__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(60);
-/* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
-/* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(48);
+/* harmony import */ var _Feed_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(79);
+/* harmony import */ var _Loading_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(60);
+/* harmony import */ var _Main_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(52);
+/* harmony import */ var _api_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(48);
 /* harmony import */ var _Blog_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(81);
 
 
@@ -7073,7 +7066,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class Blog extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
+class Blog extends _Main_js__WEBPACK_IMPORTED_MODULE_2__.Main
 {
   static class = 'Blog'
 
@@ -7090,9 +7083,9 @@ class Blog extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
   render() {
     const data = this.state.data
     if(!data) {
-      return new _Loading__WEBPACK_IMPORTED_MODULE_1__.Loading
+      return new _Loading_js__WEBPACK_IMPORTED_MODULE_1__.Loading
     }
-    return new _Feed__WEBPACK_IMPORTED_MODULE_0__.Feed({
+    return new _Feed_js__WEBPACK_IMPORTED_MODULE_0__.Feed({
       data,
       classList : ['appear'],
     })
@@ -7105,7 +7098,7 @@ class Blog extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
   async #load() {
     this.setState({ busy : true })
     const data = this.state.data || []
-    const { count, items } = await _api__WEBPACK_IMPORTED_MODULE_3__["default"].getBlog(data.length)
+    const { count, items } = await _api_js__WEBPACK_IMPORTED_MODULE_3__["default"].getBlog(data.length)
     this._count = count
     this.setState({
       data : [...data, ...items],
@@ -7130,7 +7123,7 @@ class Blog extends _Main__WEBPACK_IMPORTED_MODULE_2__.Main
 
 /***/ }),
 /* 79 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -7138,7 +7131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Feed: () => (/* binding */ Feed)
 /* harmony export */ });
 /* harmony import */ var htmlmodule__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(19);
-/* harmony import */ var _Post__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(80);
+/* harmony import */ var _Post_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(80);
 
 
 
@@ -7155,7 +7148,7 @@ class Feed extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.RoleFeed
         if(item.copy_history) {
           return null
         }
-        return new _Post__WEBPACK_IMPORTED_MODULE_1__.Post({ key : item.id, item })
+        return new _Post_js__WEBPACK_IMPORTED_MODULE_1__.Post({ key : item.id, item })
       }),
     ]
   }
@@ -7164,7 +7157,7 @@ class Feed extends htmlmodule__WEBPACK_IMPORTED_MODULE_0__.RoleFeed
 
 /***/ }),
 /* 80 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -7347,7 +7340,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.Blog
 
 /***/ }),
 /* 83 */
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
@@ -7653,18 +7646,24 @@ var __webpack_exports__ = {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
-/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
+/* harmony import */ var _App_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(18);
 
 
 
+// noinspection JSUnresolvedVariable
+const hot = /* unsupported import.meta.webpackHot */ undefined
 const render = app => {
-  _App__WEBPACK_IMPORTED_MODULE_1__.App.destroy(app)
-  return _App__WEBPACK_IMPORTED_MODULE_1__.App.render({}, document.getElementById('root'))
+  _App_js__WEBPACK_IMPORTED_MODULE_1__.App.destroy(app)
+  return _App_js__WEBPACK_IMPORTED_MODULE_1__.App.render({}, document.getElementById('root'))
 }
 
 let app = render()
 
-if(false) {}
+if(hot) {
+  document.getElementById('css')?.remove()
+  // noinspection JSUnresolvedVariable
+  hot.accept(['./App'], () => app = render(app))
+}
 
 })();
 

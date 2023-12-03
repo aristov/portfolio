@@ -4,6 +4,7 @@
   "description": "An engine for creating a designer's portfolio",
   "main": "src/index.js",
   "author": "Vyacheslav Aristov <vv.aristov@gmail.com>",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git://github.com/aristov/portfolio.git"

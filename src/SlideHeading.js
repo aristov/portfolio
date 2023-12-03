@@ -1,5 +1,5 @@
 import { HtmlH2 } from 'htmlmodule'
-import { Link } from './Link'
+import { Link } from './Link.js'
 
 export class SlideHeading extends HtmlH2
 {

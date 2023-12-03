@@ -1,7 +1,7 @@
 import { HtmlA, HtmlDiv, HtmlH2, HtmlHr } from 'htmlmodule'
-import { ContactsLink } from './ContactsLink'
-import { Content } from './Content'
-import { Main } from './Main'
+import { ContactsLink } from './ContactsLink.js'
+import { Content } from './Content.js'
+import { Main } from './Main.js'
 import './Contacts.css'
 
 export class Contacts extends Main

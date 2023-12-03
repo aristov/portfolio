@@ -1,11 +1,10 @@
-const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
-exports = module.exports = {
+const exports = {
   mode : 'none',
   entry : './src/index.js',
   output : {
-    path : path.join(__dirname, 'public/static'),
+    path : new URL('public/static', import.meta.url).pathname,
     publicPath : '/static/',
     filename : 'index.bundle.js',
   },
@@ -34,7 +33,7 @@ exports = module.exports = {
   },
   devServer : {
     static : {
-      directory : path.join(__dirname, 'public'),
+      directory : new URL('public', import.meta.url).pathname,
     },
     hot : true,
     historyApiFallback : true,
@@ -49,3 +48,5 @@ if(process.env.NODE_ENV === 'production') {
     new MiniCssExtractPlugin({ filename : 'index.bundle.css' }),
   ]
 }
+
+export default exports

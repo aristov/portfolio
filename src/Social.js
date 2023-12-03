@@ -1,5 +1,5 @@
 import { HtmlA, HtmlDiv } from 'htmlmodule'
-import { Icon } from './Icon'
+import { Icon } from './Icon.js'
 
 export class Social extends HtmlDiv
 {

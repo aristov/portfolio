@@ -1,11 +1,11 @@
 import {
   HtmlA, HtmlButton, HtmlH1, HtmlHeader, HtmlLi, HtmlNav, HtmlSmall, HtmlUl,
 } from 'htmlmodule'
-import { Inner } from './Inner'
-import { Link } from './Link'
-import { Social } from './Social'
-import { Icon } from './Icon'
-import api from './api'
+import { Inner } from './Inner.js'
+import { Link } from './Link.js'
+import { Social } from './Social.js'
+import { Icon } from './Icon.js'
+import api from './api.js'
 import './Header.css'
 
 const { Hammer } = window

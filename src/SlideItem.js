@@ -14,7 +14,7 @@ export class SlideItem extends RoleImg
       backgroundImage : `url(${ url })`,
       left : (this.props.index - 1) * 100 + '%',
     }
-    if(location.hostname !== 'new.lddesign.ru') {
+    if(location.hostname === 'new.lddesign.ru') {
       style.backgroundSize = 'cover'
     }
     this.style = style

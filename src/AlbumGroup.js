@@ -1,10 +1,10 @@
 import { HtmlDiv, HtmlH2 } from 'htmlmodule'
-import { AlbumItem } from './AlbumItem'
-import { ErrorContent } from './ErrorContent'
-import { Inner } from './Inner'
-import { Loading } from './Loading'
-import { Main } from './Main'
-import api from './api'
+import { AlbumItem } from './AlbumItem.js'
+import { ErrorContent } from './ErrorContent.js'
+import { Inner } from './Inner.js'
+import { Loading } from './Loading.js'
+import { Main } from './Main.js'
+import api from './api.js'
 import './AlbumGroup.css'
 
 export class AlbumGroup extends Main

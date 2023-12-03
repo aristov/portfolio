@@ -1,5 +1,5 @@
 import { HtmlDiv, HtmlButton } from 'htmlmodule'
-import { Icon } from './Icon'
+import { Icon } from './Icon.js'
 
 export class SlideControl extends HtmlDiv
 {

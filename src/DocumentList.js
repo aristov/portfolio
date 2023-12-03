@@ -1,8 +1,8 @@
 import { HtmlA, HtmlH2, HtmlHr } from 'htmlmodule'
-import { Content } from './Content'
-import { Main } from './Main'
-import { Icon } from './Icon'
-import api from './api'
+import { Content } from './Content.js'
+import { Main } from './Main.js'
+import { Icon } from './Icon.js'
+import api from './api.js'
 import './DocumentList.css'
 
 export class DocumentList extends Main
