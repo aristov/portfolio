@@ -1,3 +1,5 @@
+import './app/env.js'
+import webpack from 'webpack'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 const exports = {
@@ -41,12 +43,15 @@ const exports = {
       logging : 'none',
     },
   },
+  plugins : [
+    new webpack.EnvironmentPlugin(['API_HOST_URL'])
+  ]
 }
 
 if(process.env.NODE_ENV === 'production') {
-  exports.plugins = [
+  exports.plugins.push(
     new MiniCssExtractPlugin({ filename : 'index.bundle.css' }),
-  ]
+  )
 }
 
 export default exports

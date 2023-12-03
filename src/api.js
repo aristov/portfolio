@@ -1,6 +1,6 @@
 import config from './config.js'
 
-const BASE_URL = 'http://new.lddesign.ru'
+const API_HOST_URL = process.env.API_HOST_URL
 
 function normalize(name) {
   return name.replace(/[\s():,./]+/g, '_')
@@ -22,7 +22,7 @@ const api = {
     if(section.items) {
       return section
     }
-    const url = new URL('albums.php', BASE_URL)
+    const url = new URL('albums.php', API_HOST_URL)
     url.searchParams.set('owner_id', section.owner_id)
     const res = await fetch(url.href)
     const { items } = await res.json()
@@ -45,7 +45,7 @@ const api = {
     if(album.items) {
       return album
     }
-    const url = new URL('album.php', BASE_URL)
+    const url = new URL('album.php', API_HOST_URL)
     url.searchParams.set('owner_id', album.owner_id)
     url.searchParams.set('album_id', album.id)
     const res = await fetch(url.href)
@@ -54,7 +54,7 @@ const api = {
     return album
   },
   async getBlog(offset) {
-    const url = new URL('blog.php', BASE_URL)
+    const url = new URL('blog.php', API_HOST_URL)
     url.searchParams.set('owner_id', config.owner_id)
     url.searchParams.set('offset', offset)
     const res = await fetch(url.href)
