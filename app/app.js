@@ -12,7 +12,15 @@ app.register(fastifyStatic, {
   root : new URL('../public/', import.meta.url).pathname,
 })
 
-app.get('/albums.php',
+app.get('/albums.php', {
+    schema : {
+      query : {
+        owner_id : {
+          type : 'integer',
+        },
+      },
+    },
+  },
   /**
    * @param request
    * @param {FastifyReply} reply
@@ -26,7 +34,18 @@ app.get('/albums.php',
     })
   })
 
-app.get('/album.php',
+app.get('/album.php', {
+    schema : {
+      query : {
+        owner_id : {
+          type : 'integer',
+        },
+        album_id : {
+          type : 'integer',
+        },
+      },
+    },
+  },
   /**
    * @param request
    * @param {FastifyReply} reply
@@ -40,7 +59,15 @@ app.get('/album.php',
     })
   })
 
-app.get('/blog.php',
+app.get('/blog.php', {
+    schema : {
+      query : {
+        owner_id : {
+          type : 'integer',
+        },
+      },
+    },
+  },
   /**
    * @param request
    * @param {FastifyReply} reply
