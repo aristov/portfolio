@@ -2,8 +2,8 @@ import './env.js'
 import path from 'node:path'
 import Fastify from 'fastify'
 import fastifyStatic from '@fastify/static'
+import vk from './vk.js'
 
-const VK_API_URL = 'https://api.vk.com'
 const app = Fastify({
   logger : true,
 })
@@ -19,18 +19,11 @@ app.get('/albums.php',
    * @return {Promise<*>}
    */
   async (request, reply) => {
-    const url = Object.assign(new URL('method/photos.getAlbums', VK_API_URL), {
-      search : new URLSearchParams({
-        v : process.env.VK_API_VERSION,
-        access_token : process.env.VK_ACCESS_TOKEN,
-        owner_id : request.query.owner_id,
-        need_covers : String(+true),
-        photo_sizes : String(+true),
-      }),
+    return vk.api.photos.getAlbums({
+      owner_id : request.query.owner_id,
+      need_covers : true,
+      photo_sizes : true,
     })
-    const res = await fetch(url.href)
-    const result = await res.json()
-    return result.response
   })
 
 app.get('/album.php',
@@ -40,18 +33,11 @@ app.get('/album.php',
    * @return {Promise<*>}
    */
   async (request, reply) => {
-    const url = Object.assign(new URL('method/photos.get', VK_API_URL), {
-      search : new URLSearchParams({
-        v : process.env.VK_API_VERSION,
-        access_token : process.env.VK_ACCESS_TOKEN,
-        owner_id : request.query.owner_id,
-        album_id : request.query.album_id,
-        count : '1000',
-      }),
+    return vk.api.photos.get({
+      owner_id : request.query.owner_id,
+      album_id : request.query.album_id,
+      count : 1000,
     })
-    const res = await fetch(url.href)
-    const result = await res.json()
-    return result.response
   })
 
 app.get('/blog.php',
@@ -61,18 +47,11 @@ app.get('/blog.php',
    * @return {Promise<*>}
    */
   async (request, reply) => {
-    const url = Object.assign(new URL('method/wall.get', VK_API_URL), {
-      search : new URLSearchParams({
-        v : process.env.VK_API_VERSION,
-        access_token : process.env.VK_ACCESS_TOKEN,
-        owner_id : request.query.owner_id,
-        count : '5',
-        offset : request.query.offset || '0',
-      }),
+    return vk.api.wall.get({
+      owner_id : request.query.owner_id,
+      count : 5,
+      offset : +request.query.offset || 0,
     })
-    const res = await fetch(url.href)
-    const result = await res.json()
-    return result.response
   })
 
 app.get('/:section',
