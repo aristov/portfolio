@@ -16,11 +16,14 @@ export class Header extends HtmlHeader
 
   render() {
     const year = (new Date).getFullYear()
+    const contacts = api.params.sections.find(
+      section => section.type === 'contacts',
+    )
     return [
       new Inner([
         new HtmlH1(new HtmlA({
           href : '/',
-          children : 'Лариса Дедловская',
+          children : api.params.name,
         })),
         new HtmlButton({
           className : 'MenuButton',
@@ -33,7 +36,7 @@ export class Header extends HtmlHeader
           role : 'menu',
           onclick : this.props.closeNav,
           children : [
-            api.config.sections.map(section => new HtmlLi({
+            api.params.sections.map(section => new HtmlLi({
               role : 'menuitem',
               children : new Link({
                 to : section.path,
@@ -41,34 +44,12 @@ export class Header extends HtmlHeader
                 onkeydown : this.onKeyDown,
               }),
             })),
-            new HtmlLi({
-              role : 'menuitem',
-              children : new Link({
-                to : '/Проектирование',
-                children : 'Проектирование',
-                onkeydown : this.onKeyDown,
-              }),
-            }),
-            new HtmlLi({
-              role : 'menuitem',
-              children : new Link({
-                to : '/Блог',
-                children : 'Блог',
-                onkeydown : this.onKeyDown,
-              }),
-            }),
-            new HtmlLi({
-              role : 'menuitem',
-              children : new Link({
-                to : '/Контакты',
-                children : 'Контакты',
-                onkeydown : this.onKeyDown,
-              }),
-            }),
           ],
         }),
-        new Social,
-        new HtmlSmall(`© ${ year } Лариса Дедловская`),
+        new Social({
+          links : contacts.links,
+        }),
+        new HtmlSmall(`© ${ year } ${ api.params.name }`),
       ]),
     ]
   }

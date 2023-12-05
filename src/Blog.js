@@ -20,6 +20,7 @@ export class Blog extends Main
 
   render() {
     const data = this.state.data
+    document.title = `${ this.props.section.title } | ${ api.params.name }`
     if(!data) {
       return new Loading
     }

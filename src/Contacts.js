@@ -2,6 +2,7 @@ import { HtmlA, HtmlDiv, HtmlH2, HtmlHr } from 'htmlmodule'
 import { ContactsLink } from './ContactsLink.js'
 import { Content } from './Content.js'
 import { Main } from './Main.js'
+import api from './api.js'
 import './Contacts.css'
 
 export class Contacts extends Main
@@ -9,61 +10,43 @@ export class Contacts extends Main
   static class = 'Contacts'
 
   render() {
-    document.title = 'Контакты | Лариса Дедловская'
+    const section = this.props.section
+    document.title = `${ section.title } | ${ api.params.name }`
     return new Content([
-      new HtmlH2('Контакты'),
+      new HtmlH2(section.title),
       new HtmlHr,
       new ContactsLink({
-        href : 'mailto:lddesign@mail.ru',
+        href : 'mailto:' + section.email,
         icon : 'mail',
-        children : 'lddesign@mail.ru',
+        children : section.email,
       }),
       new ContactsLink({
-        href : 'tel:+79257711473',
+        href : 'tel:' + section.phone_number.replace(/\s+/g, ''),
         icon : 'phone',
-        children : '+7 925 771 1473',
+        children : section.phone_number,
       }),
       new HtmlHr,
-      new ContactsLink({
-        href : 'https://instagram.com/design.ld',
-        target : '_blank',
-        rel : 'noreferrer',
-        icon : 'instagram',
-        children : 'design.ld',
-      }),
-      new ContactsLink({
-        href : 'https://facebook.com/larisa.dedlovskaya',
-        target : '_blank',
-        rel : 'noreferrer',
-        icon : 'facebook',
-        children : 'larisa.dedlovskaya',
-      }),
-      new ContactsLink({
-        href : 'https://vk.com/larisadedlovskaya',
-        target : '_blank',
-        rel : 'noreferrer',
-        icon : 'vkontakte',
-        children : 'larisadedlovskaya',
-      }),
-      new ContactsLink({
-        href : 'https://mona.livejournal.com',
-        target : '_blank',
-        rel : 'noreferrer',
-        icon : 'livejournal',
-        children : 'mona',
-      }),
+      section.links.map(
+        props => new ContactsLink({
+          target : '_blank',
+          rel : 'noreferrer',
+          href : props.url,
+          icon : props.icon,
+          children : props.text,
+        }),
+      ),
       new HtmlHr,
       new HtmlDiv({
         className : 'Author',
         children : [
-          'Разработчик сайта: ',
+          `${ api.params.author.title }: `,
           new HtmlA({
-            href : 'mailto:vv.aristov@gmail.com',
+            href : 'mailto:' + api.params.author.email,
             target : '_blank',
             rel : 'noreferrer',
-            children : 'Вячеслав Аристов',
+            children : api.params.author.name,
           }),
-        ]
+        ],
       }),
     ])
   }

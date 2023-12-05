@@ -4,6 +4,7 @@ import Fastify from 'fastify'
 import fastifyStatic from '@fastify/static'
 import view from './view.js'
 import vk from './vk.js'
+import config from './config.js'
 
 const app = Fastify({
   logger : true,
@@ -89,7 +90,10 @@ app.get('/:section/:project?',
    * @return {Promise<*>}
    */
   async (request, reply) => {
-    const result = view()
+    const result = view({
+      params : config,
+      lang : process.env.DEFAULT_LOCALE,
+    })
     reply.type('text/html')
     return result.toString()
   })

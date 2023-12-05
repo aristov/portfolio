@@ -4,9 +4,10 @@
     ".env",
     "app",
     "bin/www",
+    "config.json",
+    "webpack.config.js",
     "postcss.config.js",
-    "public/static",
-    "webpack.config.js"
+    "public/static"
   ],
   "ext": "js json html"
 }

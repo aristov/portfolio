@@ -45,7 +45,7 @@ export class SlideShow extends Main
       album.items[next],
     ]
     if(album.title) {
-      document.title = album.title + ' | Лариса Дедловская'
+      document.title = `${ album.title } | ${ api.params.name }`
     }
     return new Inner([
       section && new SlideHeading({

@@ -16,18 +16,29 @@ export class App extends HtmlDiv
 {
   static class = 'App'
 
+  static #getKey() {
+    const pathname = decodeURIComponent(location.pathname)
+    const key = pathname.replace(/\/$/, '')
+    return key || '/'
+  }
+
+  static sections = {
+    albums : AlbumGroup,
+    documents : DocumentList,
+    articles : Blog,
+    contacts : Contacts,
+  }
+
   state = {
     open : false,
     data : null,
   }
 
   render() {
-    let path = decodeURIComponent(location.pathname)
-    path = path.replace(/\/$/, '')
-    path ||= '/'
+    const key = App.#getKey()
     this.classList = [
       this.state.open && 'open',
-      path === '/' && 'homepage',
+      key === '/' && 'homepage',
     ]
     return new Inner([
       new Header({
@@ -40,39 +51,21 @@ export class App extends HtmlDiv
         {
           path : /^\/[а-яёй\w\-]+\/[а-яёй\w\-]+$/i,
           render : () => new SlideShow({
-            key : 'slideshow',
-            path,
+            key,
+            path : key,
           }),
         },
-        ...api.config.sections.map(section => ({
+        ...api.params.sections.map(section => ({
           path : section.path,
-          render : () => new AlbumGroup({
-            path,
-            key : path,
-          }),
+          render : () => {
+            const constructor = App.sections[section.type]
+            return new constructor({ key, section })
+          },
         })),
-        {
-          path : '/Проектирование',
-          render : () => new DocumentList({
-            key : 'documentlist',
-          }),
-        },
-        {
-          path : '/Блог',
-          render : () => new Blog({
-            key : 'blog',
-          }),
-        },
-        {
-          path : '/Контакты',
-          render : () => new Contacts({
-            key : 'contacts',
-          }),
-        },
         {
           path : '/',
           render : () => new SlideShow({
-            key : 'slideshow',
+            key,
             path : '/',
             auto : true,
           }),
@@ -80,7 +73,7 @@ export class App extends HtmlDiv
         {
           path : /.*/,
           render : () => new Main({
-            key : 'error',
+            key,
             children : new ErrorContent,
           }),
         },

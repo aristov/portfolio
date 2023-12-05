@@ -30,7 +30,7 @@ export class AlbumGroup extends Main
     if(!group) {
       return new Loading
     }
-    document.title = group.title + ' | Лариса Дедловская'
+    document.title = `${ group.title } | ${ api.params.name }`
     return new Inner({
       classList : ['appear'],
       children : [
@@ -53,7 +53,7 @@ export class AlbumGroup extends Main
   }
 
   update(prevProps, prevState) {
-    if(this.props.path !== prevProps.path) {
+    if(this.props.section.path !== prevProps.section.path) {
       void this.#load()
     }
   }
@@ -62,7 +62,7 @@ export class AlbumGroup extends Main
     this.setState({ busy : true })
     try {
       this.setState({
-        group : await api.getSection(this.props.path),
+        group : await api.getSection(this.props.section.path),
         busy : false,
       })
     }

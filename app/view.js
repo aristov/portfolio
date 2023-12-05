@@ -1,16 +1,28 @@
 import { base, body, div, head, html, img, link, meta, noscript, script, title } from 'jste'
 
-export default () => html({
+export default ({ params, lang }) => html({
   doctype : true,
-  lang : 'ru',
+  lang,
   children : [
     head([
       base({
-        href : '/',
+        href : '/'
       }),
-      title('Лариса Дедловская | архитектор, дизайнер интерьеров'),
+      title(params.title),
       meta({
         charset : 'utf-8',
+      }),
+      meta({
+        name : 'viewport',
+        content : 'user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1',
+      }),
+      meta({
+        name : 'description',
+        content : params.description,
+      }),
+      meta({
+        name : 'theme-color',
+        content : params.theme_color,
       }),
       link({
         rel : 'icon',
@@ -28,18 +40,6 @@ export default () => html({
         rel : 'stylesheet',
         href : 'static/index.bundle.css',
         id : 'css',
-      }),
-      meta({
-        name : 'viewport',
-        content : 'user-scalable=no,width=device-width,initial-scale=1,maximum-scale=1',
-      }),
-      meta({
-        name : 'theme-color',
-        content : '#000000',
-      }),
-      meta({
-        name : 'description',
-        content : 'Лариса Дедловская — архитектор, дизайнер интерьеров',
       }),
       script({
         src : 'https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js',
@@ -59,9 +59,14 @@ export default () => html({
         crossOrigin : 'anonymous',
         referrerPolicy : 'no-referrer',
       }),
+      script({
+        id : 'params',
+        type : 'application/json',
+        text : JSON.stringify(params),
+      }),
     ]),
     body([
-      noscript('Для правильной работы сайта необходимо включить JavaScript.'),
+      noscript('JavaScript must be enabled for the site to work properly'),
       script({
         src : 'static/index.bundle.js',
       }),

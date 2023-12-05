@@ -1,4 +1,4 @@
-import config from './config.js'
+import params from './params.js'
 
 const API_HOST_URL = process.env.API_HOST_URL
 
@@ -7,17 +7,17 @@ function normalize(name) {
 }
 
 const api = {
-  config,
+  params,
   cache : {
     '/' : {
-      owner_id : config.owner_id,
-      id : config.album_id,
+      owner_id : params.owner_id,
+      id : params.album_id,
     },
   },
   async getSection(path) {
     const section = this.cache[path]
     if(!section) {
-      throw Error('Страница не найдена')
+      throw Error(params.not_found)
     }
     if(section.items) {
       return section
@@ -40,7 +40,7 @@ const api = {
       album = this.cache[path]
     }
     if(!album) {
-      throw Error('Страница не найдена')
+      throw Error(params.not_found)
     }
     if(album.items) {
       return album
@@ -55,15 +55,16 @@ const api = {
   },
   async getBlog(offset) {
     const url = new URL('blog.php', API_HOST_URL)
-    url.searchParams.set('owner_id', config.owner_id)
+    url.searchParams.set('owner_id', params.owner_id)
     url.searchParams.set('offset', offset)
     const res = await fetch(url.href)
     return res.json()
   },
 }
 
-for(const section of config.sections) {
-  api.cache[section.path = '/' + normalize(section.title)] = section
+for(const section of params.sections) {
+  const title = '/' + normalize(section.title)
+  api.cache[section.path = title] = section
 }
 
 export default api

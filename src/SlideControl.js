@@ -1,5 +1,6 @@
 import { HtmlDiv, HtmlButton } from 'htmlmodule'
 import { Icon } from './Icon.js'
+import api from './api.js'
 
 export class SlideControl extends HtmlDiv
 {
@@ -8,7 +9,7 @@ export class SlideControl extends HtmlDiv
   render() {
     return [
       new SlidePrev({
-        title : 'Предыдущий слайд',
+        title : api.params.prev_slide || 'Previous slide',
         onkeydown : this.onKeyDown,
         onclick : () => this.props.switchSlide(-1, true),
         children : new Icon('angle-left'),
@@ -18,7 +19,7 @@ export class SlideControl extends HtmlDiv
         this.props.album.items.length,
       ]),
       new SlideNext({
-        title : 'Следующий слайд',
+        title : api.params.next_slide || 'Next slide',
         onkeydown : this.onKeyDown,
         onclick : () => this.props.switchSlide(1, true),
         children : new Icon('angle-right'),
