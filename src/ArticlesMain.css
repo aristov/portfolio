@@ -1,0 +1,16 @@
+.ArticlesMain
+{
+  background-color: #eee;
+  display: block;
+}
+.ArticlesMain .Loading
+{
+  color: #000;
+}
+@media (min-width: 900px)
+{
+  .ArticlesMain
+  {
+    padding: 20px;
+  }
+}

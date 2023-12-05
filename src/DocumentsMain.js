@@ -3,11 +3,11 @@ import { Content } from './Content.js'
 import { Main } from './Main.js'
 import { Icon } from './Icon.js'
 import api from './api.js'
-import './DocumentList.css'
+import './DocumentsMain.css'
 
-export class DocumentList extends Main
+export class DocumentsMain extends Main
 {
-  static class = 'DocumentList'
+  static class = 'DocumentsMain'
 
   render() {
     const section = this.props.section

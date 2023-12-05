@@ -1,56 +1,45 @@
-.Blog
-{
-  background-color: #eee;
-  display: block;
-}
-.Blog article
+.PostArticle
 {
   background-color: #fff;
   padding: 20px;
   margin-bottom: 20px;
 }
-.Blog h3,
-.Blog p
+.PostArticle h3,
+.PostArticle p
 {
   max-width: 900px;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.Blog h3
+.PostArticle h3
 {
   margin-top: 10px;
 }
-.Blog time
+.PostArticle time
 {
   font-size: .8rem;
 }
-.Blog p
+.PostArticle p
 {
   font-size: .9rem;
 }
-.Blog img
+.PostArticle img
 {
   max-width: 100%;
   max-height: 382px;
   vertical-align: top;
   margin-bottom: 5px;
 }
-.Blog img:not(:last-child)
+.PostArticle img:not(:last-child)
 {
   margin-right: 5px;
 }
-.Blog .Loading
-{
-  color: #000;
-}
+/*
 @media (min-width: 900px)
 {
-  .Blog
-  {
-    padding: 20px;
-  }
-  /*.Blog article
+  .PostArticle
   {
     max-width: 900px;
-  }*/
+  }
 }
+*/

@@ -1,5 +1,8 @@
 import './index.css'
+import { Settings } from 'luxon'
 import { App } from './App.js'
+
+Settings.defaultLocale = document.documentElement.lang
 
 // noinspection JSUnresolvedVariable
 const hot = import.meta.webpackHot

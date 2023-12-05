@@ -43,9 +43,12 @@ const exports = {
       logging : 'none',
     },
   },
+  externals : {
+    luxon : 'luxon',
+  },
   plugins : [
-    new webpack.EnvironmentPlugin(['API_HOST_URL'])
-  ]
+    new webpack.EnvironmentPlugin(['API_HOST_URL']),
+  ],
 }
 
 if(process.env.NODE_ENV === 'production') {

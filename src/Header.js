@@ -16,7 +16,8 @@ export class Header extends HtmlHeader
 
   render() {
     const year = (new Date).getFullYear()
-    const contacts = api.params.sections.find(
+    const sections = api.params.sections
+    const section = sections.find(
       section => section.type === 'contacts',
     )
     return [
@@ -35,19 +36,17 @@ export class Header extends HtmlHeader
         new HtmlUl({
           role : 'menu',
           onclick : this.props.closeNav,
-          children : [
-            api.params.sections.map(section => new HtmlLi({
-              role : 'menuitem',
-              children : new Link({
-                to : section.path,
-                children : section.title,
-                onkeydown : this.onKeyDown,
-              }),
-            })),
-          ],
+          children : sections.map(section => new HtmlLi({
+            role : 'menuitem',
+            children : new Link({
+              to : section.path,
+              children : section.title,
+              onkeydown : this.onKeyDown,
+            }),
+          })),
         }),
         new Social({
-          links : contacts.links,
+          links : section.links,
         }),
         new HtmlSmall(`© ${ year } ${ api.params.name }`),
       ]),

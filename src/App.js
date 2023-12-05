@@ -4,10 +4,11 @@ import { Inner } from './Inner.js'
 import { Main } from './Main.js'
 import { SlideShow } from './SlideShow.js'
 import { AlbumGroup } from './AlbumGroup.js'
-import { DocumentList } from './DocumentList.js'
-import { Contacts } from './Contacts.js'
-import { Blog } from './Blog.js'
+import { DocumentsMain } from './DocumentsMain.js'
+import { ContactsMain } from './ContactsMain.js'
+import { ArticlesMain } from './ArticlesMain.js'
 import { ErrorContent } from './ErrorContent.js'
+import { Backdrop } from './Backdrop.js'
 import { router } from './router.js'
 import api from './api.js'
 import './App.css'
@@ -24,9 +25,9 @@ export class App extends HtmlDiv
 
   static sections = {
     albums : AlbumGroup,
-    documents : DocumentList,
-    articles : Blog,
-    contacts : Contacts,
+    documents : DocumentsMain,
+    articles : ArticlesMain,
+    contacts : ContactsMain,
   }
 
   state = {
@@ -101,9 +102,4 @@ export class App extends HtmlDiv
   closeNav = () => {
     this.setState({ open : false })
   }
-}
-
-class Backdrop extends HtmlDiv
-{
-  static class = 'Backdrop'
 }

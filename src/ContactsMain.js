@@ -1,13 +1,14 @@
-import { HtmlA, HtmlDiv, HtmlH2, HtmlHr } from 'htmlmodule'
+import { HtmlH2, HtmlHr } from 'htmlmodule'
+import { Main } from './Main.js'
 import { ContactsLink } from './ContactsLink.js'
 import { Content } from './Content.js'
-import { Main } from './Main.js'
+import { AuthorBlock } from './AuthorBlock.js'
 import api from './api.js'
-import './Contacts.css'
+import './ContactsMain.css'
 
-export class Contacts extends Main
+export class ContactsMain extends Main
 {
-  static class = 'Contacts'
+  static class = 'ContactsMain'
 
   render() {
     const section = this.props.section
@@ -36,18 +37,7 @@ export class Contacts extends Main
         }),
       ),
       new HtmlHr,
-      new HtmlDiv({
-        className : 'Author',
-        children : [
-          `${ api.params.author.title }: `,
-          new HtmlA({
-            href : 'mailto:' + api.params.author.email,
-            target : '_blank',
-            rel : 'noreferrer',
-            children : api.params.author.name,
-          }),
-        ],
-      }),
+      new AuthorBlock,
     ])
   }
 }

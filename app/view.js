@@ -5,10 +5,10 @@ export default ({ params, lang }) => html({
   lang,
   children : [
     head([
+      title(params.title),
       base({
         href : '/'
       }),
-      title(params.title),
       meta({
         charset : 'utf-8',
       }),
@@ -48,14 +48,8 @@ export default ({ params, lang }) => html({
         referrerPolicy : 'no-referrer',
       }),
       script({
-        src : 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js',
-        integrity : 'sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==',
-        crossOrigin : 'anonymous',
-        referrerPolicy : 'no-referrer',
-      }),
-      script({
-        src : 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/ru.min.js',
-        integrity : 'sha512-+yvkALwyeQtsLyR3mImw8ie79H9GcXkknm/babRovVSTe04osQxiohc1ukHkBCIKQ9y97TAf2+17MxkIimZOdw==',
+        src : 'https://cdnjs.cloudflare.com/ajax/libs/luxon/3.4.4/luxon.min.js',
+        integrity : 'sha512-dUlSLLkxslGILhPdCkALwk4szPhp3xmZIKFtlUD+O9Lslq41Aksmdt5OGqpomDoT4FsCUH70jQU8ezZHI3v1RQ==',
         crossOrigin : 'anonymous',
         referrerPolicy : 'no-referrer',
       }),

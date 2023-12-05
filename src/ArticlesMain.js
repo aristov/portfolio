@@ -2,11 +2,11 @@ import { Feed } from './Feed.js'
 import { Loading } from './Loading.js'
 import { Main } from './Main.js'
 import api from './api.js'
-import './Blog.css'
+import './ArticlesMain.css'
 
-export class Blog extends Main
+export class ArticlesMain extends Main
 {
-  static class = 'Blog'
+  static class = 'ArticlesMain'
 
   state = {
     data : null,
