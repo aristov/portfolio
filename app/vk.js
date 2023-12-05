@@ -1,3 +1,4 @@
+import './env.js'
 import { VK } from 'vk-io'
 
 const vk = new VK({

@@ -1,13 +1,9 @@
 import dotenv from 'dotenv'
 
-let loaded = false
+const url = new URL('../.env', import.meta.url)
 
-if(!loaded) {
-  const url = new URL('../.env', import.meta.url)
-  dotenv.config({
-    path : url.pathname,
-  })
-  loaded = true
-}
+dotenv.config({
+  path : url.pathname,
+})
 
 export default process.env

@@ -2,6 +2,7 @@ import './env.js'
 import path from 'node:path'
 import Fastify from 'fastify'
 import fastifyStatic from '@fastify/static'
+import view from './view.js'
 import vk from './vk.js'
 
 const app = Fastify({
@@ -81,24 +82,16 @@ app.get('/blog.php', {
     })
   })
 
-app.get('/:section',
+app.get('/:section/:project?',
   /**
    * @param request
    * @param {FastifyReply} reply
    * @return {Promise<*>}
    */
   async (request, reply) => {
-    return reply.sendFile('index.html')
-  })
-
-app.get('/:section/:project',
-  /**
-   * @param request
-   * @param {FastifyReply} reply
-   * @return {Promise<*>}
-   */
-  async (request, reply) => {
-    return reply.sendFile('index.html')
+    const result = view()
+    reply.type('text/html')
+    return result.toString()
   })
 
 app.get('/static/:filename',
@@ -112,7 +105,7 @@ app.get('/static/:filename',
     return reply.sendFile(filename)
   })
 
-app.listen({ port : 1473 }, (err, address) => {
+app.listen({ port : +process.env.PORT }, (err, address) => {
   if(err) {
     throw err
   }

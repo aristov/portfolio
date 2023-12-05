@@ -5,7 +5,7 @@ import { App } from './App.js'
 const hot = import.meta.webpackHot
 const render = app => {
   App.destroy(app)
-  return App.render({}, document.getElementById('root'))
+  return App.render({}, document.body)
 }
 
 let app = render()
