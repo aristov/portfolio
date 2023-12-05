@@ -1,0 +1,26 @@
+.AlbumsMain
+{
+  overflow: auto;
+}
+@media (min-width: 500px)
+{
+  .AlbumsMain > .Inner
+  {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1100px)
+{
+  .AlbumsMain > .Inner
+  {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media (min-width: 1500px)
+{
+  .AlbumsMain > .Inner
+  {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}

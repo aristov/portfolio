@@ -1,15 +1,16 @@
-import { HtmlDiv, HtmlH2 } from 'htmlmodule'
-import { AlbumItem } from './AlbumItem.js'
+import { HtmlDiv } from 'htmlmodule'
+import { Heading } from './Heading.js'
+import { AlbumCardLink } from './AlbumCardLink.js'
 import { ErrorContent } from './ErrorContent.js'
 import { Inner } from './Inner.js'
 import { Loading } from './Loading.js'
 import { Main } from './Main.js'
 import api from './api.js'
-import './AlbumGroup.css'
+import './AlbumsMain.css'
 
-export class AlbumGroup extends Main
+export class AlbumsMain extends Main
 {
-  static class = 'AlbumGroup'
+  static class = 'AlbumsMain'
 
   state = {
     group : null,
@@ -35,11 +36,11 @@ export class AlbumGroup extends Main
       classList : ['appear'],
       children : [
         new HtmlDiv({
-          className : 'AlbumItem',
-          children : new HtmlH2(group.title),
+          className : 'AlbumCardLink',
+          children : new Heading(group.title),
         }),
         group.items.map(
-          album => new AlbumItem({
+          album => new AlbumCardLink({
             key : album.id,
             album,
           }),
@@ -62,7 +63,7 @@ export class AlbumGroup extends Main
     this.setState({ busy : true })
     try {
       this.setState({
-        group : await api.getSection(this.props.section.path),
+        group : await api.getAlbumsGroup(this.props.section.path),
         busy : false,
       })
     }

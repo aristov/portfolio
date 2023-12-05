@@ -22,11 +22,6 @@
   opacity: .5;
   color: #fff;
 }
-.Main h2
-{
-  font-size: 1.2rem;
-  margin-top: 30px;
-}
 .Main hr
 {
   border: none;
@@ -42,11 +37,5 @@
   .Main > .Content
   {
     padding: 0 30px;
-  }
-  .Main h2
-  {
-    font-size: 1.3rem;
-    padding: 10px 0;
-    margin: 14px 0;
   }
 }

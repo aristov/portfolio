@@ -1,19 +1,23 @@
 import { HtmlA, HtmlDiv } from 'htmlmodule'
 import { Icon } from './Icon.js'
+import api from './api.js'
+import './SocialBlock.css'
 
-export class Social extends HtmlDiv
+const links = api.params.contacts.links
+
+export class SocialBlock extends HtmlDiv
 {
-  static class = 'Social'
+  static class = 'SocialBlock'
 
   render() {
-    return new HtmlDiv([
-      this.props.links.map(props => new HtmlA({
+    return new HtmlDiv(links.map(
+      props => new HtmlA({
         target : '_blank',
         rel : 'noreferrer',
         href : props.url,
         title : props.text,
         children : new Icon(props.icon),
-      })),
-    ])
+      }),
+    ))
   }
 }

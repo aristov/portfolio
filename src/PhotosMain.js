@@ -2,17 +2,17 @@ import { ErrorContent } from './ErrorContent.js'
 import { Loading } from './Loading.js'
 import { Main } from './Main.js'
 import { Inner } from './Inner.js'
-import { SlideHeading } from './SlideHeading.js'
-import { SlideList } from './SlideList.js'
-import { SlideControl } from './SlideControl.js'
+import { AlbumHeading } from './AlbumHeading.js'
+import { PhotosList } from './PhotosList.js'
+import { AlbumNavBlock } from './AlbumNavBlock.js'
 import api from './api.js'
-import './SlideShow.css'
+import './PhotosMain.css'
 
 const { Hammer } = window
 
-export class SlideShow extends Main
+export class PhotosMain extends Main
 {
-  static class = 'SlideShow'
+  static class = 'PhotosMain'
 
   state = {
     album : null,
@@ -48,17 +48,17 @@ export class SlideShow extends Main
       document.title = `${ album.title } | ${ api.params.name }`
     }
     return new Inner([
-      section && new SlideHeading({
+      section && new AlbumHeading({
         section,
         album,
       }),
-      this._ref = new SlideList({
+      this._ref = new PhotosList({
         items,
         classList : ['appear'],
         onclick : this.onClick,
         ontransitionend : this.onTransitionEnd,
       }),
-      new SlideControl({
+      new AlbumNavBlock({
         current,
         album,
         switchSlide : this.switchSlide,

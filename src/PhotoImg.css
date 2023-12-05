@@ -1,0 +1,19 @@
+.PhotosMain .PhotoImg
+{
+  height: 100%;
+}
+.PhotosMain .PhotoImg
+{
+  display: inline-block;
+  background: center center / cover no-repeat;
+  width: 100%;
+  transition: left .5s;
+  position: absolute;
+}
+@media (min-width: 900px)
+{
+  .PhotosMain .PhotoImg
+  {
+    background-size: contain;
+  }
+}

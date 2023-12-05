@@ -1,0 +1,25 @@
+.SocialBlock
+{
+  padding: 20px;
+  font-size: 1.6rem;
+  margin-top: 20px;
+}
+.SocialBlock a
+{
+  display: inline-block;
+  padding: 10px;
+  opacity: .8;
+}
+.SocialBlock a:hover,
+.SocialBlock a:focus
+{
+  opacity: 1;
+}
+@media (min-width: 900px)
+{
+  .SocialBlock
+  {
+    font-size: 1.2rem;
+    padding: 10px;
+  }
+}

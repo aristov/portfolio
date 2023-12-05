@@ -1,5 +1,4 @@
 import './app/env.js'
-import webpack from 'webpack'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 const exports = {
@@ -46,9 +45,7 @@ const exports = {
   externals : {
     luxon : 'luxon',
   },
-  plugins : [
-    new webpack.EnvironmentPlugin(['API_HOST_URL']),
-  ],
+  plugins : [],
 }
 
 if(process.env.NODE_ENV === 'production') {

@@ -1,9 +1,10 @@
-import { HtmlH2 } from 'htmlmodule'
+import { Heading } from './Heading.js'
 import { Link } from './Link.js'
+import './AlbumHeading.css'
 
-export class SlideHeading extends HtmlH2
+export class AlbumHeading extends Heading
 {
-  static class = 'SlideHeading'
+  static class = 'AlbumHeading'
 
   render() {
     return [

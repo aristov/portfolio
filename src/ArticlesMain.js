@@ -37,7 +37,7 @@ export class ArticlesMain extends Main
   async #load() {
     this.setState({ busy : true })
     const data = this.state.data || []
-    const { count, items } = await api.getBlog(data.length)
+    const { count, items } = await api.getArticles(data.length)
     this._count = count
     this.setState({
       data : [...data, ...items],

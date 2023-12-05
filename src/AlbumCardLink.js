@@ -1,9 +1,10 @@
-import { HtmlDiv } from 'htmlmodule'
 import { Link } from './Link.js'
+import { AlbumCardTitle } from './AlbumCardTitle.js'
+import './AlbumCardLink.css'
 
-export class AlbumItem extends Link
+export class AlbumCardLink extends Link
 {
-  static class = 'AlbumItem'
+  static class = 'AlbumCardLink'
 
   init() {
     super.init()
@@ -24,10 +25,7 @@ export class AlbumItem extends Link
   }
 
   render() {
-    return new HtmlDiv({
-      className : 'AlbumInfo',
-      children : this.props.album.title,
-    })
+    return new AlbumCardTitle(this.props.album.title)
   }
 
   onKeyDown(e) {

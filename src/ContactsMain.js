@@ -1,5 +1,6 @@
-import { HtmlH2, HtmlHr } from 'htmlmodule'
+import { HtmlHr } from 'htmlmodule'
 import { Main } from './Main.js'
+import { Heading } from './Heading.js'
 import { ContactsLink } from './ContactsLink.js'
 import { Content } from './Content.js'
 import { AuthorBlock } from './AuthorBlock.js'
@@ -12,22 +13,23 @@ export class ContactsMain extends Main
 
   render() {
     const section = this.props.section
+    const contacts = api.params.contacts
     document.title = `${ section.title } | ${ api.params.name }`
     return new Content([
-      new HtmlH2(section.title),
+      new Heading(section.title),
       new HtmlHr,
       new ContactsLink({
-        href : 'mailto:' + section.email,
+        href : 'mailto:' + contacts.email,
         icon : 'mail',
-        children : section.email,
+        children : contacts.email,
       }),
       new ContactsLink({
-        href : 'tel:' + section.phone_number.replace(/\s+/g, ''),
+        href : 'tel:' + contacts.phone_number.replace(/\s+/g, ''),
         icon : 'phone',
-        children : section.phone_number,
+        children : contacts.phone_number,
       }),
       new HtmlHr,
-      section.links.map(
+      contacts.links.map(
         props => new ContactsLink({
           target : '_blank',
           rel : 'noreferrer',

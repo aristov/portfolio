@@ -2,8 +2,8 @@ import { HtmlDiv } from 'htmlmodule'
 import { Header } from './Header.js'
 import { Inner } from './Inner.js'
 import { Main } from './Main.js'
-import { SlideShow } from './SlideShow.js'
-import { AlbumGroup } from './AlbumGroup.js'
+import { PhotosMain } from './PhotosMain.js'
+import { AlbumsMain } from './AlbumsMain.js'
 import { DocumentsMain } from './DocumentsMain.js'
 import { ContactsMain } from './ContactsMain.js'
 import { ArticlesMain } from './ArticlesMain.js'
@@ -17,44 +17,60 @@ export class App extends HtmlDiv
 {
   static class = 'App'
 
-  static #getKey() {
-    const pathname = decodeURIComponent(location.pathname)
-    const key = pathname.replace(/\/$/, '')
-    return key || '/'
-  }
-
   static sections = {
-    albums : AlbumGroup,
+    albums : AlbumsMain,
     documents : DocumentsMain,
     articles : ArticlesMain,
     contacts : ContactsMain,
   }
 
+  static #getPath() {
+    const pathname = decodeURIComponent(location.pathname)
+    const key = pathname.replace(/\/$/, '')
+    return key || '/'
+  }
+
   state = {
+    path : App.#getPath(),
     open : false,
     data : null,
   }
 
+  init() {
+    window.onpopstate = () => this.setState({
+      path : App.#getPath()
+    })
+    document.onclick = e => {
+      e.target.closest('.Link') && this.setState({
+        path : App.#getPath()
+      })
+    }
+  }
+
+  destroy() {
+    window.onpopstate = null
+    document.onclick = null
+  }
+
   render() {
-    const key = App.#getKey()
+    const state = this.state
+    const path = state.path
+    const key = path
     this.classList = [
-      this.state.open && 'open',
+      state.open && 'open',
       key === '/' && 'homepage',
     ]
     return new Inner([
       new Header({
-        data : this.state.data,
-        open : this.state.open,
+        data : state.data,
+        open : state.open,
         toggleNav : this.toggleNav,
         closeNav : this.closeNav,
       }),
       router([
         {
           path : /^\/[а-яёй\w\-]+\/[а-яёй\w\-]+$/i,
-          render : () => new SlideShow({
-            key,
-            path : key,
-          }),
+          render : () => new PhotosMain({ key, path }),
         },
         ...api.params.sections.map(section => ({
           path : section.path,
@@ -65,7 +81,7 @@ export class App extends HtmlDiv
         })),
         {
           path : '/',
-          render : () => new SlideShow({
+          render : () => new PhotosMain({
             key,
             path : '/',
             auto : true,
@@ -81,18 +97,6 @@ export class App extends HtmlDiv
       ]),
       new Backdrop({ onclick : this.closeNav }),
     ])
-  }
-
-  mount() {
-    window.onpopstate = () => this.setState({})
-    document.onclick = e => {
-      e.target.closest('.Link') && this.setState({})
-    }
-  }
-
-  destroy() {
-    window.onpopstate = null
-    document.onclick = null
   }
 
   toggleNav = () => {

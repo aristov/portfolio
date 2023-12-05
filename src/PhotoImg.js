@@ -1,9 +1,10 @@
 import { RoleImg } from 'htmlmodule'
 import params from './params.js'
+import './PhotoImg.css'
 
-export class SlideItem extends RoleImg
+export class PhotoImg extends RoleImg
 {
-  static class = 'SlideItem'
+  static class = 'PhotoImg'
 
   assign() {
     super.assign()

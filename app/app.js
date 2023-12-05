@@ -14,7 +14,7 @@ app.register(fastifyStatic, {
   root : new URL('../public/', import.meta.url).pathname,
 })
 
-app.get('/albums.php', {
+app.get('/photos.getAlbums', {
     schema : {
       query : {
         owner_id : {
@@ -36,7 +36,7 @@ app.get('/albums.php', {
     })
   })
 
-app.get('/album.php', {
+app.get('/photos.get', {
     schema : {
       query : {
         owner_id : {
@@ -61,7 +61,7 @@ app.get('/album.php', {
     })
   })
 
-app.get('/blog.php', {
+app.get('/wall.get', {
     schema : {
       query : {
         owner_id : {
@@ -90,10 +90,7 @@ app.get('/:section/:project?',
    * @return {Promise<*>}
    */
   async (request, reply) => {
-    const result = view({
-      params : config,
-      lang : process.env.DEFAULT_LOCALE,
-    })
+    const result = view(config)
     reply.type('text/html')
     return result.toString()
   })

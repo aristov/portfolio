@@ -1,0 +1,14 @@
+.PhotosList
+{
+  height: 100%;
+}
+.PhotosList
+{
+  position: relative;
+  white-space: nowrap;
+  cursor: grab;
+}
+.PhotosList:active
+{
+  cursor: grabbing;
+}

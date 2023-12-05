@@ -89,23 +89,6 @@
 {
   cursor: default;
 }
-.Header .Social
-{
-  padding: 20px;
-  font-size: 1.6rem;
-  margin-top: 20px;
-}
-.Header .Social a
-{
-  display: inline-block;
-  padding: 10px;
-  opacity: .8;
-}
-.Header .Social a:hover,
-.Header .Social a:focus
-{
-  opacity: 1;
-}
 .Header small
 {
   text-align: center;
@@ -150,11 +133,6 @@
   }
   .Header li a
   {
-    padding: 10px;
-  }
-  .Header .Social
-  {
-    font-size: 1.2rem;
     padding: 10px;
   }
 }

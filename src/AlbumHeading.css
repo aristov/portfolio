@@ -1,0 +1,31 @@
+.AlbumHeading
+{
+  position: absolute;
+  font-size: .8rem;
+  z-index: 1;
+  margin: 0;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.3) 100%);
+}
+.AlbumHeading a[href],
+.AlbumHeading a[href]:hover,
+.AlbumHeading a[href]:focus
+{
+  color: #fff;
+}
+@media (min-width: 500px)
+{
+  .AlbumHeading
+  {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 900px)
+{
+  .AlbumHeading
+  {
+    padding: 15px 20px;
+  }
+}

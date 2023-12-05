@@ -3,7 +3,7 @@ import {
 } from 'htmlmodule'
 import { Inner } from './Inner.js'
 import { Link } from './Link.js'
-import { Social } from './Social.js'
+import { SocialBlock } from './SocialBlock.js'
 import { Icon } from './Icon.js'
 import api from './api.js'
 import './Header.css'
@@ -17,9 +17,6 @@ export class Header extends HtmlHeader
   render() {
     const year = (new Date).getFullYear()
     const sections = api.params.sections
-    const section = sections.find(
-      section => section.type === 'contacts',
-    )
     return [
       new Inner([
         new HtmlH1(new HtmlA({
@@ -27,7 +24,6 @@ export class Header extends HtmlHeader
           children : api.params.name,
         })),
         new HtmlButton({
-          className : 'MenuButton',
           onclick : this.props.toggleNav,
           children : new Icon(this.props.open ? 'cancel' : 'menu'),
         }),
@@ -45,9 +41,7 @@ export class Header extends HtmlHeader
             }),
           })),
         }),
-        new Social({
-          links : section.links,
-        }),
+        new SocialBlock,
         new HtmlSmall(`© ${ year } ${ api.params.name }`),
       ]),
     ]

@@ -1,6 +1,7 @@
-import { HtmlA, HtmlH2, HtmlHr } from 'htmlmodule'
-import { Content } from './Content.js'
+import { HtmlA, HtmlHr } from 'htmlmodule'
 import { Main } from './Main.js'
+import { Content } from './Content.js'
+import { Heading } from './Heading.js'
 import { Icon } from './Icon.js'
 import api from './api.js'
 import './DocumentsMain.css'
@@ -13,7 +14,7 @@ export class DocumentsMain extends Main
     const section = this.props.section
     document.title = `${ section.title } | ${ api.params.name }`
     return new Content([
-      new HtmlH2(section.title),
+      new Heading(section.title),
       new HtmlHr,
       section.docs.map(item => new HtmlA({
         key : item.path,

@@ -1,0 +1,14 @@
+.Heading
+{
+  font-size: 1.2rem;
+  margin-top: 30px;
+}
+@media (min-width: 900px)
+{
+  .Heading
+  {
+    font-size: 1.3rem;
+    padding: 10px 0;
+    margin: 14px 0;
+  }
+}

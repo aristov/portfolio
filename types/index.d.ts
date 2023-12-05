@@ -17,8 +17,18 @@ export type Section = {
   title: string;
   owner_id: number;
   type: SectionType;
+}
+
+export type Link = {
+  url: string;
+  icon: string;
+  text: string;
+}
+
+export type Contacts = {
   email: string;
   phone_number: string;
+  links: Link[];
 }
 
 export type Author = {
@@ -37,6 +47,7 @@ export type Config = {
   author: Author;
   prev_slide: string;
   next_slide: string;
+  contacts: Contacts;
 }
 
 export type VkPhotoSize = {

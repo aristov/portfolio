@@ -1,8 +1,8 @@
 import { base, body, div, head, html, img, link, meta, noscript, script, title } from 'jste'
 
-export default ({ params, lang }) => html({
+export default params => html({
   doctype : true,
-  lang,
+  lang : params.lang,
   children : [
     head([
       title(params.title),
@@ -36,7 +36,7 @@ export default ({ params, lang }) => html({
         href : 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap',
         rel : 'stylesheet',
       }),
-      link({
+      process.env.NODE_ENV === 'production' && link({
         rel : 'stylesheet',
         href : 'static/index.bundle.css',
         id : 'css',
