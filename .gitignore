@@ -1,6 +1,7 @@
 /node_modules
 /tmp
 
+/public/static/
 /public/config.php
 
 .env
