@@ -1,10 +1,7 @@
-import {
-  HtmlA, HtmlButton, HtmlH1, HtmlHeader, HtmlLi, HtmlNav, HtmlSmall, HtmlUl,
-} from 'htmlmodule'
+import { HtmlA, HtmlButton, HtmlH1, HtmlHeader } from 'htmlmodule'
 import { Inner } from './Inner.js'
-import { Link } from './Link.js'
-import { SocialBlock } from './SocialBlock.js'
 import { Icon } from './Icon.js'
+import { HeaderMenuNav } from './HeaderMenuNav.js'
 import api from './api.js'
 import './Header.css'
 
@@ -15,8 +12,6 @@ export class Header extends HtmlHeader
   static class = 'Header'
 
   render() {
-    const year = (new Date).getFullYear()
-    const sections = api.params.sections
     return [
       new Inner([
         new HtmlH1(new HtmlA({
@@ -24,26 +19,15 @@ export class Header extends HtmlHeader
           children : api.params.name,
         })),
         new HtmlButton({
-          onclick : this.props.toggleNav,
-          children : new Icon(this.props.open ? 'cancel' : 'menu'),
+          onclick : () => {
+            this.emit('nav-toggle', { bubbles : true })
+          },
+          children : new Icon(
+            this.props.open ? 'cancel' : 'menu',
+          ),
         }),
       ]),
-      this._nav = new HtmlNav([
-        new HtmlUl({
-          role : 'menu',
-          onclick : this.props.closeNav,
-          children : sections.map(section => new HtmlLi({
-            role : 'menuitem',
-            children : new Link({
-              to : section.path,
-              children : section.title,
-              onkeydown : this.onKeyDown,
-            }),
-          })),
-        }),
-        new SocialBlock,
-        new HtmlSmall(`© ${ year } ${ api.params.name }`),
-      ]),
+      this._nav = new HeaderMenuNav,
     ]
   }
 
@@ -51,26 +35,12 @@ export class Header extends HtmlHeader
     this._hammertime = new Hammer(this._nav.node)
     this._hammertime.on('swipe', e => {
       if(e.direction === Hammer.DIRECTION_RIGHT) {
-        this.props.closeNav()
+        this.emit('nav-close', { bubbles : true })
       }
     })
   }
 
   destroy() {
     this._hammertime.off('swipe')
-  }
-
-  onKeyDown = e => {
-    const target = e.nativeEvent.target
-    if(e.code === 'Space') {
-      e.stopPropagation()
-      target.click()
-    }
-    if(e.code === 'ArrowUp') {
-      target.parentElement.previousElementSibling?.querySelector('a').focus()
-    }
-    if(e.code === 'ArrowDown') {
-      target.parentElement.nextElementSibling?.querySelector('a').focus()
-    }
   }
 }

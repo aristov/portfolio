@@ -8,18 +8,23 @@ import { AlbumNavBlock } from './AlbumNavBlock.js'
 import api from './api.js'
 import './PhotosMain.css'
 
-const { Hammer } = window
-
 export class PhotosMain extends Main
 {
   static class = 'PhotosMain'
 
+  #transition = false
+
   state = {
-    album : null,
     current : 0,
+    album : null,
     timer : null,
     error : null,
     busy : false,
+  }
+
+  init() {
+    super.init()
+    this.on('photo-switch', this.#onPhotoSwitch)
   }
 
   assign() {
@@ -37,8 +42,8 @@ export class PhotosMain extends Main
     }
     const section = album.section
     const current = this.state.current
-    const prev = this.getIndex(current - 1)
-    const next = this.getIndex(current + 1)
+    const prev = this.#getIndex(current - 1)
+    const next = this.#getIndex(current + 1)
     const items = [
       album.items[prev],
       album.items[current],
@@ -55,13 +60,12 @@ export class PhotosMain extends Main
       this._ref = new PhotosList({
         items,
         classList : ['appear'],
-        onclick : this.onClick,
-        ontransitionend : this.onTransitionEnd,
+        onclick : this.#onClick,
+        ontransitionend : this.#onTransitionEnd,
       }),
       new AlbumNavBlock({
         current,
         album,
-        switchSlide : this.switchSlide,
       }),
     ])
   }
@@ -71,26 +75,20 @@ export class PhotosMain extends Main
     if(this.state.error) {
       return
     }
-    this.props.auto && this.tick()
-    this._hammertime = new Hammer(this._ref.node)
-    this._hammertime.on('swipe', e => {
-      if(e.direction === Hammer.DIRECTION_LEFT) {
-        this.switchSlide(1, true)
-      }
-      else if(e.direction === Hammer.DIRECTION_RIGHT) {
-        this.switchSlide(-1, true)
-      }
-    })
-    document.addEventListener('keydown', this.onKeyDown)
+    if(this.props.auto) {
+      this.#tick()
+    }
+    document.addEventListener('keydown', this.#onKeyDown)
   }
 
   destroy() {
     if(this.state.timer) {
       clearTimeout(this.state.timer)
     }
-    this.setState({ timer : null })
-    this._hammertime?.off('swipe')
-    document.removeEventListener('keydown', this.onKeyDown)
+    this.setState({
+      timer : null,
+    })
+    document.removeEventListener('keydown', this.#onKeyDown)
   }
 
   async #load() {
@@ -106,58 +104,60 @@ export class PhotosMain extends Main
     }
   }
 
-  tick() {
+  #tick() {
     const handler = () => {
-      this.switchSlide(1)
-      this.tick()
+      this.#switchPhoto(1)
+      this.#tick()
     }
     this.setState({
       timer : setTimeout(handler, 5000),
     })
   }
 
-  switchSlide = (shift, stop = false) => {
+  #switchPhoto(offset, stop = false) {
     if(stop) {
       if(this.state.timer) {
         clearTimeout(this.state.timer)
       }
       this.setState({ timer : null })
     }
-    if(this._transition) {
+    if(this.#transition) {
       return
     }
-    this._transition = true
+    this.#transition = true
     this.setState(state => ({
-      current : this.getIndex(state.current + shift),
+      current : this.#getIndex(state.current + offset),
     }))
   }
 
-  getIndex(i) {
+  #getIndex(i) {
     const items = this.state.album.items
     return i < 0 ?
       items.length + i :
       i % items.length
   }
 
-  onClick = () => {
-    this.switchSlide(1, true)
+  #onClick = () => {
+    this.#switchPhoto(1, true)
   }
 
-  onKeyDown = e => {
+  #onKeyDown = e => {
     switch(e.code) {
       case 'ArrowLeft':
-        this.switchSlide(-1, true)
+        this.#switchPhoto(-1, true)
         break
       case 'ArrowRight':
       case 'Space':
-        this.switchSlide(1, true)
+        this.#switchPhoto(1, true)
         break
-      default:
-        void null
     }
   }
 
-  onTransitionEnd = () => {
-    this._transition = false
+  #onTransitionEnd = () => {
+    this.#transition = false
+  }
+
+  #onPhotoSwitch(e) {
+    this.#switchPhoto(e.detail.offset, true)
   }
 }

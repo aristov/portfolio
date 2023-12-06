@@ -11,14 +11,14 @@ export class AlbumHeading extends Heading
       new Link({
         to : this.props.section.path,
         children : this.props.section.title,
-        onkeydown : this.onKeyDown,
+        onkeydown : this.#onKeyDown,
       }),
       ' → ',
       this.props.album.title,
     ]
   }
 
-  onKeyDown = e => {
+  #onKeyDown = e => {
     if(e.code === 'Space') {
       e.stopPropagation()
       e.target.click()

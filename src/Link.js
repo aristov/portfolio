@@ -6,7 +6,7 @@ export class Link extends HtmlA
 
   init() {
     super.init()
-    this.on('click', this.onClick)
+    this.on('click', this.#onClick)
   }
 
   assign() {
@@ -17,7 +17,7 @@ export class Link extends HtmlA
     }
   }
 
-  onClick(e) {
+  #onClick(e) {
     if(!this.pathname) {
       return
     }

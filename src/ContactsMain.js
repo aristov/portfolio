@@ -5,7 +5,6 @@ import { ContactsLink } from './ContactsLink.js'
 import { Content } from './Content.js'
 import { AuthorBlock } from './AuthorBlock.js'
 import api from './api.js'
-import './ContactsMain.css'
 
 export class ContactsMain extends Main
 {

@@ -37,19 +37,15 @@ export class App extends HtmlDiv
   }
 
   init() {
-    window.onpopstate = () => this.setState({
-      path : App.#getPath()
-    })
-    document.onclick = e => {
-      e.target.closest('.Link') && this.setState({
-        path : App.#getPath()
-      })
-    }
+    this.on('nav-toggle', this.#onNavToggle)
+    this.on('nav-close', this.#onNavClose)
+    window.addEventListener('popstate', this.#onPopState)
+    document.addEventListener('click', this.#onDocClick)
   }
 
   destroy() {
-    window.onpopstate = null
-    document.onclick = null
+    window.removeEventListener('popstate', this.#onPopState)
+    document.removeEventListener('click', this.#onDocClick)
   }
 
   render() {
@@ -64,8 +60,6 @@ export class App extends HtmlDiv
       new Header({
         data : state.data,
         open : state.open,
-        toggleNav : this.toggleNav,
-        closeNav : this.closeNav,
       }),
       router([
         {
@@ -95,15 +89,36 @@ export class App extends HtmlDiv
           }),
         },
       ]),
-      new Backdrop({ onclick : this.closeNav }),
+      new Backdrop({
+        onclick : () => {
+          this.emit('nav-close', { bubbles : true })
+        },
+      }),
     ])
   }
 
-  toggleNav = () => {
-    this.setState(state => ({ open : !state.open }))
+  #onNavToggle() {
+    this.setState(state => ({
+      open : !state.open,
+    }))
   }
 
-  closeNav = () => {
+  #onNavClose() {
     this.setState({ open : false })
+  }
+
+  #onPopState = () => {
+    this.setState({
+      path : App.#getPath(),
+    })
+  }
+
+  #onDocClick = e => {
+    if(!e.target.closest('.Link')) {
+      return
+    }
+    this.setState({
+      path : App.#getPath(),
+    })
   }
 }

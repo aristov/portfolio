@@ -1,5 +1,6 @@
 import { HtmlA } from 'htmlmodule'
 import { Icon } from './Icon.js'
+import './ContactsLink.css'
 
 export class ContactsLink extends HtmlA
 {

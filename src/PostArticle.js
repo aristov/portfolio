@@ -4,13 +4,13 @@ import './PostArticle.css'
 
 const URL_RE = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=+$,\w]+@)?[A-Za-z\d.-]+|(?:www\.|[-;:&=+$,\w]+@)[A-Za-z\d.-]+)((?:\/[+~%/.\w\-_]*)?\??([-+=&;%@.\w_]*)#?([.!/\\\w]*))?)/g
 
-function replace(str) {
-  return str.replace(URL_RE, '<a href="$1" target="_blank" rel="noreferrer">$1</a>')
-}
-
 export class PostArticle extends HtmlArticle
 {
   static class = 'PostArticle'
+
+  static #replaceUrls(str) {
+    return str.replace(URL_RE, '<a href="$1" target="_blank" rel="noreferrer">$1</a>')
+  }
 
   render() {
     const item = this.props.item
@@ -20,11 +20,11 @@ export class PostArticle extends HtmlArticle
     return [
       new HtmlTime(dateString),
       new HtmlH3({
-        innerHTML : replace(title),
+        innerHTML : PostArticle.#replaceUrls(title),
       }),
       !!blocks.length && blocks.map(
         p => new HtmlP({
-          innerHTML : replace(p),
+          innerHTML : PostArticle.#replaceUrls(p),
         }),
       ),
       item.attachments?.map(attachment => {

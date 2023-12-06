@@ -11,8 +11,13 @@ export class AlbumNavBlock extends HtmlDiv
     return [
       new PrevButton({
         title : api.params.prev_slide || 'Previous slide',
-        onkeydown : this.onKeyDown,
-        onclick : () => this.props.switchSlide(-1, true),
+        onkeydown : this.#onKeyDown,
+        onclick : () => {
+          this.emit('photo-switch', {
+            bubbles : true,
+            detail : { offset : -1 }
+          })
+        },
         children : new Icon('angle-left'),
       }),
       new AlbumNavCounter([
@@ -22,14 +27,19 @@ export class AlbumNavBlock extends HtmlDiv
       ]),
       new NextButton({
         title : api.params.next_slide || 'Next slide',
-        onkeydown : this.onKeyDown,
-        onclick : () => this.props.switchSlide(1, true),
+        onkeydown : this.#onKeyDown,
+        onclick : () => {
+          this.emit('photo-switch', {
+            bubbles : true,
+            detail : { offset : +1 }
+          })
+        },
         children : new Icon('angle-right'),
       }),
     ]
   }
 
-  onKeyDown = e => {
+  #onKeyDown = e => {
     if(e.code === 'Space') {
       e.stopPropagation()
     }

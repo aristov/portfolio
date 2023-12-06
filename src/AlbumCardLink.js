@@ -8,7 +8,7 @@ export class AlbumCardLink extends Link
 
   init() {
     super.init()
-    this.on('keydown', this.onKeyDown)
+    this.on('keydown', this.#onKeyDown)
   }
 
   assign() {
@@ -28,7 +28,7 @@ export class AlbumCardLink extends Link
     return new AlbumCardTitle(this.props.album.title)
   }
 
-  onKeyDown(e) {
+  #onKeyDown(e) {
     const target = e.nativeEvent.target
     switch(e.code) {
       case 'Space':
@@ -44,8 +44,6 @@ export class AlbumCardLink extends Link
         e.preventDefault()
         target.nextElementSibling?.focus()
         break
-      default:
-        void null
     }
   }
 }
