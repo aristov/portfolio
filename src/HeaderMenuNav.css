@@ -40,6 +40,20 @@
 {
   cursor: default;
 }
+@media (max-width: 899px)
+{
+  .HeaderMenuNav
+  {
+    width: 400px;
+  }
+}
+@media (max-width: 499px)
+{
+  .HeaderMenuNav
+  {
+    width: 80vw;
+  }
+}
 @media (min-width: 900px)
 {
   .HeaderMenuNav
