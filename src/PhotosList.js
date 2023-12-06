@@ -13,20 +13,9 @@ export class PhotosList extends HtmlDiv
 
   #startPointerX
 
-  state = {
-    zoomed : false,
-  }
-
   init() {
     this.on('contextmenu', this.#onContextMenu)
     this.on('pointerdown', this.#onPointerDown)
-    this.on('photo-zoom', this.#onPhotoZoom)
-  }
-
-  #onPhotoZoom() {
-    this.setState(state => ({
-      zoomed : !state.zoomed,
-    }))
   }
 
   render() {
@@ -35,7 +24,7 @@ export class PhotosList extends HtmlDiv
         key : item.id,
         item,
         index : i,
-        zoomed : this.state.zoomed,
+        zoomed : this.props.zoomed,
       }),
     )
   }
@@ -46,7 +35,7 @@ export class PhotosList extends HtmlDiv
   }
 
   #onPointerDown(e) {
-    if(this.props.transition || this.state.zoomed) {
+    if(this.props.transition || this.props.zoomed) {
       return
     }
     this.#startPointerX = e.x

@@ -4,6 +4,7 @@ import { Main } from './Main.js'
 import { Inner } from './Inner.js'
 import { AlbumHeading } from './AlbumHeading.js'
 import { PhotosList } from './PhotosList.js'
+import { ZoomButton } from './ZoomButton.js'
 import { AlbumNavBlock } from './AlbumNavBlock.js'
 import api from './api.js'
 import './PhotosMain.css'
@@ -21,13 +22,15 @@ export class PhotosMain extends Main
     album : null,
     error : null,
     busy : false,
+    zoomed : false,
     transition : false,
   }
 
   init() {
     super.init()
-    this.on('photo-switch', this.#onPhotoSwitch)
     this.on('transitionend', this.#onTransitionEnd)
+    this.on('photo-switch', this.#onPhotoSwitch)
+    this.on('photo-zoom', this.#onPhotoZoom)
   }
 
   assign() {
@@ -36,7 +39,7 @@ export class PhotosMain extends Main
   }
 
   render() {
-    const album = this.state.album
+    const { album, zoomed, current, transition } = this.state
     if(this.state.error) {
       return new ErrorContent
     }
@@ -44,7 +47,6 @@ export class PhotosMain extends Main
       return new Loading
     }
     const section = album.section
-    const current = this.state.current
     const prev = this.#getIndex(current - 1)
     const next = this.#getIndex(current + 1)
     const items = [
@@ -56,20 +58,16 @@ export class PhotosMain extends Main
       document.title = `${ album.title } | ${ api.params.name }`
     }
     return new Inner([
-      section && new AlbumHeading({
-        section,
-        album,
-      }),
+      section && new AlbumHeading({ section, album }),
       new PhotosList({
         items,
+        zoomed,
+        transition,
         classList : ['appear'],
-        transition : this.state.transition,
         onclick : this.#onListClick,
       }),
-      new AlbumNavBlock({
-        current,
-        album,
-      }),
+      new ZoomButton({ zoomed }),
+      new AlbumNavBlock({ current, album }),
     ])
   }
 
@@ -106,11 +104,11 @@ export class PhotosMain extends Main
   }
 
   #tick() {
-    const handler = () => {
+    const onTimeout = () => {
       this.#switchPhoto(1)
       this.#tick()
     }
-    this.#timeoutId = setTimeout(handler, TIMEOUT_DELAY)
+    this.#timeoutId = setTimeout(onTimeout, TIMEOUT_DELAY)
   }
 
   #stopTick() {
@@ -162,5 +160,11 @@ export class PhotosMain extends Main
 
   #onPhotoSwitch(e) {
     this.#switchPhoto(e.detail.offset, true)
+  }
+
+  #onPhotoZoom() {
+    this.setState(state => ({
+      zoomed : !state.zoomed,
+    }))
   }
 }

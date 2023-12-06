@@ -41,7 +41,6 @@ export type Config = {
   title: string;
   description: string;
   theme_color: string;
-  background_size: BackgroundSize;
   sections: Section[];
   not_found: string;
   author: Author;

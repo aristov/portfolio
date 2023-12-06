@@ -1,0 +1,23 @@
+.ZoomButton
+{
+  background-color: transparent;
+  border: none;
+  padding: 20px;
+  margin: 0;
+  opacity: .5;
+  color: inherit;
+  font-size: 2rem;
+  text-shadow: inherit;
+}
+@media (min-width: 900px)
+{
+  .ZoomButton
+  {
+    cursor: pointer;
+  }
+  .ZoomButton:hover,
+  .ZoomButton:focus-visible
+  {
+    opacity: 1;
+  }
+}
