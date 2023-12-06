@@ -13,6 +13,11 @@ import { router } from './router.js'
 import api from './api.js'
 import './AppContent.css'
 
+const MOBILE_MAX_WITH = 899
+const TRANSLATEX_INITIAL = 0
+const TRANSLATEX_K_MIN = .8
+const TRANSLATEX_PX_MAX = 400
+
 export class AppContent extends HtmlDiv
 {
   static class = 'AppContent'
@@ -24,10 +29,10 @@ export class AppContent extends HtmlDiv
     contacts : ContactsMain,
   }
 
-  #translateX
-  #pointerX
-  #prevPointerX
-  #startPointerX
+  #translateX = null
+  #pointerX = null
+  #prevPointerX = null
+  #startPointerX = null
 
   state = {
     open : false,
@@ -103,8 +108,8 @@ export class AppContent extends HtmlDiv
       return
     }
     this.#translateX = this.state.open ?
-      -Math.min(400, innerWidth * .8) :
-      0
+      -Math.min(TRANSLATEX_PX_MAX, innerWidth * TRANSLATEX_K_MIN) :
+      TRANSLATEX_INITIAL
     this.style.transition = null
     this.style.transform = `translateX(${ this.#translateX }px)`
   }
@@ -115,11 +120,11 @@ export class AppContent extends HtmlDiv
   }
 
   #onPointerDown(e) {
-    if(!this.state.open || innerWidth > 899) {
+    if(!this.state.open || innerWidth > MOBILE_MAX_WITH) {
       return
     }
-    this.#pointerX = undefined
-    this.#prevPointerX = undefined
+    this.#pointerX = null
+    this.#prevPointerX = null
     this.#startPointerX = e.x
     this.on('pointermove', this.#onPointerMove, { passive : true })
     this.on('pointerup', this.#onPointerUp, { once : true })
@@ -140,16 +145,16 @@ export class AppContent extends HtmlDiv
   #onPointerUp(e) {
     this.off('pointermove', this.#onPointerMove)
     document.documentElement.style.overflow = null
-    if(this.#pointerX === undefined) {
+    if(this.#pointerX === null) {
       return
     }
     if(e.x > this.#pointerX) {
       this.setState({ open : false })
     }
     else this.#updatePosition()
-    this.#pointerX = undefined
-    this.#prevPointerX = undefined
-    this.#startPointerX = undefined
+    this.#pointerX = null
+    this.#prevPointerX = null
+    this.#startPointerX = null
   }
 
   #onNavToggle() {

@@ -8,16 +8,18 @@ import { AlbumNavBlock } from './AlbumNavBlock.js'
 import api from './api.js'
 import './PhotosMain.css'
 
+const TIMEOUT_DELAY = 5000
+
 export class PhotosMain extends Main
 {
   static class = 'PhotosMain'
 
   #transition = false
+  #timeoutId = null
 
   state = {
     current : 0,
     album : null,
-    timer : null,
     error : null,
     busy : false,
   }
@@ -82,12 +84,10 @@ export class PhotosMain extends Main
   }
 
   destroy() {
-    if(this.state.timer) {
-      clearTimeout(this.state.timer)
+    if(this.#timeoutId) {
+      clearTimeout(this.#timeoutId)
     }
-    this.setState({
-      timer : null,
-    })
+    this.#timeoutId = null
     document.removeEventListener('keydown', this.#onKeyDown)
   }
 
@@ -109,17 +109,15 @@ export class PhotosMain extends Main
       this.#switchPhoto(1)
       this.#tick()
     }
-    this.setState({
-      timer : setTimeout(handler, 5000),
-    })
+    this.#timeoutId = setTimeout(handler, TIMEOUT_DELAY)
   }
 
   #switchPhoto(offset, stop = false) {
     if(stop) {
-      if(this.state.timer) {
-        clearTimeout(this.state.timer)
+      if(this.#timeoutId) {
+        clearTimeout(this.#timeoutId)
       }
-      this.setState({ timer : null })
+      this.#timeoutId = null
     }
     if(this.#transition) {
       return

@@ -13,8 +13,9 @@ export class PhotoImg extends RoleImg
     )
     const url = size.url
     const index = this.props.index - 1
+    const x = index * 100
     this.style = {
-      left : index * 100 + '%',
+      transform : `translateX(${ x }%)`,
       backgroundImage : `url(${ url })`,
       backgroundSize : params.background_size,
     }
@@ -23,6 +24,6 @@ export class PhotoImg extends RoleImg
   setX(x) {
     const index = this.props.index - 1
     const percent = index * 100
-    this.style.left = `calc(${ percent }% + ${ x }px)`
+    this.style.transform = `translateX(calc(${ percent }% + ${ x }px))`
   }
 }
