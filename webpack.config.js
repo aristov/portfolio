@@ -47,11 +47,15 @@ const config = {
 }
 
 if(process.env.NODE_ENV === 'production') {
-  config.plugins.push(
+  config.optimization = {
+    minimize : true,
+  }
+  config.plugins = [
+    ...config.plugins,
     new MiniCssExtractPlugin({
       filename : `main.${ BUNDLE_KEY }.css`,
     }),
-  )
+  ]
 }
 
 export default config

@@ -1,7 +1,11 @@
+import './app/env.js'
 import autoprefixer from 'autoprefixer'
+import csso from 'postcss-csso'
 
-export default {
-  plugins : [
-    autoprefixer,
-  ],
+const plugins = [autoprefixer]
+
+if(process.env.NODE_ENV === 'production') {
+  plugins.push(csso())
 }
+
+export { plugins }
