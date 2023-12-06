@@ -1,3 +1,4 @@
+import lodash from 'lodash'
 import { HtmlDiv } from 'htmlmodule'
 import { Header } from './Header.js'
 import { PhotosMain } from './PhotosMain.js'
@@ -23,6 +24,11 @@ export class AppContent extends HtmlDiv
     contacts : ContactsMain,
   }
 
+  #translateX
+  #pointerX
+  #prevPointerX
+  #startPointerX
+
   state = {
     open : false,
   }
@@ -31,13 +37,15 @@ export class AppContent extends HtmlDiv
     super.init()
     this.on('nav-toggle', this.#onNavToggle)
     this.on('nav-close', this.#onNavClose)
+    this.on('pointerdown', this.#onPointerDown)
+    this.on('contextmenu', this.#onContextMenu)
+    window.addEventListener('resize', this.#onWindowResize)
   }
 
   assign() {
     super.assign()
-    this.classList = [
-      this.state.open && 'open',
-    ]
+    this.classList = this.state.open && 'open'
+    this.#updatePosition()
   }
 
   render() {
@@ -83,6 +91,67 @@ export class AppContent extends HtmlDiv
     ]
   }
 
+  destroy() {
+    super.destroy()
+    window.removeEventListener('resize', this.#onWindowResize)
+  }
+
+  #updatePosition(translateX) {
+    if(typeof translateX === 'number') {
+      this.style.transition = 'none'
+      this.style.transform = `translateX(${ translateX }px)`
+      return
+    }
+    this.#translateX = this.state.open ?
+      -Math.min(400, innerWidth * .8) :
+      0
+    this.style.transition = null
+    this.style.transform = `translateX(${ this.#translateX }px)`
+  }
+
+  #onContextMenu() {
+    this.off('pointermove', this.#onPointerMove)
+    this.off('pointerup', this.#onPointerUp)
+  }
+
+  #onPointerDown(e) {
+    if(!this.state.open || innerWidth > 899) {
+      return
+    }
+    this.#pointerX = undefined
+    this.#prevPointerX = undefined
+    this.#startPointerX = e.x
+    this.on('pointermove', this.#onPointerMove, { passive : true })
+    this.on('pointerup', this.#onPointerUp, { once : true })
+    document.documentElement.style.overflow = 'hidden'
+  }
+
+  #onPointerMove(e) {
+    const pointerX = lodash.clamp(e.x, 0, innerWidth)
+    const dX = pointerX - this.#startPointerX
+    if(dX <= 0) {
+      return
+    }
+    this.#pointerX = this.#prevPointerX ?? pointerX
+    this.#prevPointerX = pointerX
+    this.#updatePosition(this.#translateX + dX)
+  }
+
+  #onPointerUp(e) {
+    this.off('pointermove', this.#onPointerMove)
+    document.documentElement.style.overflow = null
+    if(this.#pointerX === undefined) {
+      return
+    }
+    if(e.x > this.#pointerX) {
+      this.setState({ open : false })
+    }
+    else this.#updatePosition()
+    this.#pointerX = undefined
+    this.#prevPointerX = undefined
+    this.#startPointerX = undefined
+  }
+
   #onNavToggle() {
     this.setState(state => ({
       open : !state.open,
@@ -91,5 +160,9 @@ export class AppContent extends HtmlDiv
 
   #onNavClose() {
     this.setState({ open : false })
+  }
+
+  #onWindowResize = () => {
+    this.#updatePosition()
   }
 }

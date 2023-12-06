@@ -5,8 +5,6 @@ import { HeaderMenuNav } from './HeaderMenuNav.js'
 import api from './api.js'
 import './Header.css'
 
-const { Hammer } = window
-
 export class Header extends HtmlHeader
 {
   static class = 'Header'
@@ -27,20 +25,7 @@ export class Header extends HtmlHeader
           ),
         }),
       ]),
-      this._nav = new HeaderMenuNav,
+      new HeaderMenuNav,
     ]
-  }
-
-  mount() {
-    this._hammertime = new Hammer(this._nav.node)
-    this._hammertime.on('swipe', e => {
-      if(e.direction === Hammer.DIRECTION_RIGHT) {
-        this.emit('nav-close', { bubbles : true })
-      }
-    })
-  }
-
-  destroy() {
-    this._hammertime.off('swipe')
   }
 }

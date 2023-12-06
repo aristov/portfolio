@@ -57,7 +57,7 @@ export class PhotosMain extends Main
         section,
         album,
       }),
-      this._ref = new PhotosList({
+      new PhotosList({
         items,
         classList : ['appear'],
         onclick : this.#onClick,

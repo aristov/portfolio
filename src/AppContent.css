@@ -3,25 +3,15 @@
   position: relative;
   left: 0;
   height: 100%;
-  transition: left .3s;
+  transition: transform .3s;
   display: grid;
   grid-template-rows: auto 1fr;
+  touch-action: none;
 }
 @media (max-width: 899px)
 {
-  .AppContent.open
-  {
-    left: -400px;
-  }
   .AppContent.open .Backdrop
   {
     display: block;
-  }
-}
-@media (max-width: 499px)
-{
-  .AppContent.open
-  {
-    left: -80%;
   }
 }

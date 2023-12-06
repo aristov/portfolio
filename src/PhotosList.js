@@ -10,13 +10,8 @@ export class PhotosList extends HtmlDiv
   #x
 
   init() {
-    this.on('pointerdown', this.#onPointerDown)
     this.on('contextmenu', this.#onContextMenu)
-  }
-
-  #onContextMenu() {
-    this.off('pointermove', this.#onPointerMove)
-    this.off('pointerup', this.#onPointerUp)
+    this.on('pointerdown', this.#onPointerDown)
   }
 
   render() {
@@ -27,6 +22,11 @@ export class PhotosList extends HtmlDiv
         item,
       }),
     )
+  }
+
+  #onContextMenu() {
+    this.off('pointermove', this.#onPointerMove)
+    this.off('pointerup', this.#onPointerUp)
   }
 
   #onPointerDown(e) {
