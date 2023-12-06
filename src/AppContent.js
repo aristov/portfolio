@@ -133,13 +133,13 @@ export class AppContent extends HtmlDiv
 
   #onPointerMove(e) {
     const pointerX = lodash.clamp(e.x, 0, innerWidth)
-    const dX = pointerX - this.#startPointerX
-    if(dX <= 0) {
+    const offsetX = pointerX - this.#startPointerX
+    if(offsetX <= 0) {
       return
     }
     this.#pointerX = this.#prevPointerX ?? pointerX
     this.#prevPointerX = pointerX
-    this.#updatePosition(this.#translateX + dX)
+    this.#updatePosition(this.#translateX + offsetX)
   }
 
   #onPointerUp(e) {

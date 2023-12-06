@@ -7,7 +7,11 @@ export class PhotosList extends HtmlDiv
 {
   static class = 'PhotosList'
 
-  #x
+  static defaultProps = {
+    draggable : 'false',
+  }
+
+  #startPointerX
 
   state = {
     zoomed : false,
@@ -42,10 +46,10 @@ export class PhotosList extends HtmlDiv
   }
 
   #onPointerDown(e) {
-    if(this.props.transition) {
+    if(this.props.transition || this.state.zoomed) {
       return
     }
-    this.#x = e.x
+    this.#startPointerX = e.x
     this.photos.forEach(img => {
       img.style.transition = 'none'
     })
@@ -55,25 +59,26 @@ export class PhotosList extends HtmlDiv
   }
 
   #onPointerMove(e) {
-    const x = lodash.clamp(e.x, 0, innerWidth)
-    const dX = x - this.#x
-    this.photos.forEach(img => img.setX(dX))
+    const rect = this.node.getBoundingClientRect()
+    const clientX = lodash.clamp(e.x, rect.left, rect.right)
+    const offsetX = clientX - this.#startPointerX
+    this.photos.forEach(img => img.setX(offsetX))
   }
 
   #onPointerUp(e) {
-    const dX = e.x - this.#x
+    const offsetX = e.x - this.#startPointerX
     this.photos.forEach(img => {
       img.style.transition = null
     })
     this.off('pointermove', this.#onPointerMove)
     document.documentElement.style.overflow = null
-    if(!dX) {
+    if(!offsetX) {
       return
     }
     this.emit('photo-switch', {
       bubbles : true,
       detail : {
-        offset : -dX / Math.abs(dX),
+        offset : -offsetX / Math.abs(offsetX),
       },
     })
   }
