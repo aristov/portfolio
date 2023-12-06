@@ -1,13 +1,19 @@
 import './app/env.js'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
 
-const exports = {
+const BUNDLE_KEY = process.env.NODE_ENV === 'production' ?
+  '[contenthash]' :
+  'bundle'
+
+const config = {
   mode : 'none',
   entry : './src/index.js',
   output : {
     path : new URL('public/static', import.meta.url).pathname,
     publicPath : '/static/',
-    filename : 'index.bundle.js',
+    filename : `main.${ BUNDLE_KEY }.js`,
+    clean : true,
   },
   module : {
     rules : [
@@ -32,26 +38,20 @@ const exports = {
       },
     ],
   },
-  devServer : {
-    static : {
-      directory : new URL('public', import.meta.url).pathname,
-    },
-    hot : true,
-    historyApiFallback : true,
-    client : {
-      logging : 'none',
-    },
-  },
   externals : {
     luxon : 'luxon',
   },
-  plugins : [],
+  plugins : [
+    new WebpackManifestPlugin({}),
+  ],
 }
 
 if(process.env.NODE_ENV === 'production') {
-  exports.plugins.push(
-    new MiniCssExtractPlugin({ filename : 'index.bundle.css' }),
+  config.plugins.push(
+    new MiniCssExtractPlugin({
+      filename : `main.${ BUNDLE_KEY }.css`,
+    }),
   )
 }
 
-export default exports
+export default config

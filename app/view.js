@@ -1,6 +1,6 @@
 import { base, body, div, head, html, img, link, meta, noscript, script, title } from 'jste'
 
-export default params => html({
+export default ({ params, manifest }) => html({
   doctype : true,
   lang : params.lang,
   children : [
@@ -38,7 +38,7 @@ export default params => html({
       }),
       process.env.NODE_ENV === 'production' && link({
         rel : 'stylesheet',
-        href : 'static/index.bundle.css',
+        href : manifest['main.css'],
         id : 'css',
       }),
       script({
@@ -62,7 +62,7 @@ export default params => html({
     body([
       noscript('JavaScript must be enabled for the site to work properly'),
       script({
-        src : 'static/index.bundle.js',
+        src : manifest['main.js'],
       }),
       script({
         type : 'text/javascript',

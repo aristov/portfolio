@@ -5,6 +5,7 @@ import fastifyStatic from '@fastify/static'
 import view from './view.js'
 import vk from './vk.js'
 import config from './config.js'
+import { loadManifest } from './loadManifest.js'
 
 const app = Fastify({
   logger : true,
@@ -90,7 +91,10 @@ app.get('/:section/:project?',
    * @return {Promise<*>}
    */
   async (request, reply) => {
-    const result = view(config)
+    const result = view({
+      params : config,
+      manifest : await loadManifest()
+    })
     reply.type('text/html')
     return result.toString()
   })
