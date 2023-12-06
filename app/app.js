@@ -93,7 +93,8 @@ app.get('/:section/:project?',
   async (request, reply) => {
     const result = view({
       params : config,
-      manifest : await loadManifest()
+      manifest : await loadManifest(),
+      ymId : process.env.YANDEX_METRIKA_ID,
     })
     reply.type('text/html')
     return result.toString()
