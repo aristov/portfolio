@@ -39,14 +39,20 @@ const config = {
     ],
   },
   externals : {
+    lodash : '_',
     luxon : 'luxon',
   },
   plugins : [
     new WebpackManifestPlugin({}),
   ],
+  infrastructureLogging : {
+    level : 'warn',
+  },
+  devtool : 'inline-source-map',
 }
 
 if(process.env.NODE_ENV === 'production') {
+  config.devtool = 'source-map'
   config.optimization = {
     minimize : true,
   }
