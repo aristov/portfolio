@@ -27,6 +27,7 @@ export class PhotosMain extends Main
   init() {
     super.init()
     this.on('photo-switch', this.#onPhotoSwitch)
+    this.on('transitionend', this.#onTransitionEnd)
   }
 
   assign() {
@@ -63,8 +64,7 @@ export class PhotosMain extends Main
         items,
         classList : ['appear'],
         transition : this.state.transition,
-        onclick : this.#onClick,
-        ontransitionend : this.#onTransitionEnd,
+        onclick : this.#onListClick,
       }),
       new AlbumNavBlock({
         current,
@@ -113,12 +113,16 @@ export class PhotosMain extends Main
     this.#timeoutId = setTimeout(handler, TIMEOUT_DELAY)
   }
 
+  #stopTick() {
+    if(this.#timeoutId) {
+      clearTimeout(this.#timeoutId)
+    }
+    this.#timeoutId = null
+  }
+
   #switchPhoto(offset, stop = false) {
     if(stop) {
-      if(this.#timeoutId) {
-        clearTimeout(this.#timeoutId)
-      }
-      this.#timeoutId = null
+      this.#stopTick()
     }
     if(this.state.transition) {
       return
@@ -136,8 +140,8 @@ export class PhotosMain extends Main
       i % items.length
   }
 
-  #onClick = () => {
-    this.#switchPhoto(1, true)
+  #onListClick = () => {
+    this.#stopTick()
   }
 
   #onKeyDown = e => {
@@ -152,7 +156,7 @@ export class PhotosMain extends Main
     }
   }
 
-  #onTransitionEnd = () => {
+  #onTransitionEnd() {
     this.setState({ transition : false })
   }
 

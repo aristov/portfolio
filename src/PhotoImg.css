@@ -4,7 +4,7 @@
   background: center center / cover no-repeat;
   width: 100%;
   height: 100%;
-  transition: transform .3s;
+  transition: transform .3s, background-size .3s;
   position: absolute;
 }
 @media (min-width: 900px)

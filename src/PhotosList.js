@@ -9,17 +9,29 @@ export class PhotosList extends HtmlDiv
 
   #x
 
+  state = {
+    zoomed : false,
+  }
+
   init() {
     this.on('contextmenu', this.#onContextMenu)
     this.on('pointerdown', this.#onPointerDown)
+    this.on('photo-zoom', this.#onPhotoZoom)
+  }
+
+  #onPhotoZoom() {
+    this.setState(state => ({
+      zoomed : !state.zoomed,
+    }))
   }
 
   render() {
     return this.props.items.map(
       (item, i) => new PhotoImg({
         key : item.id,
-        index : i,
         item,
+        index : i,
+        zoomed : this.state.zoomed,
       }),
     )
   }
