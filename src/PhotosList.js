@@ -1,14 +1,23 @@
+import lodash from 'lodash'
 import { HtmlDiv } from 'htmlmodule'
 import { PhotoImg } from './PhotoImg.js'
 import './PhotosList.css'
-
-const { Hammer } = window
 
 export class PhotosList extends HtmlDiv
 {
   static class = 'PhotosList'
 
-  #hammertime
+  #x
+
+  init() {
+    this.on('pointerdown', this.#onPointerDown)
+    this.on('contextmenu', this.#onContextMenu)
+  }
+
+  #onContextMenu() {
+    this.off('pointermove', this.#onPointerMove)
+    this.off('pointerup', this.#onPointerUp)
+  }
 
   render() {
     return this.props.items.map(
@@ -20,29 +29,41 @@ export class PhotosList extends HtmlDiv
     )
   }
 
-  mount() {
-    this.#hammertime = new Hammer(this.node)
-    this.#hammertime.on('swipe', this.#onSwipe)
+  #onPointerDown(e) {
+    this.#x = e.x
+    this.photos.forEach(img => {
+      img.style.transition = 'none'
+    })
+    this.on('pointermove', this.#onPointerMove, { passive : true })
+    this.on('pointerup', this.#onPointerUp, { once : true })
+    document.documentElement.style.overflow = 'hidden'
   }
 
-  destroy() {
-    this.#hammertime.off('swipe')
+  #onPointerMove(e) {
+    const x = lodash.clamp(e.x, 0, innerWidth)
+    const dX = x - this.#x
+    this.photos.forEach(img => img.setX(dX))
   }
 
-  #onSwipe = e => {
-    switch(e.direction) {
-      case Hammer.DIRECTION_LEFT:
-        this.emit('photo-switch', {
-          bubbles : true,
-          detail : { offset : 1 },
-        })
-        break
-      case Hammer.DIRECTION_RIGHT:
-        this.emit('photo-switch', {
-          bubbles : true,
-          detail : { offset : -1 },
-        })
-        break
+  #onPointerUp(e) {
+    const dX = e.x - this.#x
+    this.photos.forEach(img => {
+      img.style.transition = null
+    })
+    this.off('pointermove', this.#onPointerMove)
+    document.documentElement.style.overflow = null
+    if(!dX) {
+      return
     }
+    this.emit('photo-switch', {
+      bubbles : true,
+      detail : {
+        offset : -dX / Math.abs(dX),
+      },
+    })
+  }
+
+  get photos() {
+    return this.findAll(PhotoImg)
   }
 }

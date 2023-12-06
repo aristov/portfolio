@@ -19,4 +19,10 @@ export class PhotoImg extends RoleImg
       backgroundSize : params.background_size,
     }
   }
+
+  setX(x) {
+    const index = this.props.index - 1
+    const percent = index * 100
+    this.style.left = `calc(${ percent }% + ${ x }px)`
+  }
 }

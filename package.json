@@ -20,6 +20,7 @@
     "autoprefixer": "^10.4.16",
     "css-loader": "^6.8.1",
     "htmlmodule": "^0.15.0",
+    "lodash": "^4.17.21",
     "luxon": "^3.4.4",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss-csso": "^6.0.1",

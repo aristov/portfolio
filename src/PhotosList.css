@@ -4,6 +4,7 @@
   position: relative;
   white-space: nowrap;
   cursor: grab;
+  touch-action: none;
 }
 .PhotosList:active
 {
