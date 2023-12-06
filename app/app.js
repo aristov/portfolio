@@ -8,7 +8,19 @@ import config from './config.js'
 import { loadManifest } from './loadManifest.js'
 
 const app = Fastify({
-  logger : true,
+  logger : process.env.LOGGING_HTTP === 'on' && {
+    transport : {
+      target : 'pino-pretty',
+      options : {
+        sync : process.env.NODE_ENV === 'development',
+        ignore : 'reqId,req.hostname',
+        translateTime : 'SYS:standard',
+        minimumLevel : 'trace',
+        colorize : true,
+        singleLine : true,
+      },
+    },
+  },
 })
 
 app.register(fastifyStatic, {
