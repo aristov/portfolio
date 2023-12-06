@@ -1,4 +1,5 @@
 import './app/env.js'
+import webpack from 'webpack'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
 
@@ -44,6 +45,7 @@ const config = {
   },
   plugins : [
     new WebpackManifestPlugin({}),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
   ],
   infrastructureLogging : {
     level : 'warn',
