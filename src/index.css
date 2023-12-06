@@ -1,4 +1,4 @@
-@import 'icons/css/lddesign.css';
+@import 'icons/css/portfolio.css';
 
 html
 {
@@ -24,7 +24,7 @@ a[href]:focus
 {
   color: #00f;
 }
-.icon::before
+.Icon::before
 {
   margin: 0;
 }

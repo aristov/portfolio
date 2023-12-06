@@ -1,6 +1,6 @@
 {
-  "name": "lddesign",
-  "css_prefix_text": "icon-",
+  "name": "portfolio",
+  "css_prefix_text": "Icon_",
   "css_use_suffix": false,
   "hinting": true,
   "units_per_em": 1000,
@@ -84,6 +84,18 @@
       "uid": "7bf14281af5633a597f85b061ef1cfb9",
       "css": "angle-right",
       "code": 61701,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "0b2b66e526028a6972d51a6f10281b4b",
+      "css": "zoom-in",
+      "code": 59392,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "d25d10efa900f529ad1d275657cfd30e",
+      "css": "zoom-out",
+      "code": 59393,
       "src": "fontawesome"
     }
   ]

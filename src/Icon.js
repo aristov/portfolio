@@ -14,6 +14,6 @@ export class Icon extends HtmlSpan
 
   assign() {
     super.assign()
-    this.classList = 'icon icon-' + this.props.glyph
+    this.classList = 'Icon_' + this.props.glyph
   }
 }
