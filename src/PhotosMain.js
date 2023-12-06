@@ -14,7 +14,6 @@ export class PhotosMain extends Main
 {
   static class = 'PhotosMain'
 
-  #transition = false
   #timeoutId = null
 
   state = {
@@ -22,6 +21,7 @@ export class PhotosMain extends Main
     album : null,
     error : null,
     busy : false,
+    transition : false,
   }
 
   init() {
@@ -62,6 +62,7 @@ export class PhotosMain extends Main
       new PhotosList({
         items,
         classList : ['appear'],
+        transition : this.state.transition,
         onclick : this.#onClick,
         ontransitionend : this.#onTransitionEnd,
       }),
@@ -119,12 +120,12 @@ export class PhotosMain extends Main
       }
       this.#timeoutId = null
     }
-    if(this.#transition) {
+    if(this.state.transition) {
       return
     }
-    this.#transition = true
     this.setState(state => ({
       current : this.#getIndex(state.current + offset),
+      transition : true,
     }))
   }
 
@@ -152,7 +153,7 @@ export class PhotosMain extends Main
   }
 
   #onTransitionEnd = () => {
-    this.#transition = false
+    this.setState({ transition : false })
   }
 
   #onPhotoSwitch(e) {

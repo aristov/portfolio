@@ -30,6 +30,9 @@ export class PhotosList extends HtmlDiv
   }
 
   #onPointerDown(e) {
+    if(this.props.transition) {
+      return
+    }
     this.#x = e.x
     this.photos.forEach(img => {
       img.style.transition = 'none'
