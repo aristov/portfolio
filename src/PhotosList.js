@@ -3,6 +3,8 @@ import { HtmlDiv } from 'htmlmodule'
 import { PhotoImg } from './PhotoImg.js'
 import './PhotosList.css'
 
+const WHEEL_DEBOUNCE_DELAY = 50
+
 export class PhotosList extends HtmlDiv
 {
   static class = 'PhotosList'
@@ -14,8 +16,27 @@ export class PhotosList extends HtmlDiv
   #startPointerX
 
   init() {
+    const onWheel = lodash.debounce(this.#onWheel, WHEEL_DEBOUNCE_DELAY, {
+      leading : true,
+      trailing : false,
+    })
+    this.on('wheel', onWheel)
     this.on('contextmenu', this.#onContextMenu)
     this.on('pointerdown', this.#onPointerDown)
+  }
+
+  #onWheel = e => {
+    const absX = Math.abs(e.deltaX)
+    const absY = Math.abs(e.deltaY)
+    if(absX < absY) {
+      return
+    }
+    this.emit('photo-switch', {
+      bubbles : true,
+      detail : {
+        offset : e.deltaX / absX,
+      },
+    })
   }
 
   render() {
