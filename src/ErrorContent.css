@@ -1,8 +1,13 @@
 .ErrorContent
 {
-  font-size: 7rem;
   color: rgba(0, 0, 0, .2);
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+.ErrorContent[data-status-code='404']
+{
+  font-size: 7rem;
 }

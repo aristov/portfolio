@@ -2,7 +2,7 @@
   "name": "portfolio",
   "private": true,
   "description": "An engine for creating a designer's portfolio",
-  "main": "app/app.js",
+  "main": "app/fastify.js",
   "author": "Vyacheslav Aristov <vv.aristov@gmail.com>",
   "type": "module",
   "types": "types/index.d.ts",
@@ -14,7 +14,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "nodemon": "nodemon",
-    "start": "node ./app/app.js"
+    "start": "node app/fastify.js"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.16",

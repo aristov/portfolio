@@ -1,4 +1,5 @@
 import { Feed } from './Feed.js'
+import { ErrorContent } from './ErrorContent.js'
 import { Loading } from './Loading.js'
 import { Main } from './Main.js'
 import api from './api.js'
@@ -11,6 +12,7 @@ export class ArticlesMain extends Main
   state = {
     data : null,
     busy : false,
+    error : null,
   }
 
   init() {
@@ -19,7 +21,10 @@ export class ArticlesMain extends Main
   }
 
   render() {
-    const data = this.state.data
+    const { data, error } = this.state
+    if(error) {
+      return new ErrorContent({ error })
+    }
     document.title = `${ this.props.section.title } | ${ api.params.name }`
     if(!data) {
       return new Loading
@@ -37,12 +42,17 @@ export class ArticlesMain extends Main
   async #load() {
     this.setState({ busy : true })
     const data = this.state.data || []
-    const { count, items } = await api.getArticles(data.length)
-    this._count = count
-    this.setState({
-      data : [...data, ...items],
-      busy : false,
-    })
+    try {
+      const { count, items } = await api.getArticles(data.length)
+      this._count = count
+      this.setState({
+        data : [...data, ...items],
+        busy : false,
+      })
+    }
+    catch(error) {
+      this.setState({ error })
+    }
   }
 
   onScroll() {

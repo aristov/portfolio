@@ -19,8 +19,17 @@ const api = {
   },
   async callMethod(method, params) {
     const url = api.createUrl(method, params)
-    const res = await fetch(url.href)
-    return res.json()
+    const res = await fetch(url.href, {
+      headers : {
+        'Accept' : 'application/json',
+      },
+    })
+    if(res.ok) {
+      return res.json()
+    }
+    const data = await res.json()
+    const error = new Error(data.message)
+    throw Object.assign(error, data)
   },
   async getAlbumsGroup(path) {
     const section = this.cache[path]

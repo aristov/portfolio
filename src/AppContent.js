@@ -84,7 +84,15 @@ export class AppContent extends HtmlDiv
           path : /.*/,
           render : () => new Main({
             key,
-            children : new ErrorContent,
+            children : new ErrorContent({
+              error : {
+                name : api.params.not_found,
+                message : '404',
+              },
+              dataset : {
+                statusCode : '404',
+              },
+            }),
           }),
         },
       ]),

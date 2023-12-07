@@ -1,4 +1,5 @@
 import './env.js'
+import { constants } from 'node:http2'
 import path from 'node:path'
 import Fastify from 'fastify'
 import fastifyStatic from '@fastify/static'
@@ -7,7 +8,7 @@ import vk from './vk.js'
 import config from './config.js'
 import { loadManifest } from './loadManifest.js'
 
-const app = Fastify({
+const fastify = Fastify({
   logger : process.env.LOGGING_HTTP === 'on' && {
     transport : {
       target : 'pino-pretty',
@@ -23,15 +24,19 @@ const app = Fastify({
   },
 })
 
-app.register(fastifyStatic, {
+fastify.register(fastifyStatic, {
   root : new URL('../public/', import.meta.url).pathname,
 })
 
-app.get('/photos.getAlbums', {
+fastify.get('/photos.getAlbums', {
     schema : {
       query : {
-        owner_id : {
-          type : 'integer',
+        type : 'object',
+        required : ['owner_id'],
+        properties : {
+          owner_id : {
+            type : 'integer',
+          },
         },
       },
     },
@@ -49,14 +54,18 @@ app.get('/photos.getAlbums', {
     })
   })
 
-app.get('/photos.get', {
+fastify.get('/photos.get', {
     schema : {
       query : {
-        owner_id : {
-          type : 'integer',
-        },
-        album_id : {
-          type : 'integer',
+        type : 'object',
+        required : ['owner_id', 'album_id'],
+        properties : {
+          owner_id : {
+            type : 'integer',
+          },
+          album_id : {
+            type : 'integer',
+          },
         },
       },
     },
@@ -74,11 +83,15 @@ app.get('/photos.get', {
     })
   })
 
-app.get('/wall.get', {
+fastify.get('/wall.get', {
     schema : {
       query : {
-        owner_id : {
-          type : 'integer',
+        type : 'object',
+        required : ['owner_id'],
+        properties : {
+          owner_id : {
+            type : 'integer',
+          },
         },
       },
     },
@@ -96,23 +109,7 @@ app.get('/wall.get', {
     })
   })
 
-app.get('/:section/:project?',
-  /**
-   * @param request
-   * @param {FastifyReply} reply
-   * @return {Promise<*>}
-   */
-  async (request, reply) => {
-    const result = view({
-      params : config,
-      manifest : await loadManifest(),
-      ymId : process.env.YANDEX_METRIKA_ID,
-    })
-    reply.type('text/html')
-    return result.toString()
-  })
-
-app.get('/static/:filename',
+fastify.get('/static/:filename',
   /**
    * @param request
    * @param {FastifyReply} reply
@@ -123,11 +120,31 @@ app.get('/static/:filename',
     return reply.sendFile(filename)
   })
 
-app.listen({ port : +process.env.PORT }, (err, address) => {
-  if(err) {
-    throw err
+fastify.get('/:section/:project?',
+  /**
+   * @param request
+   * @param {FastifyReply} reply
+   * @return {Promise<*>}
+   */
+  async (request, reply) => {
+    if(request.headers.accept === 'application/json') {
+      reply.status(constants.HTTP_STATUS_NOT_FOUND)
+      reply.send(new Error('Not found'))
+    }
+    const result = view({
+      params : config,
+      manifest : await loadManifest(),
+      ymId : process.env.YANDEX_METRIKA_ID,
+    })
+    reply.type('text/html')
+    return result.toString()
+  })
+
+fastify.listen({ port : +process.env.PORT }, (error, address) => {
+  if(error) {
+    throw error
   }
   console.log(`Server is now listening on ${ address }`)
 })
 
-export default app
+export default fastify

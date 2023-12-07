@@ -24,9 +24,9 @@ export class AlbumsMain extends Main
   }
 
   render() {
-    const group = this.state.group
-    if(this.state.error) {
-      return new ErrorContent
+    const { group, error } = this.state
+    if(error) {
+      return new ErrorContent({ error })
     }
     if(!group) {
       return new Loading

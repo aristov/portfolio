@@ -39,9 +39,9 @@ export class PhotosMain extends Main
   }
 
   render() {
-    const { album, zoomed, current, transition } = this.state
-    if(this.state.error) {
-      return new ErrorContent
+    const { album, zoomed, current, transition, error } = this.state
+    if(error) {
+      return new ErrorContent({ error })
     }
     if(!album) {
       return new Loading
@@ -77,7 +77,7 @@ export class PhotosMain extends Main
       return
     }
     if(this.props.auto) {
-      this.#tick()
+      this.#setTimeout()
     }
     document.addEventListener('keydown', this.#onKeyDown)
   }
@@ -103,15 +103,16 @@ export class PhotosMain extends Main
     }
   }
 
-  #tick() {
-    const onTimeout = () => {
-      this.#switchPhoto(1)
-      this.#tick()
-    }
-    this.#timeoutId = setTimeout(onTimeout, TIMEOUT_DELAY)
+  #setTimeout() {
+    this.#timeoutId = setTimeout(this.#onTimeout, TIMEOUT_DELAY)
   }
 
-  #stopTick() {
+  #onTimeout = () => {
+    this.#switchPhoto(1)
+    this.#setTimeout()
+  }
+
+  #clearTimeout() {
     if(this.#timeoutId) {
       clearTimeout(this.#timeoutId)
     }
@@ -120,7 +121,7 @@ export class PhotosMain extends Main
 
   #switchPhoto(offset, stop = false) {
     if(stop) {
-      this.#stopTick()
+      this.#clearTimeout()
     }
     if(this.state.transition) {
       return
@@ -139,7 +140,7 @@ export class PhotosMain extends Main
   }
 
   #onListClick = () => {
-    this.#stopTick()
+    this.#clearTimeout()
   }
 
   #onKeyDown = e => {
