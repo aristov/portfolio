@@ -6,6 +6,10 @@
   position: absolute;
   transition: margin-left .3s;
 }
+.App.homepage .ZoomButton
+{
+  display: none;
+}
 @media (min-width: 900px)
 {
   .App .AppContent
