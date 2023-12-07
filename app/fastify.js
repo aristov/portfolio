@@ -1,6 +1,7 @@
 import './env.js'
 import { constants } from 'node:http2'
 import path from 'node:path'
+import lodash from 'lodash'
 import Fastify from 'fastify'
 import fastifyStatic from '@fastify/static'
 import view from './view.js'
@@ -14,7 +15,14 @@ const fastify = Fastify({
       target : 'pino-pretty',
       options : {
         sync : process.env.NODE_ENV === 'development',
-        ignore : 'reqId,req.hostname',
+        ignore : lodash.join([
+          'pid',
+          'hostname',
+          'reqId',
+          'req.hostname',
+          'req.remoteAddress',
+          'req.remotePort',
+        ]),
         translateTime : 'SYS:standard',
         minimumLevel : 'trace',
         colorize : true,
