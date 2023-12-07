@@ -140,11 +140,4 @@ fastify.get('/:section/:project?',
     return result.toString()
   })
 
-fastify.listen({ port : +process.env.PORT }, (error, address) => {
-  if(error) {
-    throw error
-  }
-  console.log(`Server is now listening on ${ address }`)
-})
-
 export default fastify

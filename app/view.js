@@ -65,9 +65,7 @@ export default ({ params, manifest, ymId }) => html({
       script({
         src : manifest['main.js'],
       }),
-      process.env.NODE_ENV === 'production' && (
-        ymId && script(`(${ metrika })(${ ymId })`)
-      ),
+      ymId && script(`(${ metrika })(${ ymId })`),
     ]),
   ],
 })

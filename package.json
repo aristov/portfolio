@@ -2,7 +2,7 @@
   "name": "portfolio",
   "private": true,
   "description": "An engine for creating a designer's portfolio",
-  "main": "app/fastify.js",
+  "main": "index.js",
   "author": "Vyacheslav Aristov <vv.aristov@gmail.com>",
   "type": "module",
   "types": "types/index.d.ts",
