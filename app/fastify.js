@@ -3,33 +3,35 @@ import { constants } from 'node:http2'
 import path from 'node:path'
 import lodash from 'lodash'
 import Fastify from 'fastify'
+import pino from 'pino'
 import fastifyStatic from '@fastify/static'
 import view from './view.js'
 import vk from './vk.js'
 import config from './config.js'
 import { loadManifest } from './loadManifest.js'
 
-const fastify = Fastify({
-  logger : process.env.LOGGING_HTTP === 'on' && {
-    transport : {
-      target : 'pino-pretty',
-      options : {
-        sync : process.env.NODE_ENV === 'development',
-        ignore : lodash.join([
-          'pid',
-          'hostname',
-          'reqId',
-          'req.hostname',
-          'req.remoteAddress',
-          'req.remotePort',
-        ]),
-        translateTime : 'SYS:standard',
-        minimumLevel : 'trace',
-        colorize : true,
-        singleLine : true,
-      },
+const loggerInstance = process.env.LOGGING_HTTP === 'on' && pino({
+  transport : {
+    target : 'pino-pretty',
+    options : {
+      sync : process.env.NODE_ENV === 'development',
+      ignore : lodash.join([
+        'pid',
+        'hostname',
+        'reqId',
+        'req.hostname',
+        'req.remoteAddress',
+        'req.remotePort',
+      ]),
+      translateTime : 'SYS:standard',
+      minimumLevel : 'trace',
+      colorize : true,
+      singleLine : true,
     },
   },
+})
+const fastify = Fastify({
+  loggerInstance,
 })
 
 fastify.register(fastifyStatic, {
