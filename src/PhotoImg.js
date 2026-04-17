@@ -27,9 +27,7 @@ export class PhotoImg extends RoleImg
 
   assign() {
     super.assign()
-    const photo = this.props.item.sizes.find(
-      size => size.type === 'z',
-    )
+    const photo = this.#getPhoto()
     const url = photo.url
     const index = this.props.index - 1
     const x = index * 100
@@ -72,11 +70,15 @@ export class PhotoImg extends RoleImg
     this.style.transform = `translateX(${ translateX })`
   }
 
+  #getPhoto() {
+    return this.props.item.sizes.find(
+      size => size.type === 'z' || size.type === 'base',
+    )
+  }
+
   #getPhotoWidth() {
     const rect = this.node.getBoundingClientRect()
-    const photo = this.props.item.sizes.find(
-      size => size.type === 'z',
-    )
+    const photo = this.#getPhoto()
     const k = rect.height / photo.height
     const width = photo.width * k
     return this.props.zoomed ?
@@ -86,9 +88,7 @@ export class PhotoImg extends RoleImg
 
   #getPhotoHeight() {
     const rect = this.node.getBoundingClientRect()
-    const photo = this.props.item.sizes.find(
-      size => size.type === 'z',
-    )
+    const photo = this.#getPhoto()
     const k = rect.width / photo.width
     const height = photo.height * k
     return this.props.zoomed ?
