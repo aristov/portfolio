@@ -4,6 +4,7 @@ import { ElemType } from 'htmlmodule'
 import { App } from './App.js'
 
 Settings.defaultLocale = document.documentElement.lang
+Settings.defaultZone = 'Europe/Moscow'
 ElemType.setDebugMode(process.env.NODE_ENV === 'development')
 
 // noinspection JSUnresolvedVariable
